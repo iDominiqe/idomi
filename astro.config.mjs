@@ -13,6 +13,7 @@ export default defineConfig({
 			components: {
 				PageFrame: './src/components/VisionPageFrame.astro',
 				Header: './src/components/VisionHeader.astro',
+				PageTitle: './src/components/VisionPageTitle.astro',
 			},
 			head: [
 				{

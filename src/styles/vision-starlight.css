@@ -3,6 +3,7 @@
    ========================================================================== */
 
 :root {
+	color-scheme: dark;
 	--sl-font: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 	--sl-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
@@ -116,6 +117,7 @@ html[data-vtheme='flat-dark'] {
 /* ---------- Preset 5: Flat Light (Crisp High Contrast Matte) ---------- */
 html[data-vtheme='flat-light'],
 html[data-theme='light'] {
+	color-scheme: light;
 	--vsl-win-bg: #ffffff;
 	--vsl-win-border: #e2e8f0;
 	--vsl-chrome-bg: #f8fafc;
@@ -481,6 +483,8 @@ html[data-vtheme='flat-light'] .vsl-icon-btn {
    ========================================================================== */
 
 .vsl-window .page {
+	display: flex !important;
+	flex-direction: column !important;
 	min-height: 700px;
 	background: transparent;
 }
@@ -782,6 +786,11 @@ html[data-has-sidebar] .vsl-window .sidebar-pane {
 	height: auto !important;
 	max-height: calc(100vh - 180px);
 	overflow-y: auto;
+	overflow-x: hidden !important;
+	margin: 0 !important;
+	border: 0 !important;
+	outline: none !important;
+	color: var(--vsl-text) !important;
 	background: var(--sl-color-bg-sidebar) !important;
 	border-inline-end: 1px solid var(--vsl-hairline) !important;
 	padding: 1rem 0.9rem 1.5rem !important;
@@ -830,8 +839,12 @@ html:not([data-has-sidebar]) .vsl-window .sl-markdown-content {
 		height: auto !important;
 		max-height: calc(100vh - 180px);
 		overflow-y: auto;
+		overflow-x: hidden !important;
 		border: 0 !important;
 		padding: 1.5rem 1.15rem !important;
+	}
+	.vsl-window .right-sidebar a {
+		overflow-wrap: break-word;
 	}
 	.vsl-window .main-pane {
 		flex: 1 1 0%;
@@ -861,9 +874,54 @@ html[data-vtheme='flat-light'] .vsl-window .sl-markdown-content table {
 
 .vsl-window .sl-markdown-content th,
 .vsl-window .sl-markdown-content td {
-	overflow-wrap: anywhere;
+	overflow-wrap: break-word;
+	word-break: normal;
 	padding: 0.65rem 0.9rem;
 	border-color: var(--vsl-hairline);
+}
+
+.vsl-window .sl-markdown-content th:first-child,
+.vsl-window .sl-markdown-content td:first-child {
+	white-space: nowrap;
+}
+
+/* Native Starlight Pagefind Search Modal High-Contrast Styling */
+site-search dialog {
+	background: rgba(20, 21, 27, 0.96) !important;
+	backdrop-filter: blur(28px);
+	border: 1px solid rgba(255, 255, 255, 0.24) !important;
+	border-radius: 22px !important;
+	color: #f8fafc !important;
+}
+
+site-search #starlight__search {
+	--pagefind-ui-text: #f8fafc !important;
+	--pagefind-ui-background: rgba(255, 255, 255, 0.08) !important;
+	--pagefind-ui-border: rgba(255, 255, 255, 0.18) !important;
+	--pagefind-ui-primary: #60a5fa !important;
+	--pagefind-ui-tag: rgba(255, 255, 255, 0.12) !important;
+}
+
+html[data-vtheme='flat-light'] site-search dialog {
+	background: #ffffff !important;
+	border-color: #cbd5e1 !important;
+	color: #0f172a !important;
+}
+
+html[data-vtheme='flat-light'] site-search #starlight__search {
+	--pagefind-ui-text: #0f172a !important;
+	--pagefind-ui-background: #f8fafc !important;
+	--pagefind-ui-border: #e2e8f0 !important;
+	--pagefind-ui-primary: #2563eb !important;
+	--pagefind-ui-tag: #e2e8f0 !important;
+}
+
+site-search #starlight__search .pagefind-ui__result-link {
+	color: var(--pagefind-ui-text) !important;
+}
+
+site-search #starlight__search .pagefind-ui__result-excerpt {
+	color: var(--vsl-text-muted) !important;
 }
 
 .vsl-window .content-panel + .content-panel {
@@ -1472,8 +1530,8 @@ html[data-vtheme='flat-light'] .vsl-blog-row {
 /* Entrance Tile Stagger Animation */
 @keyframes vslRevealUp {
 	from {
-		opacity: 0;
-		transform: translateY(14px) scale(0.985);
+		opacity: 0.94;
+		transform: translateY(8px) scale(0.992);
 	}
 	to {
 		opacity: 1;
@@ -1624,23 +1682,19 @@ html[data-vtheme='flat-light'] .vsl-drawer {
 	width: 100%;
 	padding: 10px 12px;
 	border-radius: 16px;
-	border: 1px solid rgba(255, 255, 255, 0.14);
-	background: rgba(255, 255, 255, 0.06);
-	color: inherit;
+	border: 1px solid var(--vsl-hairline) !important;
+	background: var(--vsl-surface) !important;
+	color: var(--vsl-text) !important;
 	text-align: left;
 	cursor: pointer;
-	transition: border-color 0.18s ease, background 0.18s ease;
-}
-
-html[data-vtheme='flat-light'] .vsl-theme-option {
-	border-color: #e2e8f0;
-	background: #f8fafc;
+	transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
 }
 
 .vsl-theme-option:hover,
 .vsl-theme-option.is-active {
-	border-color: #60a5fa;
-	background: rgba(96, 165, 250, 0.14);
+	border-color: #60a5fa !important;
+	background: var(--vsl-surface-hover) !important;
+	color: var(--vsl-text) !important;
 }
 
 .vsl-theme-swatch {

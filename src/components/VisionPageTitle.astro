@@ -1,0 +1,7 @@
+---
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+
+const isSplashHome = Astro.url.pathname === '/';
+---
+
+{!isSplashHome && <Default />}
