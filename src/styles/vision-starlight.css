@@ -778,6 +778,12 @@ html[data-has-sidebar] .vsl-window nav.sidebar {
 	}
 }
 
+.vsl-window [popover] {
+	border: 0 !important;
+	margin: 0 !important;
+	box-shadow: none !important;
+}
+
 html[data-has-sidebar] .vsl-window .sidebar-pane {
 	position: sticky !important;
 	inset: unset !important;
@@ -849,6 +855,12 @@ html:not([data-has-sidebar]) .vsl-window .sl-markdown-content {
 	}
 	.vsl-window .right-sidebar a {
 		overflow-wrap: break-word;
+	}
+	.vsl-window .right-sidebar .sl-container,
+	.vsl-window .right-sidebar .right-sidebar-panel {
+		width: 100% !important;
+		max-width: 100% !important;
+		padding-inline: 0 !important;
 	}
 	.vsl-window .main-pane {
 		flex: 1 1 0%;
@@ -1753,6 +1765,15 @@ html[data-vtheme='flat-light'] .vsl-drawer {
 .vsl-toast.is-shown {
 	opacity: 1;
 	transform: translateY(0);
+}
+
+html[data-vtheme='flat-light'] .vsl-toast {
+	background: #0f172a;
+	color: #ffffff;
+}
+
+html[data-vtheme='flat-light'] .vsl-dock-btn:not(.is-active) {
+	color: #334155;
 }
 
 /* ==========================================================================
