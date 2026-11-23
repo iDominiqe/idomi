@@ -8,7 +8,41 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'iDominiqe',
-			description: 'iDominiqe — Astro Starlight Hub, Projects & Documentation',
+			description: 'iDominiqe — VisionOS Spatial Hub, Engineering Blog & Live WebGL Ecosystem',
+			customCss: ['./src/styles/vision-starlight.css'],
+			components: {
+				PageFrame: './src/components/VisionPageFrame.astro',
+				Header: './src/components/VisionHeader.astro',
+			},
+			head: [
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'preconnect',
+						href: 'https://fonts.googleapis.com',
+					},
+				},
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'preconnect',
+						href: 'https://fonts.gstatic.com',
+						crossorigin: true,
+					},
+				},
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'stylesheet',
+						href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap',
+					},
+				},
+				{
+					tag: 'script',
+					content:
+						"(()=>{try{const t=localStorage.getItem('vslTheme')||'loft';const m=t==='flat-light'?'light':'dark';document.documentElement.dataset.vtheme=t;document.documentElement.dataset.theme=m;localStorage.setItem('starlight-theme',m);}catch(e){document.documentElement.dataset.vtheme='loft';document.documentElement.dataset.theme='dark';}})();",
+				},
+			],
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/iDominiqe' },
 				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/f5wGW62Jsy' },
@@ -19,14 +53,19 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [
-						{ label: 'Getting Started', slug: 'guides/getting-started' },
-					],
-				},
-				{
 					label: 'Projects',
 					items: [{ autogenerate: { directory: 'projects' } }],
+				},
+				{
+					label: 'Engineering Blog',
+					items: [{ autogenerate: { directory: 'blog' } }],
+				},
+				{
+					label: 'Guides & Themes',
+					items: [
+						{ label: 'Getting Started', slug: 'guides/getting-started' },
+						{ label: 'Theme Studio & Presets', slug: 'guides/themes' },
+					],
 				},
 				{
 					label: 'Reference',

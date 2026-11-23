@@ -1,56 +1,11 @@
 ---
-title: iDominiqe
-description: Interactive 3D WebGL projects, technical documentation, and spatial web engineering powered by Astro Starlight.
+title: iDominiqe — Spatial Web Hub
+description: VisionOS Spatial Glass Interface on Astro Starlight featuring live WebGL builds, engineering blog, and theme studio.
 template: splash
-hero:
-  tagline: Astro Starlight core hub for iDominiqe — live 3D WebGL ecosystems, cloud architecture, and modular documentation.
-  image:
-    file: ../../assets/hero-orb.svg
-    alt: iDominiqe Spatial Geometric Emblem
-  actions:
-    - text: Getting Started
-      link: /guides/getting-started/
-      icon: right-arrow
-    - text: Open VisionOS Portfolio
-      link: https://portfolio.idominiqe.com/
-      icon: external
-      variant: minimal
+tableOfContents: false
+pagefind: false
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import VisionDashboard from '../../components/VisionDashboard.astro';
 
-## Live iDominiqe Ecosystem
-
-<CardGrid stagger>
-	<LinkCard
-		title="VisionOS Spatial Portfolio"
-		description="Standalone smoked-glass single-screen dashboard with live Google Weather bar, services configurator, and engineering blog."
-		href="https://portfolio.idominiqe.com/"
-	/>
-	<LinkCard
-		title="NEO Smart-City v3"
-		description="Photorealistic SolarSync studio-daylight 3D WebGL smart city command center with RoomEnvironment PBR and WASM."
-		href="https://smartcity-v3.idominiqe.com/"
-	/>
-	<LinkCard
-		title="NEO Smart-City v2 & v1"
-		description="Low-PC WebGL + GLSL topographic smart energy city ecosystems and interactive ROI calculators."
-		href="https://smartcity-v2.idominiqe.com/"
-	/>
-	<LinkCard
-		title="BLAZE // RE41 & CYBER OF X"
-		description="Tactical 3D cyberpunk WebGL HUD with procedural Web Audio synth and spatial metaverse portal."
-		href="https://blaze.idominiqe.com/"
-	/>
-</CardGrid>
-
-## Architecture Quick Links
-
-<CardGrid>
-	<Card title="Ecosystem Directory" icon="rocket">
-		Explore every live repository and subdomain in [the Ecosystem Guide](/projects/ecosystem/).
-	</Card>
-	<Card title="Infrastructure & DNS" icon="setting">
-		See how GitHub Actions, Starlight, and Cloudflare Edge wire together in [Architecture Reference](/reference/architecture/).
-	</Card>
-</CardGrid>
+<VisionDashboard />

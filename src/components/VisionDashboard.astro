@@ -1,0 +1,399 @@
+---
+import { PROJECTS, BLOG_POSTS } from '../data/ecosystem';
+
+const featuredRail = PROJECTS.slice(0, 3);
+const bottomStrip = PROJECTS.slice(3, 7);
+const initialHero = PROJECTS[0];
+---
+
+<div class="vsl-dash" id="vsl-dashboard">
+	<!-- Left Bento Rail (Matches Reference Left Stack) -->
+	<aside class="vsl-rail" aria-label="Featured builds and recent blog">
+		<!-- Top Card: Featured Builds -->
+		<section class="vsl-rail-card" data-tile="1">
+			<div class="vsl-rail-head">
+				<h2 class="vsl-rail-title">
+					<span aria-hidden="true" style="color:#fb923c;">✦</span>
+					Featured Builds
+				</h2>
+				<a href="/projects/ecosystem/" class="vsl-rail-meta" style="text-decoration:none;">8 Live ⇅</a>
+			</div>
+
+			<div class="vsl-mini-stack">
+				{featuredRail.map((project, idx) => (
+					<div
+						class="vsl-mini-card"
+						role="button"
+						tabindex="0"
+						data-spotlight-idx={idx}
+						style={`background-image:${project.gradient}`}
+						aria-label={`Spotlight ${project.title}`}
+					>
+						<svg
+							style="position:absolute;right:0;top:0;width:58%;height:100%;opacity:0.25;pointer-events:none;"
+							viewBox="0 0 180 100"
+							fill="none"
+						>
+							<circle cx="135" cy="30" r="36" stroke="#ffffff" stroke-width="1" stroke-dasharray="4 4" />
+							<path d="M90 85 L125 35 L165 65" stroke={project.accent} stroke-width="1.6" />
+							<circle cx="125" cy="35" r="3.5" fill={project.accent} />
+						</svg>
+						<div class="vsl-mini-info">
+							<div class="vsl-mini-tag">{project.badge}</div>
+							<div class="vsl-mini-title">{project.title}</div>
+						</div>
+						<button
+							type="button"
+							class="vsl-mini-play"
+							data-preview-id={project.id}
+							title={`Preview ${project.title}`}
+							aria-label={`Open preview for ${project.title}`}
+						>
+							<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+								<polygon points="6 4 20 12 6 20 6 4" />
+							</svg>
+						</button>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<!-- Bottom Card: Recent Blog & Infrastructure Nodes -->
+		<section class="vsl-rail-card" data-tile="2">
+			<div class="vsl-rail-head">
+				<h2 class="vsl-rail-title">Recent Blog & Nodes</h2>
+				<a href="/blog/" class="vsl-see-all" style="padding:3px 9px;font-size:0.7rem;">All</a>
+			</div>
+
+			<div class="vsl-blog-rail">
+				{BLOG_POSTS.map((post, i) => (
+					<a href={post.href} class="vsl-blog-row">
+						<span class="vsl-blog-thumb" style={`background:linear-gradient(135deg, ${post.accent}, #18181b)`}>
+							{`0${i + 1}`}
+						</span>
+						<span class="vsl-blog-row-body">
+							<span class="vsl-blog-row-title" style="display:block;">{post.title}</span>
+							<span class="vsl-blog-row-meta">{post.category} · {post.readTime}</span>
+						</span>
+						<span class="vsl-blog-row-go" aria-hidden="true">→</span>
+					</a>
+				))}
+			</div>
+		</section>
+	</aside>
+
+	<!-- Right Main Stage Column -->
+	<div class="vsl-main-col">
+		<!-- Hero Spotlight Stage -->
+		<section class="vsl-hero" id="vsl-hero" data-tile="3" aria-label="Featured Ecosystem Spotlight">
+			<div class="vsl-hero-art">
+				<div class="vsl-hero-mesh" id="vsl-hero-mesh" style={`background:${initialHero.gradient}`}></div>
+				<svg class="vsl-hero-grid-svg" viewBox="0 0 560 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<circle cx="380" cy="185" r="142" stroke="#ffffff" stroke-opacity="0.32" stroke-width="1" stroke-dasharray="5 6" />
+					<circle cx="380" cy="185" r="96" stroke="#ffffff" stroke-opacity="0.45" stroke-width="1.2" />
+					<circle cx="380" cy="185" r="46" stroke="#60a5fa" stroke-width="1.5" />
+					<polygon points="380,68 488,242 272,242" stroke="#ffffff" stroke-opacity="0.38" stroke-width="1.1" fill="rgba(255,255,255,0.03)" />
+					<path d="M180 310 L280 220 L380 250 L495 140" stroke="#ffffff" stroke-opacity="0.45" stroke-width="1.4" />
+					<circle cx="380" cy="68" r="5" fill="#ffffff" />
+					<circle cx="488" cy="242" r="4" fill="#60a5fa" />
+					<circle cx="272" cy="242" r="4" fill="#34d399" />
+				</svg>
+				<div class="vsl-hero-scrim"></div>
+			</div>
+
+			<div class="vsl-hero-top">
+				<div class="vsl-hot-badge">
+					<span aria-hidden="true">✦</span>
+					<span id="vsl-hero-badge">{initialHero.badge}</span>
+				</div>
+				<div class="vsl-hero-dots" id="vsl-hero-dots" role="tablist" aria-label="Spotlight slides">
+					{PROJECTS.map((p, idx) => (
+						<button
+							type="button"
+							class={`vsl-hero-dot ${idx === 0 ? 'is-active' : ''}`}
+							data-dot-idx={idx}
+							aria-label={`Show ${p.title}`}
+						></button>
+					))}
+				</div>
+			</div>
+
+			<div class="vsl-hero-body">
+				<div class="vsl-tag-row" id="vsl-hero-tags">
+					{initialHero.tags.map((tag) => (
+						<span class="vsl-chip">{tag}</span>
+					))}
+				</div>
+				<h1 class="vsl-hero-title" id="vsl-hero-title">{initialHero.title}</h1>
+				<p class="vsl-hero-desc" id="vsl-hero-desc">{initialHero.description}</p>
+			</div>
+
+			<div class="vsl-hero-footer">
+				<div class="vsl-cta-group">
+					<button type="button" id="vsl-hero-preview-btn" class="vsl-btn-white" data-preview-id={initialHero.id}>
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+							<polygon points="5 3 19 12 5 21 5 3" />
+						</svg>
+						<span>Live Preview</span>
+					</button>
+					<a
+						id="vsl-hero-visit"
+						href={initialHero.liveUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="vsl-btn-glass"
+					>
+						<span>Open Site</span>
+						<span aria-hidden="true">↗</span>
+					</a>
+					<a
+						id="vsl-hero-repo"
+						href={initialHero.repoUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="vsl-btn-circle"
+						title={`Source: ${initialHero.repoName}`}
+						aria-label="Open GitHub repository"
+					>
+						•••
+					</a>
+				</div>
+
+				<div class="vsl-carousel-arrows">
+					<button type="button" id="vsl-hero-prev" class="vsl-btn-circle" aria-label="Previous project">
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="15 18 9 12 15 6" />
+						</svg>
+					</button>
+					<button type="button" id="vsl-hero-next" class="vsl-btn-circle" aria-label="Next project">
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="9 18 15 12 9 6" />
+						</svg>
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- Bottom 4-Tile Poster Strip ("You might like" -> "Explore Ecosystem") -->
+		<section data-tile="4" aria-label="Explore Ecosystem">
+			<div class="vsl-strip-head">
+				<h2 class="vsl-strip-title">Explore Ecosystem</h2>
+				<a href="/projects/ecosystem/" class="vsl-see-all">See all 8 →</a>
+			</div>
+
+			<div class="vsl-posters-grid" style="margin-top:12px;">
+				{bottomStrip.map((project, idx) => (
+					<article class="vsl-poster-card" style={`background-image:${project.gradient}`} data-tile={String(idx + 5)}>
+						<svg
+							style="position:absolute;inset:0;width:100%;height:100%;opacity:0.24;pointer-events:none;"
+							viewBox="0 0 240 240"
+							fill="none"
+						>
+							<circle cx="170" cy="66" r="54" stroke="#ffffff" stroke-width="1" stroke-dasharray="4 5" />
+							<polygon points="60,150 128,68 196,150" stroke={project.accent} stroke-width="1.4" />
+							<line x1="20" y1="190" x2="220" y2="115" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1" />
+						</svg>
+
+						<div class="vsl-poster-top">
+							<a
+								href={project.repoUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="vsl-poster-more"
+								title={`GitHub: ${project.repoName}`}
+								aria-label={`Open ${project.repoName}`}
+							>
+								•••
+							</a>
+						</div>
+
+						<div class="vsl-poster-bottom">
+							<div class="vsl-poster-info">
+								<span class="vsl-poster-pill">{project.badge}</span>
+								<div class="vsl-poster-title">{project.shortTitle}</div>
+								<div class="vsl-poster-desc">{project.description}</div>
+							</div>
+							<button
+								type="button"
+								class="vsl-poster-play"
+								data-preview-id={project.id}
+								title={`Preview ${project.title}`}
+								aria-label={`Live preview ${project.title}`}
+							>
+								<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+									<polygon points="6 4 20 12 6 20 6 4" />
+								</svg>
+							</button>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+	</div>
+</div>
+
+<!-- Live Project Preview Modal -->
+<div id="vsl-preview-modal" class="vsl-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="vsl-modal-title">
+	<div class="vsl-modal-card">
+		<div class="vsl-modal-head">
+			<div>
+				<div id="vsl-modal-badge" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.62);">
+					Live Node
+				</div>
+				<div id="vsl-modal-title" style="font-size:1.12rem;font-weight:700;">Project Preview</div>
+			</div>
+			<button type="button" id="vsl-modal-close" class="vsl-icon-btn" aria-label="Close Preview">
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+					<line x1="18" y1="6" x2="6" y2="18" />
+					<line x1="6" y1="6" x2="18" y2="18" />
+				</svg>
+			</button>
+		</div>
+
+		<div class="vsl-modal-body">
+			<div class="vsl-modal-frame-wrap" id="vsl-modal-visual">
+				<iframe
+					id="vsl-modal-iframe"
+					class="vsl-modal-iframe"
+					title="Interactive site preview"
+					loading="lazy"
+					sandbox="allow-scripts allow-same-origin allow-forms"
+				></iframe>
+			</div>
+
+			<div class="vsl-modal-specs">
+				<div>
+					<div style="font-size:0.74rem;color:rgba(255,255,255,0.6);font-family:var(--sl-font-mono);" id="vsl-modal-domain"></div>
+					<p id="vsl-modal-desc" style="font-size:0.86rem;line-height:1.58;color:rgba(255,255,255,0.88);margin:8px 0 0;"></p>
+				</div>
+
+				<div>
+					<div style="font-size:0.74rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.62);margin-bottom:6px;">
+						Key Engineering Highlights
+					</div>
+					<ul class="vsl-modal-list" id="vsl-modal-highlights"></ul>
+				</div>
+
+				<div style="margin-top:auto;display:flex;flex-wrap:wrap;gap:10px;">
+					<a id="vsl-modal-live" href="https://idominiqe.com/" target="_blank" rel="noopener noreferrer" class="vsl-btn-white">
+						Open Live Site ↗
+					</a>
+					<a id="vsl-modal-repo" href="https://github.com/iDominiqe" target="_blank" rel="noopener noreferrer" class="vsl-btn-glass">
+						GitHub Repo
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script define:vars={{ projectsData: PROJECTS }}>
+	(function () {
+		const projects = projectsData;
+		let currentIdx = 0;
+
+		const heroMesh = document.getElementById('vsl-hero-mesh');
+		const heroBadge = document.getElementById('vsl-hero-badge');
+		const heroTags = document.getElementById('vsl-hero-tags');
+		const heroTitle = document.getElementById('vsl-hero-title');
+		const heroDesc = document.getElementById('vsl-hero-desc');
+		const heroPreviewBtn = document.getElementById('vsl-hero-preview-btn');
+		const heroVisit = document.getElementById('vsl-hero-visit');
+		const heroRepo = document.getElementById('vsl-hero-repo');
+		const dotsWrap = document.getElementById('vsl-hero-dots');
+
+		function renderSpotlight(idx) {
+			currentIdx = (idx + projects.length) % projects.length;
+			const p = projects[currentIdx];
+			if (!p) return;
+
+			if (heroMesh) heroMesh.style.background = p.gradient;
+			if (heroBadge) heroBadge.textContent = p.badge;
+			if (heroTitle) heroTitle.textContent = p.title;
+			if (heroDesc) heroDesc.textContent = p.description;
+			if (heroTags) {
+				heroTags.innerHTML = p.tags
+					.map((t) => `<span class="vsl-chip">${t}</span>`)
+					.join('');
+			}
+			if (heroPreviewBtn) heroPreviewBtn.setAttribute('data-preview-id', p.id);
+			if (heroVisit) heroVisit.setAttribute('href', p.liveUrl);
+			if (heroRepo) {
+				heroRepo.setAttribute('href', p.repoUrl);
+				heroRepo.setAttribute('title', 'Source: ' + p.repoName);
+			}
+			dotsWrap?.querySelectorAll('.vsl-hero-dot').forEach((d, i) => {
+				d.classList.toggle('is-active', i === currentIdx);
+			});
+		}
+
+		document.getElementById('vsl-hero-prev')?.addEventListener('click', () => renderSpotlight(currentIdx - 1));
+		document.getElementById('vsl-hero-next')?.addEventListener('click', () => renderSpotlight(currentIdx + 1));
+
+		dotsWrap?.addEventListener('click', (e) => {
+			const btn = e.target instanceof Element ? e.target.closest('[data-dot-idx]') : null;
+			if (!btn) return;
+			renderSpotlight(Number(btn.getAttribute('data-dot-idx') || 0));
+		});
+
+		document.querySelectorAll('[data-spotlight-idx]').forEach((card) => {
+			card.addEventListener('click', (e) => {
+				if (e.target instanceof Element && e.target.closest('[data-preview-id]')) return;
+				renderSpotlight(Number(card.getAttribute('data-spotlight-idx') || 0));
+			});
+		});
+
+		// Live Preview Modal
+		const modal = document.getElementById('vsl-preview-modal');
+		const modalIframe = document.getElementById('vsl-modal-iframe');
+		const modalTitle = document.getElementById('vsl-modal-title');
+		const modalBadge = document.getElementById('vsl-modal-badge');
+		const modalDomain = document.getElementById('vsl-modal-domain');
+		const modalDesc = document.getElementById('vsl-modal-desc');
+		const modalHighlights = document.getElementById('vsl-modal-highlights');
+		const modalLive = document.getElementById('vsl-modal-live');
+		const modalRepo = document.getElementById('vsl-modal-repo');
+
+		function openPreview(projectId) {
+			const p = projects.find((item) => item.id === projectId) || projects[0];
+			if (!p || !modal) return;
+			if (modalTitle) modalTitle.textContent = p.title;
+			if (modalBadge) modalBadge.textContent = p.badge + ' · ' + p.stack;
+			if (modalDomain) modalDomain.textContent = 'https://' + p.domainLabel + '/';
+			if (modalDesc) modalDesc.textContent = p.description;
+			if (modalHighlights) {
+				modalHighlights.innerHTML = p.highlights.map((h) => `<li>${h}</li>`).join('');
+			}
+			if (modalLive) modalLive.setAttribute('href', p.liveUrl);
+			if (modalRepo) modalRepo.setAttribute('href', p.repoUrl);
+			if (modalIframe instanceof HTMLIFrameElement) {
+				modalIframe.src = p.liveUrl;
+			}
+			modal.classList.add('is-open');
+		}
+
+		function closePreview() {
+			if (!modal) return;
+			modal.classList.remove('is-open');
+			if (modalIframe instanceof HTMLIFrameElement) {
+				modalIframe.src = 'about:blank';
+			}
+		}
+
+		document.addEventListener('click', (e) => {
+			const btn = e.target instanceof Element ? e.target.closest('[data-preview-id]') : null;
+			if (!btn) return;
+			e.stopPropagation();
+			const id = btn.getAttribute('data-preview-id');
+			if (id) openPreview(id);
+		});
+
+		document.getElementById('vsl-modal-close')?.addEventListener('click', closePreview);
+		modal?.addEventListener('click', (e) => {
+			if (e.target === modal) closePreview();
+		});
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && modal?.classList.contains('is-open')) closePreview();
+		});
+	})();
+</script>

@@ -1,0 +1,33 @@
+---
+title: Engineering Blog & Security Notes
+description: Technical deep dives on DNS, authoritative NS routing, cybersecurity headers, personal data protection, and Cloudflare edge architecture.
+sidebar:
+  order: 0
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Technical field notes covering **domain architecture, cryptographic DNS, modern web security headers, privacy engineering, and Cloudflare edge caching** behind `idominiqe.com`.
+
+<CardGrid>
+	<LinkCard
+		title="DNS, NS Records & Subdomain Routing"
+		description="A, AAAA, CNAME flattening, authoritative nameservers, DNSSEC, and wildcard isolation across GitHub Pages repositories."
+		href="/blog/dns-ns-domains/"
+	/>
+	<LinkCard
+		title="Web Cybersecurity & CSP Defense"
+		description="Defense-in-depth with Content-Security-Policy, HSTS preload, Subresource Integrity, and zero-trust WAF rules."
+		href="/blog/cybersecurity-defense/"
+	/>
+	<LinkCard
+		title="Privacy & Personal Data Protection"
+		description="Zero-telemetry frontend patterns, EXIF metadata hygiene, local-first storage, and credential boundary practices."
+		href="/blog/privacy-data-protection/"
+	/>
+	<LinkCard
+		title="Cloudflare Edge & Static Delivery"
+		description="Anycast TLS 1.3 termination, cache purge workflows, HTTP/3 routing, and repo-level deployment decoupling."
+		href="/blog/cloudflare-edge-architecture/"
+	/>
+</CardGrid>

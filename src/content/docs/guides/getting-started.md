@@ -1,20 +1,21 @@
 ---
 title: Getting Started
-description: How the iDominiqe Astro Starlight core repository is structured and deployed on idominiqe.com.
+description: How the VisionOS Spatial Glass shell integrates natively on top of Astro Starlight in iDominiqe/idomi.
+sidebar:
+  order: 1
 ---
 
-Welcome to the new **`iDominiqe`** core website running on **Astro + Starlight**.
+Welcome to **`iDominiqe` (`idominiqe.com`)** — an **Astro + Starlight** documentation, engineering blog, and project ecosystem styled inside a spatial **VisionOS smoked-glass** window shell.
 
-## Repository Separation
+## What Changed in the Redesign
 
-Your web ecosystem is split into clean, independent repositories:
+1. **Detached Spatial Browser Bar**: Floating top pill showing live route status (`idominiqe.com/...`), Back/Forward controls, quick URL navigation, animation replay (`↻`), Share button, and Theme Studio launcher.
+2. **Vertical Glass Dock**: Sticky left control rail switching seamlessly between **Home (`/`)**, **Projects (`/projects/ecosystem/`)**, **Engineering Blog (`/blog/`)**, **Architecture (`/reference/architecture/`)**, and the **Theme Studio Drawer**.
+3. **Containment Architecture**: Every Starlight page (including the left navigation sidebar, Markdown/MDX docs, code blocks, Pagefind `Ctrl+K` modal search, and right-side table of contents) renders cleanly inside the floating rounded glass window.
+4. **Standalone Subdomains Stay Isolated**: [`portfolio.idominiqe.com`](https://portfolio.idominiqe.com/) (`iDominiqe/portfolio`) and [`v-2.idominiqe.com`](https://v-2.idominiqe.com/) (`iDominiqe/v-2`) continue running independently on their own branches and DNS records.
 
-- **`iDominiqe/idomi`** — Root hub on [`idominiqe.com`](https://idominiqe.com/) built with Astro & Starlight, ready for custom templates, components, and documentation.
-- **`iDominiqe/portfolio`** — Standalone VisionOS single-screen showcase hosted separately on [`portfolio.idominiqe.com`](https://portfolio.idominiqe.com/).
-- **`iDominiqe/v-2`** — Legacy Liquid Glass Bento archive preserved on [`v-2.idominiqe.com`](https://v-2.idominiqe.com/).
+## Adding Content or Themes
 
-## Customizing the Theme & Template
-
-1. Add custom CSS stylesheets in `src/styles/custom.css` and register them under `customCss` in `astro.config.mjs`.
-2. Override any built-in Starlight layout component (`Hero`, `Header`, `Sidebar`, `PageFrame`) via the `components` map in `astro.config.mjs`.
-3. Add Markdown or MDX pages under `src/content/docs/` — changes pushed to `main` automatically rebuild and publish to `idominiqe.com` via GitHub Actions.
+- **New Blog Post or Guide**: Create a `.md` or `.mdx` file under `src/content/docs/blog/` or `src/content/docs/guides/`.
+- **Edit Flagship Cards or Themes**: Update `src/data/ecosystem.ts` and customize tokens in `src/styles/vision-starlight.css`.
+- **Switch Preset Live**: Open [Website Themes & VisionOS Presets](/guides/themes/) or press the `+` / Gear button at any time.

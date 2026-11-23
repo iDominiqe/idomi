@@ -1,0 +1,40 @@
+---
+title: Website Themes & VisionOS Presets
+description: Switch between Vision Loft smoked glass, Obsidian Dark, Aurora Prism, and zero-GPU Flat Light / Flat Dark templates interactively.
+sidebar:
+  order: 2
+---
+
+import { THEMES } from '../../../data/ecosystem';
+
+Select a visual preset below to transform both the spatial shell (smoked glass backdrop, floating dock, address bar) and Starlight's typography, code blocks, and sidebar contrast immediately. Your choice is saved locally in your browser.
+
+<div class="vsl-cards-grid">
+	{THEMES.map((theme) => (
+		<div class="vsl-doc-card">
+			<div style="display:flex;align-items:center;gap:12px;">
+				<span class="vsl-theme-swatch" style={`background:${theme.swatch}`}></span>
+				<div>
+					<div style="font-weight:700;font-size:0.98rem;">{theme.name}</div>
+					<div style="font-size:0.74rem;color:var(--vsl-text-soft);">{theme.badge} · {theme.mode.toUpperCase()}</div>
+				</div>
+			</div>
+			<p style="font-size:0.84rem;color:var(--vsl-text-muted);margin:4px 0 8px;">{theme.description}</p>
+			<button
+				type="button"
+				data-vtheme-set={theme.id}
+				class="vsl-theme-option"
+				style="justify-content:center;font-weight:700;font-size:0.82rem;margin-top:auto;"
+			>
+				Activate {theme.name}
+			</button>
+		</div>
+	))}
+</div>
+
+## Flat Mode vs Spatial Smoked Glass
+
+- **Vision Loft / Obsidian / Aurora**: Layered `backdrop-filter: blur(42px)` glassmorphism panels over a soft architectural room scene or custom user wallpaper.
+- **Flat Dark & Flat Light**: Disables backdrop compositing filters (`backdrop-filter: none`) for lower GPU usage, maximum crispness on low-power devices, and classic clean documentation contrast.
+
+Need custom background photography? Click the **`+`** icon in the floating top address bar or the **gear** icon on the left vertical dock to open the **Theme Studio Drawer** from any page.

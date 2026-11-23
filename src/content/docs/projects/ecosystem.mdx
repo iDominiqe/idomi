@@ -1,0 +1,61 @@
+---
+title: Live Ecosystem Projects
+description: Directory of all 8 active WebGL, Spatial OS, Smart-City, and Astro Starlight repositories under idominiqe.com.
+sidebar:
+  order: 1
+---
+
+import { PROJECTS } from '../../../data/ecosystem';
+
+All active production builds live in dedicated GitHub repositories and route independently through Cloudflare edge DNS.
+
+<div class="vsl-cards-grid">
+	{PROJECTS.map((project) => (
+		<div class="vsl-doc-card" style="padding:18px;">
+			<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+				<span style="font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--vsl-surface-strong);color:var(--vsl-text);">
+					{project.badge}
+				</span>
+				<span style="font-size:0.72rem;color:var(--vsl-text-soft);font-family:var(--sl-font-mono);">{project.repoName}</span>
+			</div>
+			<h3 style="margin:6px 0 4px;font-size:1.05rem;">{project.title}</h3>
+			<p style="font-size:0.84rem;color:var(--vsl-text-muted);margin:0 0 10px;line-height:1.5;">
+				{project.description}
+			</p>
+			<div style="font-size:0.76rem;color:var(--vsl-text-soft);margin-bottom:10px;">
+				{project.stack}
+			</div>
+			<div style="margin-top:auto;display:flex;gap:8px;flex-wrap:wrap;">
+				<a
+					href={project.liveUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					style="padding:7px 14px;border-radius:999px;background:var(--vsl-accent);color:var(--vsl-accent-ink);font-size:0.78rem;font-weight:700;text-decoration:none;"
+				>
+					Open Site ↗
+				</a>
+				<a
+					href={project.repoUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					style="padding:7px 14px;border-radius:999px;border:1px solid var(--vsl-hairline);color:var(--vsl-text);font-size:0.78rem;font-weight:600;text-decoration:none;"
+				>
+					GitHub
+				</a>
+			</div>
+		</div>
+	))}
+</div>
+
+## Domain & Repository Matrix
+
+| Project | Live Domain | Repository | Core Stack |
+|---|---|---|---|
+| **iDominiqe Hub (Starlight)** | [idominiqe.com](https://idominiqe.com/) | `iDominiqe/idomi` | Astro 7 · Starlight · VisionOS UI |
+| **VisionOS Spatial Portfolio** | [portfolio.idominiqe.com](https://portfolio.idominiqe.com/) | `iDominiqe/portfolio` | Smoked Glass UI · Open-Meteo |
+| **NEO Smart-City v3** | [smartcity-v3.idominiqe.com](https://smartcity-v3.idominiqe.com/) | `iDominiqe/smartcity-v3` | Three.js · PBR IBL · WASM |
+| **NEO Smart-City v2** | [smartcity-v2.idominiqe.com](https://smartcity-v2.idominiqe.com/) | `iDominiqe/smartcity-v2` | Three.js · GLSL · Web Worker |
+| **NEO Smart-City v1** | [smartcity.idominiqe.com](https://smartcity.idominiqe.com/) | `iDominiqe/smartcity` | Three.js · Scroll FX · ROI |
+| **BLAZE // RE41 HUD** | [blaze.idominiqe.com](https://blaze.idominiqe.com/) | `iDominiqe/blaze-re41-hud` | Three.js · Preserve-3D · Audio |
+| **CYBER OF X Portal** | [cyber.idominiqe.com](https://cyber.idominiqe.com/) | `iDominiqe/cyber-of-x-metaverse` | WebGL · Magnetic UI · FX |
+| **Portfolio v-2 Archive** | [v-2.idominiqe.com](https://v-2.idominiqe.com/) | `iDominiqe/v-2` | Liquid Glass · Canvas 3D |
