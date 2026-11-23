@@ -483,8 +483,8 @@ html[data-vtheme='flat-light'] .vsl-icon-btn {
    ========================================================================== */
 
 .vsl-window .page {
-	display: flex !important;
-	flex-direction: column !important;
+	display: flex;
+	flex-direction: column;
 	min-height: 700px;
 	background: transparent;
 }
@@ -813,6 +813,10 @@ html:not([data-has-sidebar]) .vsl-window .main-frame {
 html:not([data-has-sidebar]) .vsl-window .content-panel {
 	border-top: 0 !important;
 	padding: 12px 24px 24px !important;
+}
+
+html:not([data-has-sidebar]) .vsl-window main > .content-panel:first-child {
+	display: none;
 }
 
 html:not([data-has-sidebar]) .vsl-window .sl-container {
