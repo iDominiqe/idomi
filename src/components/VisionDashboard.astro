@@ -1,14 +1,13 @@
 ---
-import { PROJECTS, BLOG_POSTS } from '../data/ecosystem';
+import { PROJECTS } from '../data/ecosystem';
 
 const featuredRail = PROJECTS.slice(0, 3);
-const bottomStrip = PROJECTS.slice(3, 7);
 const initialHero = PROJECTS[0];
 ---
 
 <div class="vsl-dash" id="vsl-dashboard">
-	<!-- Left Bento Rail (Matches Reference Left Stack) -->
-	<aside class="vsl-rail" aria-label="Featured builds and recent blog">
+	<!-- Left Bento Rail -->
+	<aside class="vsl-rail" aria-label="Featured builds and Chisinau weather">
 		<!-- Top Card: Featured Builds -->
 		<section class="vsl-rail-card" data-tile="1">
 			<div class="vsl-rail-head">
@@ -58,26 +57,69 @@ const initialHero = PROJECTS[0];
 			</div>
 		</section>
 
-		<!-- Bottom Card: Recent Blog & Infrastructure Nodes -->
-		<section class="vsl-rail-card" data-tile="2">
+		<!-- Bottom Card: Google-Style Weather Widget (Chișinău) -->
+		<section class="vsl-rail-card vsl-weather-card" id="vsl-weather-card" data-tile="2" aria-label="Погода в Кишинёве">
 			<div class="vsl-rail-head">
-				<h2 class="vsl-rail-title">Recent Blog & Nodes</h2>
-				<a href="/blog/" class="vsl-see-all" style="padding:3px 9px;font-size:0.7rem;">All</a>
+				<h2 class="vsl-rail-title">
+					<span class="vsl-g-dots" aria-hidden="true">
+						<i style="background:#4285F4;"></i>
+						<i style="background:#EA4335;"></i>
+						<i style="background:#FBBC05;"></i>
+						<i style="background:#34A853;"></i>
+					</span>
+					<span>Погода · Кишинёв</span>
+				</h2>
+				<div class="vsl-w-actions">
+					<button type="button" id="vsl-w-unit" class="vsl-w-chip-btn" title="Переключить °C / °F">°C</button>
+					<button type="button" id="vsl-w-refresh" class="vsl-w-chip-btn" title="Обновить погоду" aria-label="Обновить погоду">↻</button>
+					<a
+						href="https://www.google.com/search?q=weather+Chisinau"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="vsl-w-chip-btn"
+						title="Открыть в Google Погоде"
+					>
+						Google ↗
+					</a>
+				</div>
 			</div>
 
-			<div class="vsl-blog-rail">
-				{BLOG_POSTS.map((post, i) => (
-					<a href={post.href} class="vsl-blog-row">
-						<span class="vsl-blog-thumb" style={`background:linear-gradient(135deg, ${post.accent}, #18181b)`}>
-							{`0${i + 1}`}
-						</span>
-						<span class="vsl-blog-row-body">
-							<span class="vsl-blog-row-title" style="display:block;">{post.title}</span>
-							<span class="vsl-blog-row-meta">{post.category} · {post.readTime}</span>
-						</span>
-						<span class="vsl-blog-row-go" aria-hidden="true">→</span>
-					</a>
-				))}
+			<div class="vsl-w-main">
+				<div class="vsl-w-hero-left">
+					<div id="vsl-w-icon" class="vsl-w-icon" aria-hidden="true">
+						<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="4.5" fill="rgba(251,191,36,0.22)" />
+							<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+						</svg>
+					</div>
+					<div id="vsl-w-temp" class="vsl-w-temp">--°</div>
+				</div>
+				<div class="vsl-w-hero-right">
+					<div id="vsl-w-cond" class="vsl-w-cond">Загрузка...</div>
+					<div id="vsl-w-feels" class="vsl-w-sub">Кишинёв · Europe/Chisinau</div>
+				</div>
+			</div>
+
+			<div class="vsl-w-metrics">
+				<div class="vsl-w-metric">
+					<span class="vsl-w-metric-label">Влажность</span>
+					<strong id="vsl-w-hum">--%</strong>
+				</div>
+				<div class="vsl-w-metric">
+					<span class="vsl-w-metric-label">Ветер</span>
+					<strong id="vsl-w-wind">-- км/ч</strong>
+				</div>
+				<div class="vsl-w-metric">
+					<span class="vsl-w-metric-label">Время MD</span>
+					<strong id="vsl-w-time">--:--</strong>
+				</div>
+			</div>
+
+			<div id="vsl-w-forecast" class="vsl-w-days" aria-label="Прогноз на 4 дня">
+				<div class="vsl-w-day"><span>--</span><strong>--° / --°</strong></div>
+				<div class="vsl-w-day"><span>--</span><strong>--° / --°</strong></div>
+				<div class="vsl-w-day"><span>--</span><strong>--° / --°</strong></div>
+				<div class="vsl-w-day"><span>--</span><strong>--° / --°</strong></div>
 			</div>
 		</section>
 	</aside>
@@ -174,60 +216,83 @@ const initialHero = PROJECTS[0];
 			</div>
 		</section>
 
-		<!-- Bottom 4-Tile Poster Strip ("You might like" -> "Explore Ecosystem") -->
-		<section data-tile="4" aria-label="Explore Ecosystem">
-			<div class="vsl-strip-head">
-				<h2 class="vsl-strip-title">Explore Ecosystem</h2>
-				<a href="/projects/ecosystem/" class="vsl-see-all">See all 8 →</a>
+		<!-- Bottom Card: Two-Way Live Chat with Telegram Bot -->
+		<section class="vsl-chat-card" id="vsl-chat-card" data-tile="4" aria-label="Прямой чат с iDominiqe в Telegram">
+			<div class="vsl-chat-head">
+				<div class="vsl-chat-title-wrap">
+					<span class="vsl-chat-dot" id="vsl-chat-dot" aria-hidden="true"></span>
+					<div>
+						<h2 class="vsl-strip-title" style="display:flex;align-items:center;gap:8px;">
+							<span>Чат с iDominiqe</span>
+							<span class="vsl-chat-status" id="vsl-chat-status">Telegram Live</span>
+						</h2>
+					</div>
+				</div>
+
+				<div class="vsl-chat-tools">
+					<input
+						id="vsl-chat-name"
+						class="vsl-chat-name"
+						type="text"
+						maxlength="48"
+						placeholder="Ваше имя"
+						aria-label="Ваше имя"
+					/>
+					<a
+						href="https://t.me/idominiqe"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="vsl-see-all"
+					>
+						@idominiqe ↗
+					</a>
+					<button
+						type="button"
+						id="vsl-chat-reset"
+						class="vsl-w-chip-btn"
+						title="Очистить локальную историю чата"
+						aria-label="Новый диалог"
+					>
+						↻
+					</button>
+				</div>
 			</div>
 
-			<div class="vsl-posters-grid" style="margin-top:12px;">
-				{bottomStrip.map((project, idx) => (
-					<article class="vsl-poster-card" style={`background-image:${project.gradient}`} data-tile={String(idx + 5)}>
-						<svg
-							style="position:absolute;inset:0;width:100%;height:100%;opacity:0.24;pointer-events:none;"
-							viewBox="0 0 240 240"
-							fill="none"
-						>
-							<circle cx="170" cy="66" r="54" stroke="#ffffff" stroke-width="1" stroke-dasharray="4 5" />
-							<polygon points="60,150 128,68 196,150" stroke={project.accent} stroke-width="1.4" />
-							<line x1="20" y1="190" x2="220" y2="115" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1" />
-						</svg>
-
-						<div class="vsl-poster-top">
-							<a
-								href={project.repoUrl}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="vsl-poster-more"
-								title={`GitHub: ${project.repoName}`}
-								aria-label={`Open ${project.repoName}`}
-							>
-								•••
-							</a>
-						</div>
-
-						<div class="vsl-poster-bottom">
-							<div class="vsl-poster-info">
-								<span class="vsl-poster-pill">{project.badge}</span>
-								<div class="vsl-poster-title">{project.shortTitle}</div>
-								<div class="vsl-poster-desc">{project.description}</div>
-							</div>
-							<button
-								type="button"
-								class="vsl-poster-play"
-								data-preview-id={project.id}
-								title={`Preview ${project.title}`}
-								aria-label={`Live preview ${project.title}`}
-							>
-								<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-									<polygon points="6 4 20 12 6 20 6 4" />
-								</svg>
-							</button>
-						</div>
-					</article>
-				))}
+			<div class="vsl-chat-chips" aria-label="Быстрые темы">
+				<button type="button" class="vsl-chat-chip" data-chat-prompt="Привет! Хочу обсудить создание сайта или веб-приложения.">🚀 Заказать сайт</button>
+				<button type="button" class="vsl-chat-chip" data-chat-prompt="Интересует 3D-сцена на Three.js / WebGL для проекта.">🧊 3D / WebGL</button>
+				<button type="button" class="vsl-chat-chip" data-chat-prompt="Есть вопрос по DNS, Cloudflare, домену или кибербезопасности.">🛡️ DNS & Security</button>
+				<button type="button" class="vsl-chat-chip" data-chat-prompt="Привет! Хотел задать вопрос по проектам.">👋 Вопрос</button>
 			</div>
+
+			<div class="vsl-chat-messages" id="vsl-chat-messages" aria-live="polite">
+				<div class="vsl-msg vsl-msg--owner">
+					<div class="vsl-msg-meta">iDominiqe · Telegram</div>
+					<div class="vsl-msg-text">
+						Привет! Напишите сообщение ниже — оно мгновенно уйдёт мне в Telegram, а ответ появится прямо здесь в чате.
+					</div>
+				</div>
+			</div>
+
+			<form class="vsl-chat-form" id="vsl-chat-form">
+				<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
+				<input
+					id="vsl-chat-input"
+					class="vsl-chat-input"
+					type="text"
+					maxlength="800"
+					required
+					placeholder="Напишите сообщение — оно сразу уйдёт мне в Telegram..."
+					aria-label="Сообщение в Telegram"
+				/>
+				<button type="submit" id="vsl-chat-send" class="vsl-chat-send">
+					<span>Отправить</span>
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="22" y1="2" x2="11" y2="13" />
+						<polygon points="22 2 15 22 11 13 2 9 22 2" />
+					</svg>
+				</button>
+			</form>
 		</section>
 	</div>
 </div>
@@ -289,6 +354,7 @@ const initialHero = PROJECTS[0];
 
 <script define:vars={{ projectsData: PROJECTS }}>
 	(function () {
+		// ======================== 1. HERO SPOTLIGHT & MODAL ========================
 		const projects = projectsData;
 		let currentIdx = 0;
 
@@ -312,9 +378,13 @@ const initialHero = PROJECTS[0];
 			if (heroTitle) heroTitle.textContent = p.title;
 			if (heroDesc) heroDesc.textContent = p.description;
 			if (heroTags) {
-				heroTags.innerHTML = p.tags
-					.map((t) => `<span class="vsl-chip">${t}</span>`)
-					.join('');
+				heroTags.replaceChildren();
+				p.tags.forEach((t) => {
+					const chip = document.createElement('span');
+					chip.className = 'vsl-chip';
+					chip.textContent = t;
+					heroTags.appendChild(chip);
+				});
 			}
 			if (heroPreviewBtn) heroPreviewBtn.setAttribute('data-preview-id', p.id);
 			if (heroVisit) heroVisit.setAttribute('href', p.liveUrl);
@@ -343,7 +413,6 @@ const initialHero = PROJECTS[0];
 			});
 		});
 
-		// Live Preview Modal
 		const modal = document.getElementById('vsl-preview-modal');
 		const modalIframe = document.getElementById('vsl-modal-iframe');
 		const modalTitle = document.getElementById('vsl-modal-title');
@@ -362,7 +431,12 @@ const initialHero = PROJECTS[0];
 			if (modalDomain) modalDomain.textContent = 'https://' + p.domainLabel + '/';
 			if (modalDesc) modalDesc.textContent = p.description;
 			if (modalHighlights) {
-				modalHighlights.innerHTML = p.highlights.map((h) => `<li>${h}</li>`).join('');
+				modalHighlights.replaceChildren();
+				p.highlights.forEach((h) => {
+					const li = document.createElement('li');
+					li.textContent = h;
+					modalHighlights.appendChild(li);
+				});
 			}
 			if (modalLive) modalLive.setAttribute('href', p.liveUrl);
 			if (modalRepo) modalRepo.setAttribute('href', p.repoUrl);
@@ -395,5 +469,430 @@ const initialHero = PROJECTS[0];
 		document.addEventListener('keydown', (e) => {
 			if (e.key === 'Escape' && modal?.classList.contains('is-open')) closePreview();
 		});
+
+		// ======================== 2. CHISINAU WEATHER WIDGET ========================
+		const WEATHER_API =
+			'https://api.open-meteo.com/v1/forecast?latitude=47.0105&longitude=28.8638&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Europe%2FChisinau&forecast_days=4';
+		const WEATHER_CACHE_KEY = 'vslChisinauWeather';
+		const WEATHER_UNIT_KEY = 'vslWeatherUnit';
+		let weatherUnit = (() => {
+			try {
+				return localStorage.getItem(WEATHER_UNIT_KEY) === 'F' ? 'F' : 'C';
+			} catch (_) {
+				return 'C';
+			}
+		})();
+		let latestWeatherPayload = null;
+
+		const wUnitBtn = document.getElementById('vsl-w-unit');
+		const wRefreshBtn = document.getElementById('vsl-w-refresh');
+		const wIconEl = document.getElementById('vsl-w-icon');
+		const wTempEl = document.getElementById('vsl-w-temp');
+		const wCondEl = document.getElementById('vsl-w-cond');
+		const wFeelsEl = document.getElementById('vsl-w-feels');
+		const wHumEl = document.getElementById('vsl-w-hum');
+		const wWindEl = document.getElementById('vsl-w-wind');
+		const wTimeEl = document.getElementById('vsl-w-time');
+		const wForecastEl = document.getElementById('vsl-w-forecast');
+
+		function updateChisinauClock() {
+			if (!wTimeEl) return;
+			try {
+				wTimeEl.textContent = new Intl.DateTimeFormat('ru-RU', {
+					timeZone: 'Europe/Chisinau',
+					hour: '2-digit',
+					minute: '2-digit',
+				}).format(new Date());
+			} catch (_) {
+				wTimeEl.textContent = '--:--';
+			}
+		}
+		updateChisinauClock();
+		setInterval(updateChisinauClock, 30000);
+
+		function weatherMeta(code, isDay = 1) {
+			if (code === 0) return { label: isDay ? 'Ясно' : 'Ясная ночь', kind: isDay ? 'sun' : 'moon' };
+			if (code === 1 || code === 2) return { label: 'Малооблачно', kind: 'partly' };
+			if (code === 3) return { label: 'Облачно', kind: 'cloud' };
+			if (code === 45 || code === 48) return { label: 'Туман', kind: 'cloud' };
+			if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return { label: 'Дождь', kind: 'rain' };
+			if ([71, 73, 75, 77, 85, 86].includes(code)) return { label: 'Снег', kind: 'snow' };
+			if ([95, 96, 99].includes(code)) return { label: 'Гроза', kind: 'storm' };
+			return { label: 'Переменно', kind: 'partly' };
+		}
+
+		function createWeatherSvg(kind, size = 38) {
+			const ns = 'http://www.w3.org/2000/svg';
+			const svg = document.createElementNS(ns, 'svg');
+			svg.setAttribute('width', String(size));
+			svg.setAttribute('height', String(size));
+			svg.setAttribute('viewBox', '0 0 24 24');
+			svg.setAttribute('fill', 'none');
+			svg.setAttribute('stroke-width', '1.8');
+			svg.setAttribute('stroke-linecap', 'round');
+			svg.setAttribute('stroke-linejoin', 'round');
+
+			if (kind === 'sun') {
+				svg.setAttribute('stroke', '#fbbf24');
+				const c = document.createElementNS(ns, 'circle');
+				c.setAttribute('cx', '12');
+				c.setAttribute('cy', '12');
+				c.setAttribute('r', '4.5');
+				c.setAttribute('fill', 'rgba(251,191,36,0.24)');
+				const p = document.createElementNS(ns, 'path');
+				p.setAttribute('d', 'M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41');
+				svg.append(c, p);
+			} else if (kind === 'moon') {
+				svg.setAttribute('stroke', '#93c5fd');
+				const p = document.createElementNS(ns, 'path');
+				p.setAttribute('d', 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z');
+				p.setAttribute('fill', 'rgba(147,197,253,0.2)');
+				svg.appendChild(p);
+			} else if (kind === 'rain' || kind === 'storm') {
+				svg.setAttribute('stroke', kind === 'storm' ? '#facc15' : '#60a5fa');
+				const p1 = document.createElementNS(ns, 'path');
+				p1.setAttribute('d', 'M17.5 16H7a4 4 0 0 1-.4-7.98A5.5 5.5 0 0 1 17.2 7.2 3.5 3.5 0 0 1 17.5 16Z');
+				p1.setAttribute('stroke', '#cbd5e1');
+				const p2 = document.createElementNS(ns, 'path');
+				p2.setAttribute('d', kind === 'storm' ? 'M13 15l-2 4h3l-2 4' : 'M9 19l-1 3M13 19l-1 3M17 19l-1 3');
+				svg.append(p1, p2);
+			} else if (kind === 'snow') {
+				svg.setAttribute('stroke', '#e0f2fe');
+				const p = document.createElementNS(ns, 'path');
+				p.setAttribute('d', 'M17.5 16H7a4 4 0 0 1-.4-7.98A5.5 5.5 0 0 1 17.2 7.2 3.5 3.5 0 0 1 17.5 16ZM9 19.5h.01M13 20h.01M16.5 19.5h.01');
+				svg.appendChild(p);
+			} else {
+				const s = document.createElementNS(ns, 'circle');
+				if (kind === 'partly') {
+					s.setAttribute('cx', '9');
+					s.setAttribute('cy', '9');
+					s.setAttribute('r', '3.5');
+					s.setAttribute('stroke', '#fbbf24');
+					s.setAttribute('fill', 'rgba(251,191,36,0.22)');
+					svg.appendChild(s);
+				}
+				const c = document.createElementNS(ns, 'path');
+				c.setAttribute('d', 'M17.5 18H7.5a4 4 0 0 1-.3-7.99A5 5 0 0 1 16.8 9.2 3.5 3.5 0 0 1 17.5 18Z');
+				c.setAttribute('stroke', '#e2e8f0');
+				c.setAttribute('fill', 'rgba(226,232,240,0.16)');
+				svg.appendChild(c);
+			}
+			return svg;
+		}
+
+		function fmtTemp(celsius) {
+			const val = weatherUnit === 'F' ? (Number(celsius) * 9) / 5 + 32 : Number(celsius);
+			return `${Math.round(val)}°`;
+		}
+
+		function renderWeather(data) {
+			if (!data?.current || !data?.daily) return;
+			latestWeatherPayload = data;
+			if (wUnitBtn) wUnitBtn.textContent = `°${weatherUnit}`;
+
+			const cur = data.current;
+			const meta = weatherMeta(Number(cur.weather_code), Number(cur.is_day ?? 1));
+			if (wIconEl) {
+				wIconEl.replaceChildren(createWeatherSvg(meta.kind, 38));
+			}
+			if (wTempEl) wTempEl.textContent = fmtTemp(cur.temperature_2m);
+			if (wCondEl) wCondEl.textContent = meta.label;
+			if (wFeelsEl) wFeelsEl.textContent = `Ощущается как ${fmtTemp(cur.apparent_temperature)} · °${weatherUnit}`;
+			if (wHumEl) wHumEl.textContent = `${Math.round(Number(cur.relative_humidity_2m))}%`;
+			if (wWindEl) wWindEl.textContent = `${Math.round(Number(cur.wind_speed_10m))} км/ч`;
+
+			if (wForecastEl && Array.isArray(data.daily.time)) {
+				wForecastEl.replaceChildren();
+				const dayFmt = new Intl.DateTimeFormat('ru-RU', { weekday: 'short', timeZone: 'Europe/Chisinau' });
+				data.daily.time.slice(0, 4).forEach((isoDate, i) => {
+					const box = document.createElement('div');
+					box.className = 'vsl-w-day';
+
+					const nameEl = document.createElement('span');
+					nameEl.textContent = i === 0 ? 'Сег' : dayFmt.format(new Date(`${isoDate}T12:00:00Z`)).replace('.', '');
+
+					const code = Number(data.daily.weather_code?.[i] ?? 1);
+					const miniIcon = createWeatherSvg(weatherMeta(code, 1).kind, 18);
+
+					const tempsEl = document.createElement('strong');
+					const hi = fmtTemp(data.daily.temperature_2m_max?.[i] ?? 0);
+					const lo = fmtTemp(data.daily.temperature_2m_min?.[i] ?? 0);
+					tempsEl.textContent = `${hi} ${lo}`;
+
+					box.append(nameEl, miniIcon, tempsEl);
+					wForecastEl.appendChild(box);
+				});
+			}
+		}
+
+		async function loadWeather(forceFresh = false) {
+			if (!forceFresh) {
+				try {
+					const raw = sessionStorage.getItem(WEATHER_CACHE_KEY);
+					if (raw) {
+						const cached = JSON.parse(raw);
+						if (cached?.ts && Date.now() - cached.ts < 600000 && cached.data) {
+							renderWeather(cached.data);
+							return;
+						}
+					}
+				} catch (_) {}
+			}
+
+			try {
+				const res = await fetch(WEATHER_API);
+				if (!res.ok) throw new Error('Weather API HTTP ' + res.status);
+				const data = await res.json();
+				try {
+					sessionStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify({ ts: Date.now(), data }));
+				} catch (_) {}
+				renderWeather(data);
+			} catch (_) {
+				if (wCondEl) wCondEl.textContent = 'Нет связи · откройте Google';
+			}
+		}
+
+		wUnitBtn?.addEventListener('click', () => {
+			weatherUnit = weatherUnit === 'C' ? 'F' : 'C';
+			try {
+				localStorage.setItem(WEATHER_UNIT_KEY, weatherUnit);
+			} catch (_) {}
+			if (latestWeatherPayload) renderWeather(latestWeatherPayload);
+		});
+
+		wRefreshBtn?.addEventListener('click', () => {
+			loadWeather(true);
+			window.__vslToast?.('Погода Кишинёва обновлена');
+		});
+
+		loadWeather(false);
+
+		// ======================== 3. LIVE TELEGRAM CHAT ========================
+		const isLocalHost = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+		const CHAT_API = isLocalHost ? 'https://idominiqe.com/api/chat' : '/api/chat';
+		const CHAT_SESSION_KEY = 'vslChatSession';
+		const CHAT_NAME_KEY = 'vslChatName';
+
+		const chatDot = document.getElementById('vsl-chat-dot');
+		const chatStatusEl = document.getElementById('vsl-chat-status');
+		const chatNameInput = document.getElementById('vsl-chat-name');
+		const chatMessagesEl = document.getElementById('vsl-chat-messages');
+		const chatForm = document.getElementById('vsl-chat-form');
+		const chatInput = document.getElementById('vsl-chat-input');
+		const chatSendBtn = document.getElementById('vsl-chat-send');
+		const chatResetBtn = document.getElementById('vsl-chat-reset');
+
+		let chatState = (() => {
+			try {
+				const raw = localStorage.getItem(CHAT_SESSION_KEY);
+				return raw ? JSON.parse(raw) : { sessionId: '', sessionToken: '', messages: [] };
+			} catch (_) {
+				return { sessionId: '', sessionToken: '', messages: [] };
+			}
+		})();
+
+		if (chatNameInput instanceof HTMLInputElement) {
+			try {
+				chatNameInput.value = localStorage.getItem(CHAT_NAME_KEY) || '';
+			} catch (_) {}
+			chatNameInput.addEventListener('input', () => {
+				try {
+					localStorage.setItem(CHAT_NAME_KEY, chatNameInput.value.trim());
+				} catch (_) {}
+			});
+		}
+
+		function saveChatState() {
+			try {
+				localStorage.setItem(CHAT_SESSION_KEY, JSON.stringify(chatState));
+			} catch (_) {}
+		}
+
+		function formatMsgTime(ts) {
+			try {
+				return new Date(ts).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+			} catch (_) {
+				return '';
+			}
+		}
+
+		function renderChatMessages(overrideList) {
+			if (!chatMessagesEl) return;
+			const list = Array.isArray(overrideList) ? overrideList : chatState.messages || [];
+			chatMessagesEl.replaceChildren();
+
+			const welcome = document.createElement('div');
+			welcome.className = 'vsl-msg vsl-msg--owner';
+			const wMeta = document.createElement('div');
+			wMeta.className = 'vsl-msg-meta';
+			wMeta.textContent = 'iDominiqe · Telegram';
+			const wText = document.createElement('div');
+			wText.className = 'vsl-msg-text';
+			wText.textContent =
+				'Привет! Напишите сообщение ниже — оно мгновенно уйдёт мне в Telegram, а ответ появится прямо здесь в чате.';
+			welcome.append(wMeta, wText);
+			chatMessagesEl.appendChild(welcome);
+
+			list.forEach((msg) => {
+				const row = document.createElement('div');
+				row.className = `vsl-msg ${msg.role === 'visitor' ? 'vsl-msg--visitor' : 'vsl-msg--owner'}`;
+
+				const meta = document.createElement('div');
+				meta.className = 'vsl-msg-meta';
+				const timeStr = msg.ts ? formatMsgTime(msg.ts) : '';
+				if (msg.role === 'visitor') {
+					const statusTxt = msg.pending
+						? 'Отправка...'
+						: msg.queued
+						? '⏳ В очереди'
+						: '✓ Telegram';
+					meta.textContent = `${timeStr ? timeStr + ' · ' : ''}${statusTxt}`;
+				} else {
+					meta.textContent = `iDominiqe · Telegram${timeStr ? ' · ' + timeStr : ''}`;
+				}
+
+				const body = document.createElement('div');
+				body.className = 'vsl-msg-text';
+				body.textContent = msg.text || '';
+
+				row.append(meta, body);
+				chatMessagesEl.appendChild(row);
+			});
+
+			chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+		}
+
+		function updateStatusBadge(ownerBound) {
+			if (chatDot) {
+				chatDot.classList.toggle('is-queued', !ownerBound);
+			}
+			if (chatStatusEl) {
+				chatStatusEl.textContent = ownerBound ? 'Telegram Live' : 'Бот готов · очередь';
+			}
+		}
+
+		async function fetchChatStatus() {
+			try {
+				const res = await fetch(`${CHAT_API}/status`);
+				if (!res.ok) return;
+				const data = await res.json();
+				if (data?.ok) {
+					updateStatusBadge(Boolean(data.ownerBound));
+				}
+			} catch (_) {}
+		}
+
+		let pollTimer = null;
+		async function pollMessages() {
+			if (!chatState.sessionId || !chatState.sessionToken) return;
+			if (document.visibilityState !== 'visible') return;
+			try {
+				const res = await fetch(`${CHAT_API}/poll?session=${encodeURIComponent(chatState.sessionId)}`, {
+					headers: { 'X-Session-Token': chatState.sessionToken },
+				});
+				if (!res.ok) return;
+				const data = await res.json();
+				if (data?.ok && Array.isArray(data.messages)) {
+					updateStatusBadge(Boolean(data.ownerBound));
+					const prevJson = JSON.stringify(chatState.messages || []);
+					const nextJson = JSON.stringify(data.messages);
+					if (prevJson !== nextJson) {
+						chatState.messages = data.messages;
+						saveChatState();
+						renderChatMessages();
+					}
+				}
+			} catch (_) {}
+		}
+
+		function ensurePolling() {
+			if (pollTimer) clearInterval(pollTimer);
+			if (chatState.sessionId && chatState.sessionToken) {
+				pollTimer = setInterval(pollMessages, 4500);
+			}
+		}
+
+		document.querySelectorAll('[data-chat-prompt]').forEach((chip) => {
+			chip.addEventListener('click', () => {
+				const prompt = chip.getAttribute('data-chat-prompt') || '';
+				if (chatInput instanceof HTMLInputElement) {
+					chatInput.value = prompt;
+					chatInput.focus();
+				}
+			});
+		});
+
+		chatResetBtn?.addEventListener('click', () => {
+			chatState = { sessionId: '', sessionToken: '', messages: [] };
+			try {
+				localStorage.removeItem(CHAT_SESSION_KEY);
+			} catch (_) {}
+			if (pollTimer) clearInterval(pollTimer);
+			renderChatMessages();
+			window.__vslToast?.('История локального чата очищена');
+		});
+
+		chatForm?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			if (!(chatInput instanceof HTMLInputElement)) return;
+			const text = chatInput.value.trim();
+			if (!text) return;
+
+			const name = chatNameInput instanceof HTMLInputElement ? chatNameInput.value.trim() : '';
+			const honeyInput = chatForm.querySelector('input[name="website"]');
+			const website = honeyInput instanceof HTMLInputElement ? honeyInput.value : '';
+
+			const optimisticList = [
+				...(chatState.messages || []),
+				{ id: 'pending', role: 'visitor', text, ts: Date.now(), pending: true },
+			];
+			renderChatMessages(optimisticList);
+			chatInput.value = '';
+			if (chatSendBtn instanceof HTMLButtonElement) chatSendBtn.disabled = true;
+
+			try {
+				const res = await fetch(`${CHAT_API}/send`, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						name,
+						text,
+						website,
+						sessionId: chatState.sessionId || undefined,
+						sessionToken: chatState.sessionToken || undefined,
+					}),
+				});
+				const data = await res.json().catch(() => null);
+				if (!res.ok || !data?.ok) {
+					throw new Error(data?.error || 'Не удалось отправить сообщение');
+				}
+
+				const hydrated = (data.messages || []).map((m, idx, arr) =>
+					idx === arr.length - 1 && data.queued ? { ...m, queued: true } : m
+				);
+				chatState = {
+					sessionId: data.sessionId,
+					sessionToken: data.sessionToken,
+					messages: hydrated,
+				};
+				saveChatState();
+				updateStatusBadge(Boolean(data.ownerBound));
+				renderChatMessages();
+				ensurePolling();
+				window.__vslToast?.(data.delivered ? 'Отправлено в Telegram' : 'Сохранено в очередь Telegram');
+			} catch (err) {
+				renderChatMessages();
+				window.__vslToast?.(err instanceof Error ? err.message : 'Ошибка отправки');
+			} finally {
+				if (chatSendBtn instanceof HTMLButtonElement) chatSendBtn.disabled = false;
+			}
+		});
+
+		renderChatMessages();
+		fetchChatStatus();
+		if (chatState.sessionId && chatState.sessionToken) {
+			pollMessages();
+			ensurePolling();
+		}
 	})();
 </script>
