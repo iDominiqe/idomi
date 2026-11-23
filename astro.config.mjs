@@ -26,11 +26,11 @@ export default defineConfig({
 				},
 				{
 					label: 'Projects',
-					autogenerate: { directory: 'projects' },
+					items: [{ autogenerate: { directory: 'projects' } }],
 				},
 				{
 					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					items: [{ autogenerate: { directory: 'reference' } }],
 				},
 			],
 		}),
