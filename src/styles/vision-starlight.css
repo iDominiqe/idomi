@@ -1171,8 +1171,7 @@ site-search #starlight__search .pagefind-ui__result-excerpt {
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.22);
-	backdrop-filter: blur(8px);
+	background: rgba(15, 23, 42, 0.42);
 	border: 1px solid rgba(255, 255, 255, 0.34);
 	color: #ffffff;
 	display: inline-flex;
@@ -1472,9 +1471,8 @@ html[data-vtheme='flat-light'] .vsl-aw-pill.is-now {
 	gap: 7px;
 	padding: 6px 13px;
 	border-radius: 999px;
-	background: rgba(255, 255, 255, 0.14);
-	backdrop-filter: blur(14px);
-	border: 1px solid rgba(255, 255, 255, 0.22);
+	background: rgba(15, 23, 42, 0.44);
+	border: 1px solid rgba(255, 255, 255, 0.24);
 	font-size: 0.76rem;
 	font-weight: 650;
 	color: #ffffff;
@@ -1520,9 +1518,8 @@ html[data-vtheme='flat-light'] .vsl-aw-pill.is-now {
 .vsl-chip {
 	padding: 4px 11px;
 	border-radius: 999px;
-	background: rgba(255, 255, 255, 0.14);
-	backdrop-filter: blur(12px);
-	border: 1px solid rgba(255, 255, 255, 0.18);
+	background: rgba(15, 23, 42, 0.42);
+	border: 1px solid rgba(255, 255, 255, 0.22);
 	font-size: 0.72rem;
 	font-weight: 600;
 	color: rgba(255, 255, 255, 0.92);
@@ -1592,8 +1589,7 @@ html[data-vtheme='flat-light'] .vsl-aw-pill.is-now {
 	padding: 0 18px;
 	border-radius: 999px;
 	border: 1px solid rgba(255, 255, 255, 0.28);
-	background: rgba(255, 255, 255, 0.12);
-	backdrop-filter: blur(12px);
+	background: rgba(15, 23, 42, 0.42);
 	color: #ffffff;
 	font-size: 0.84rem;
 	font-weight: 600;
@@ -1606,7 +1602,7 @@ html[data-vtheme='flat-light'] .vsl-aw-pill.is-now {
 }
 
 .vsl-btn-glass:hover {
-	background: rgba(255, 255, 255, 0.22);
+	background: rgba(15, 23, 42, 0.62);
 }
 
 .vsl-btn-circle {
@@ -1614,8 +1610,7 @@ html[data-vtheme='flat-light'] .vsl-aw-pill.is-now {
 	height: 40px;
 	border-radius: 50%;
 	border: 1px solid rgba(255, 255, 255, 0.28);
-	background: rgba(255, 255, 255, 0.12);
-	backdrop-filter: blur(12px);
+	background: rgba(15, 23, 42, 0.42);
 	color: #ffffff;
 	display: inline-flex;
 	align-items: center;
@@ -1626,7 +1621,7 @@ html[data-vtheme='flat-light'] .vsl-aw-pill.is-now {
 }
 
 .vsl-btn-circle:hover {
-	background: rgba(255, 255, 255, 0.24);
+	background: rgba(15, 23, 42, 0.64);
 	transform: scale(1.06);
 }
 
@@ -1717,8 +1712,8 @@ html[data-vtheme='flat-light'] .vsl-aw-pill.is-now {
 	width: 28px;
 	height: 28px;
 	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.16);
-	backdrop-filter: blur(8px);
+	background: rgba(15, 23, 42, 0.46);
+	border: 1px solid rgba(255, 255, 255, 0.2);
 	color: #ffffff;
 	display: inline-flex;
 	align-items: center;
@@ -1728,7 +1723,7 @@ html[data-vtheme='flat-light'] .vsl-aw-pill.is-now {
 }
 
 .vsl-poster-more:hover {
-	background: rgba(255, 255, 255, 0.3);
+	background: rgba(15, 23, 42, 0.68);
 }
 
 .vsl-poster-bottom {
@@ -1748,8 +1743,7 @@ html[data-vtheme='flat-light'] .vsl-aw-pill.is-now {
 	display: inline-block;
 	padding: 3px 9px;
 	border-radius: 999px;
-	background: rgba(255, 255, 255, 0.16);
-	backdrop-filter: blur(10px);
+	background: rgba(15, 23, 42, 0.46);
 	border: 1px solid rgba(255, 255, 255, 0.22);
 	font-size: 0.65rem;
 	font-weight: 600;
@@ -2080,7 +2074,7 @@ html[data-vtheme='flat-light'] .vsl-chat-input {
 	}
 	to {
 		opacity: 1;
-		transform: translateY(0) scale(1);
+		transform: none;
 	}
 }
 

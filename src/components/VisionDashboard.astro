@@ -1135,6 +1135,10 @@ const i18n = {
 
 		let pollTimer = null;
 		let pollInFlight = false;
+		let lastActivityTs = Date.now();
+		const markChatActivity = () => {
+			lastActivityTs = Date.now();
+		};
 		async function pollMessages(force = false) {
 			if (!chatState.sessionId || !chatState.sessionToken) return;
 			if (!navigator.onLine) {
@@ -1142,6 +1146,7 @@ const i18n = {
 				return;
 			}
 			if (!force && document.visibilityState !== 'visible') return;
+			if (!force && Date.now() - lastActivityTs > 600000) return;
 			if (pollInFlight) return;
 			pollInFlight = true;
 			try {
@@ -1172,30 +1177,41 @@ const i18n = {
 		function ensurePolling() {
 			if (pollTimer) clearInterval(pollTimer);
 			if (chatState.sessionId && chatState.sessionToken) {
-				pollTimer = setInterval(() => pollMessages(false), 3000);
+				pollTimer = setInterval(() => pollMessages(false), 5000);
 			}
+		}
+
+		if (chatInput instanceof HTMLInputElement) {
+			chatInput.addEventListener('focus', markChatActivity);
+			chatInput.addEventListener('input', markChatActivity);
 		}
 
 		document.addEventListener('visibilitychange', () => {
 			if (document.visibilityState === 'visible') {
+				markChatActivity();
 				fetchChatStatus();
 				pollMessages(true);
 			}
 		});
 		window.addEventListener('focus', () => {
+			markChatActivity();
 			fetchChatStatus();
 			pollMessages(true);
 		});
-		window.addEventListener('pageshow', () => pollMessages(true));
+		window.addEventListener('pageshow', () => {
+			markChatActivity();
+			pollMessages(true);
+		});
 		window.addEventListener('online', () => {
+			markChatActivity();
 			fetchChatStatus();
 			pollMessages(true);
 		});
 		window.addEventListener('offline', () => setChatConnState('offline'));
-		setInterval(fetchChatStatus, 25000);
 
 		document.querySelectorAll('[data-chat-prompt]').forEach((chip) => {
 			chip.addEventListener('click', () => {
+				markChatActivity();
 				const prompt = chip.getAttribute('data-chat-prompt') || '';
 				if (chatInput instanceof HTMLInputElement) {
 					chatInput.value = prompt;
@@ -1205,6 +1221,7 @@ const i18n = {
 		});
 
 		chatResetBtn?.addEventListener('click', () => {
+			markChatActivity();
 			chatState = { sessionId: '', sessionToken: '', messages: [] };
 			try {
 				localStorage.removeItem(CHAT_SESSION_KEY);
@@ -1216,6 +1233,7 @@ const i18n = {
 
 		chatForm?.addEventListener('submit', async (e) => {
 			e.preventDefault();
+			markChatActivity();
 			if (!(chatInput instanceof HTMLInputElement)) return;
 			const text = chatInput.value.trim();
 			if (!text) return;
