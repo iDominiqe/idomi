@@ -486,7 +486,7 @@
 
 		async function fetchChatStatus() {
 			try {
-				const res = await fetch(`${CHAT_API}/status`);
+				const res = await fetch(`${CHAT_API}/status?_t=${Date.now()}`, { cache: 'no-store' });
 				if (!res.ok) return;
 				const data = await res.json();
 				if (data?.ok) {
@@ -496,11 +496,16 @@
 		}
 
 		let pollTimer = null;
-		async function pollMessages() {
+		let pollInFlight = false;
+		async function pollMessages(force = false) {
 			if (!chatState.sessionId || !chatState.sessionToken) return;
-			if (document.visibilityState !== 'visible') return;
+			if (!force && document.visibilityState !== 'visible') return;
+			if (pollInFlight) return;
+			pollInFlight = true;
 			try {
-				const res = await fetch(`${CHAT_API}/poll?session=${encodeURIComponent(chatState.sessionId)}`, {
+				const url = `${CHAT_API}/poll?session=${encodeURIComponent(chatState.sessionId)}&_t=${Date.now()}`;
+				const res = await fetch(url, {
+					cache: 'no-store',
 					headers: { 'X-Session-Token': chatState.sessionToken },
 				});
 				if (!res.ok) return;
@@ -515,15 +520,25 @@
 						renderChatMessages();
 					}
 				}
-			} catch (_) {}
+			} catch (_) {
+			} finally {
+				pollInFlight = false;
+			}
 		}
 
 		function ensurePolling() {
 			if (pollTimer) clearInterval(pollTimer);
 			if (chatState.sessionId && chatState.sessionToken) {
-				pollTimer = setInterval(pollMessages, 4500);
+				pollTimer = setInterval(() => pollMessages(false), 3000);
 			}
 		}
+
+		document.addEventListener('visibilitychange', () => {
+			if (document.visibilityState === 'visible') pollMessages(true);
+		});
+		window.addEventListener('focus', () => pollMessages(true));
+		window.addEventListener('pageshow', () => pollMessages(true));
+		window.addEventListener('online', () => pollMessages(true));
 
 		document.querySelectorAll('[data-chat-prompt]').forEach((chip) => {
 			chip.addEventListener('click', () => {
