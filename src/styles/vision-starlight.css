@@ -515,8 +515,8 @@ html[data-vtheme='flat-light'] .vsl-icon-btn {
 	display: flex;
 	align-items: center;
 	gap: 10px;
-	min-width: 180px;
-	flex: 0 1 250px;
+	min-width: 150px;
+	flex: 0 1 205px;
 }
 
 /* Style Starlight Native Search Trigger as VisionOS Frosted Pill */
@@ -564,14 +564,14 @@ html[data-vtheme='flat-light'] .vsl-header-left site-search kbd {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 6px;
+	gap: 4px;
 	flex-wrap: wrap;
 }
 
 .vsl-tab-link {
-	padding: 8px 16px;
+	padding: 7px 13px;
 	border-radius: 999px;
-	font-size: 0.83rem;
+	font-size: 0.81rem;
 	font-weight: 500;
 	color: var(--vsl-text-muted);
 	text-decoration: none;
@@ -864,7 +864,16 @@ html:not([data-has-sidebar]) .vsl-window .sl-markdown-content {
 	margin-top: 0 !important;
 }
 
-/* Keep Starlight's right TOC inside .vsl-window without fixed viewport collision */
+/* Keep Starlight's right TOC & mobile TOC cleanly inside .vsl-window */
+.vsl-window mobile-starlight-toc nav {
+	position: relative !important;
+	top: 0 !important;
+	inset-inline: unset !important;
+	border-top: 0 !important;
+	border-bottom: 1px solid var(--vsl-hairline) !important;
+	background: var(--vsl-surface) !important;
+}
+
 @media (min-width: 72rem) {
 	.vsl-window .right-sidebar-container {
 		order: 2;
