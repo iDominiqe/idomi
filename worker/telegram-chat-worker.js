@@ -8,7 +8,7 @@ const ALLOWED_ORIGINS = new Set([
 const MAX_BODY_BYTES = 8192;
 const SESSION_TTL_SEC = 604800; // 7 days
 const RATE_LIMIT_WINDOW_SEC = 60;
-const RATE_LIMIT_MAX_REQ = 15;
+const RATE_LIMIT_MAX_REQ = 20;
 
 function buildCorsHeaders(origin) {
 	const allowed = origin && ALLOWED_ORIGINS.has(origin) ? origin : 'https://idominiqe.com';
@@ -16,7 +16,8 @@ function buildCorsHeaders(origin) {
 		'Access-Control-Allow-Origin': allowed,
 		'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
 		'Access-Control-Allow-Headers': 'Content-Type, X-Session-Token, X-Setup-Secret',
-		'Cache-Control': 'no-store',
+		'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+		Pragma: 'no-cache',
 		Vary: 'Origin',
 	};
 }
@@ -164,6 +165,69 @@ async function checkRateLimit(env, ip) {
 	return true;
 }
 
+// Store each message as an immutable key m:<sessionId>:<ts>:<id> so KV.list() bypasses 60s POP read cache
+async function appendSessionMessage(env, sessionId, role, text) {
+	const ts = Date.now();
+	const id = crypto.randomUUID();
+	const entry = { id, role, text, ts };
+	const key = `m:${sessionId}:${String(ts).padStart(15, '0')}:${id.slice(0, 8)}`;
+
+	const serialized = JSON.stringify(entry);
+	const encoder = new TextEncoder();
+	const meta =
+		encoder.encode(serialized).byteLength <= 900
+			? entry
+			: { id, role, ts, overflow: true };
+
+	await env.CHAT_KV.put(key, serialized, {
+		expirationTtl: SESSION_TTL_SEC,
+		metadata: meta,
+	});
+	return entry;
+}
+
+async function listSessionMessages(env, sessionId, legacyMessages = []) {
+	const listed = await env.CHAT_KV.list({ prefix: `m:${sessionId}:`, limit: 100 });
+	const resolved = await Promise.all(
+		(listed.keys || []).map(async (k) => {
+			if (k.metadata && !k.metadata.overflow && typeof k.metadata.text === 'string') {
+				return k.metadata;
+			}
+			const full = await env.CHAT_KV.get(k.name, { type: 'json' });
+			return full || null;
+		})
+	);
+
+	const map = new Map();
+	for (const m of legacyMessages || []) {
+		if (m && m.id) map.set(m.id, m);
+	}
+	for (const m of resolved) {
+		if (m && m.id) map.set(m.id, m);
+	}
+
+	return Array.from(map.values())
+		.sort((a, b) => (a.ts || 0) - (b.ts || 0))
+		.slice(-40);
+}
+
+async function loadSessionAuth(env, sessionId) {
+	const auth = await env.CHAT_KV.get(`sessauth:${sessionId}`, { type: 'json' });
+	if (auth) return { auth, legacyMessages: [] };
+
+	const legacy = await env.CHAT_KV.get(`sess:${sessionId}`, { type: 'json' });
+	if (!legacy) return null;
+
+	return {
+		auth: {
+			tokenHash: legacy.tokenHash,
+			shortId: legacy.shortId,
+			name: legacy.name || 'Гость',
+		},
+		legacyMessages: legacy.messages || [],
+	};
+}
+
 async function handleStatus(env, origin) {
 	const [ownerChatId, botMetaRaw] = await Promise.all([
 		env.CHAT_KV.get('owner:chat_id'),
@@ -275,37 +339,37 @@ async function handleSend(request, env, origin) {
 
 	let sessionId = typeof body.sessionId === 'string' ? body.sessionId.trim() : '';
 	let sessionToken = typeof body.sessionToken === 'string' ? body.sessionToken.trim() : '';
-	let session = null;
+	let sessionAuth = null;
+	let legacyMessages = [];
 
 	if (sessionId && sessionToken) {
-		const existing = await env.CHAT_KV.get(`sess:${sessionId}`, { type: 'json' });
+		const loaded = await loadSessionAuth(env, sessionId);
 		const suppliedHash = await sha256Hex(sessionToken);
-		if (existing && (await timingSafeEqual(suppliedHash, existing.tokenHash))) {
-			session = existing;
-			session.name = name;
+		if (loaded && (await timingSafeEqual(suppliedHash, loaded.auth.tokenHash))) {
+			sessionAuth = loaded.auth;
+			legacyMessages = loaded.legacyMessages;
 		}
 	}
 
-	if (!session) {
+	if (!sessionAuth) {
 		sessionId = crypto.randomUUID();
 		sessionToken = randomHex(24);
 		const shortId = sessionId.slice(0, 8).toLowerCase();
-		session = {
+		sessionAuth = {
 			tokenHash: await sha256Hex(sessionToken),
 			shortId,
 			name,
-			messages: [],
 		};
-		await env.CHAT_KV.put(`short:${shortId}`, sessionId, { expirationTtl: SESSION_TTL_SEC });
+		await Promise.all([
+			env.CHAT_KV.put(`sessauth:${sessionId}`, JSON.stringify(sessionAuth), {
+				expirationTtl: SESSION_TTL_SEC,
+			}),
+			env.CHAT_KV.put(`short:${shortId}`, sessionId, { expirationTtl: SESSION_TTL_SEC }),
+		]);
 	}
 
-	const visitorMsg = {
-		id: crypto.randomUUID(),
-		role: 'visitor',
-		text,
-		ts: Date.now(),
-	};
-	session.messages = [...(session.messages || []), visitorMsg].slice(-40);
+	const visitorMsg = await appendSessionMessage(env, sessionId, 'visitor', text);
+	await env.CHAT_KV.put('last:session', sessionId, { expirationTtl: SESSION_TTL_SEC });
 
 	const [ownerChatId, botMeta] = await Promise.all([
 		env.CHAT_KV.get('owner:chat_id'),
@@ -317,7 +381,7 @@ async function handleSend(request, env, origin) {
 		const tgRes = await callTelegram(env, 'sendMessage', {
 			chat_id: ownerChatId,
 			parse_mode: 'HTML',
-			text: formatVisitorMessageHtml(name, session.shortId, text, false),
+			text: formatVisitorMessageHtml(name, sessionAuth.shortId, text, false),
 		});
 		if (tgRes?.ok && tgRes.result?.message_id) {
 			delivered = true;
@@ -333,16 +397,14 @@ async function handleSend(request, env, origin) {
 		const queueRaw = (await env.CHAT_KV.get('pending:queue', { type: 'json' })) || [];
 		const nextQueue = [
 			...queueRaw,
-			{ sessionId, shortId: session.shortId, name, text, ts: visitorMsg.ts },
+			{ sessionId, shortId: sessionAuth.shortId, name, text, ts: visitorMsg.ts },
 		].slice(-25);
 		await env.CHAT_KV.put('pending:queue', JSON.stringify(nextQueue), {
 			expirationTtl: SESSION_TTL_SEC,
 		});
 	}
 
-	await env.CHAT_KV.put(`sess:${sessionId}`, JSON.stringify(session), {
-		expirationTtl: SESSION_TTL_SEC,
-	});
+	const messages = await listSessionMessages(env, sessionId, legacyMessages);
 
 	return jsonResponse(
 		{
@@ -353,7 +415,7 @@ async function handleSend(request, env, origin) {
 			botUsername: botMeta?.username || null,
 			sessionId,
 			sessionToken,
-			messages: session.messages,
+			messages,
 		},
 		200,
 		origin
@@ -367,25 +429,27 @@ async function handlePoll(request, env, origin, url) {
 		return jsonResponse({ ok: false, error: 'Missing session credentials' }, 401, origin);
 	}
 
-	const [session, ownerChatId] = await Promise.all([
-		env.CHAT_KV.get(`sess:${sessionId}`, { type: 'json' }),
+	const [loaded, ownerChatId] = await Promise.all([
+		loadSessionAuth(env, sessionId),
 		env.CHAT_KV.get('owner:chat_id'),
 	]);
 
-	if (!session) {
+	if (!loaded) {
 		return jsonResponse({ ok: false, error: 'Session expired or not found' }, 404, origin);
 	}
 
 	const suppliedHash = await sha256Hex(token);
-	if (!(await timingSafeEqual(suppliedHash, session.tokenHash))) {
+	if (!(await timingSafeEqual(suppliedHash, loaded.auth.tokenHash))) {
 		return jsonResponse({ ok: false, error: 'Invalid session token' }, 401, origin);
 	}
+
+	const messages = await listSessionMessages(env, sessionId, loaded.legacyMessages);
 
 	return jsonResponse(
 		{
 			ok: true,
 			ownerBound: Boolean(ownerChatId),
-			messages: session.messages || [],
+			messages,
 		},
 		200,
 		origin
@@ -411,14 +475,19 @@ async function handleWebhook(request, env, origin) {
 
 	const chatId = String(msg.chat?.id || '');
 	const chatType = msg.chat?.type;
-	const text = String(msg.text || '').trim();
+	const text = String(msg.text || msg.caption || '').trim();
 
 	const [botMeta, currentOwnerChatId] = await Promise.all([
 		env.CHAT_KV.get('meta:bot', { type: 'json' }),
 		env.CHAT_KV.get('owner:chat_id'),
 	]);
 
-	if (chatType === 'private' && chatId && (!botMeta || chatId !== String(botMeta.id)) && (text.startsWith('/start') || text.startsWith('/bind'))) {
+	if (
+		chatType === 'private' &&
+		chatId &&
+		(!botMeta || chatId !== String(botMeta.id)) &&
+		(text.startsWith('/start') || text.startsWith('/bind'))
+	) {
 		const parts = text.split(/\s+/);
 		const suppliedCode = parts[1] || '';
 		if (await timingSafeEqual(suppliedCode, env.OWNER_BIND_CODE || '')) {
@@ -456,33 +525,36 @@ async function handleWebhook(request, env, origin) {
 		return jsonResponse({ ok: true }, 200, origin);
 	}
 
-	if (currentOwnerChatId && chatId === currentOwnerChatId && msg.reply_to_message && text) {
-		const replyMsgId = String(msg.reply_to_message.message_id || '');
-		let sessionId = await env.CHAT_KV.get(`tgmsg:${replyMsgId}`);
-		if (!sessionId) {
-			const match = String(msg.reply_to_message.text || '').match(/#([a-f0-9]{8})/i);
-			if (match) {
-				sessionId = await env.CHAT_KV.get(`short:${match[1].toLowerCase()}`);
+	if (currentOwnerChatId && chatId === currentOwnerChatId && text && !text.startsWith('/')) {
+		let sessionId = null;
+		if (msg.reply_to_message) {
+			const replyMsgId = String(msg.reply_to_message.message_id || '');
+			sessionId = await env.CHAT_KV.get(`tgmsg:${replyMsgId}`);
+			if (!sessionId) {
+				const match = String(msg.reply_to_message.text || '').match(/#([a-f0-9]{8})/i);
+				if (match) {
+					sessionId = await env.CHAT_KV.get(`short:${match[1].toLowerCase()}`);
+				}
 			}
 		}
 
+		// Fallback to latest active visitor session when replying directly without Telegram's Reply swipe
+		let usedLastFallback = false;
+		if (!sessionId) {
+			sessionId = await env.CHAT_KV.get('last:session');
+			usedLastFallback = Boolean(sessionId);
+		}
+
 		if (sessionId) {
-			const session = await env.CHAT_KV.get(`sess:${sessionId}`, { type: 'json' });
-			if (session) {
-				const replyEntry = {
-					id: crypto.randomUUID(),
-					role: 'owner',
-					text: text.slice(0, 2000),
-					ts: Date.now(),
-				};
-				session.messages = [...(session.messages || []), replyEntry].slice(-40);
-				await env.CHAT_KV.put(`sess:${sessionId}`, JSON.stringify(session), {
-					expirationTtl: SESSION_TTL_SEC,
-				});
+			const loaded = await loadSessionAuth(env, sessionId);
+			if (loaded) {
+				await appendSessionMessage(env, sessionId, 'owner', text.slice(0, 2000));
 				await callTelegram(env, 'sendMessage', {
 					chat_id: chatId,
 					reply_to_message_id: msg.message_id,
-					text: '✅ Ответ доставлен в чат на сайте',
+					text: usedLastFallback
+						? `✅ Ответ доставлен в последний активный чат (#${loaded.auth.shortId})`
+						: '✅ Ответ доставлен в чат на сайте',
 				});
 			}
 		}
