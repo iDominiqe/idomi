@@ -5,6 +5,7 @@ import { THEMES } from '../data/ecosystem';
 const { hasSidebar } = Astro.locals.starlightRoute;
 const pathname = Astro.url.pathname;
 const cleanDisplayPath = pathname === '/' ? 'idominiqe.com/' : `idominiqe.com${pathname}`;
+const routeSuffix = pathname === '/' ? '' : pathname;
 const isRo = pathname === '/ro' || pathname.startsWith('/ro/');
 const isRu = pathname === '/ru' || pathname.startsWith('/ru/');
 const lang = isRo ? 'ro' : isRu ? 'ru' : 'en';
@@ -124,11 +125,14 @@ const isThemes = stripped.startsWith('/guides/themes');
 		</div>
 
 		<form id="vsl-addr-form" class="vsl-url-pill" role="search">
-			<span class="vsl-url-aa" aria-hidden="true">AA</span>
-			<div class="vsl-url-center">
-				<svg class="vsl-lock-icon" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-					<path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-7-2a2 2 0 0 1 4 0v2h-4V7Z" />
-				</svg>
+			<button type="button" id="vsl-url-aa" class="vsl-url-aa" title="Toggle text size (AA)" aria-label="Toggle text size">AA</button>
+			<div class="vsl-url-center" id="vsl-url-center">
+				<button type="button" id="vsl-url-display" class="vsl-url-display" aria-label="Edit address">
+					<svg class="vsl-lock-icon" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+						<path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-7-2a2 2 0 0 1 4 0v2h-4V7Z" />
+					</svg>
+					<span class="vsl-url-host">idominiqe.com</span>{routeSuffix && <span class="vsl-url-path">{routeSuffix}</span>}
+				</button>
 				<input
 					id="vsl-addr-input"
 					class="vsl-url-input"
@@ -137,6 +141,7 @@ const isThemes = stripped.startsWith('/guides/themes');
 					aria-label="Current route or URL"
 					spellcheck="false"
 					autocomplete="off"
+					hidden
 				/>
 			</div>
 			<button type="button" id="vsl-addr-reload" class="vsl-url-reload" title="Replay entrance motion" aria-label="Reload animations">
@@ -492,6 +497,46 @@ const isThemes = stripped.startsWith('/guides/themes');
 		});
 
 		// Detached Address Bar Controls
+		const addrForm = document.getElementById('vsl-addr-form');
+		const urlDisplay = document.getElementById('vsl-url-display');
+		const addrInput = document.getElementById('vsl-addr-input');
+		const aaBtn = document.getElementById('vsl-url-aa');
+
+		try {
+			if (localStorage.getItem('vslZoom') === 'lg') {
+				document.documentElement.dataset.vslZoom = 'lg';
+			}
+		} catch (_) {}
+
+		aaBtn?.addEventListener('click', () => {
+			const nextLg = document.documentElement.dataset.vslZoom !== 'lg';
+			document.documentElement.dataset.vslZoom = nextLg ? 'lg' : '';
+			try {
+				localStorage.setItem('vslZoom', nextLg ? 'lg' : 'std');
+			} catch (_) {}
+			window.__vslToast?.(nextLg ? 'Text size: 105%' : 'Text size: 100%');
+		});
+
+		urlDisplay?.addEventListener('click', () => {
+			if (!(addrInput instanceof HTMLInputElement)) return;
+			urlDisplay.hidden = true;
+			addrInput.hidden = false;
+			addrForm?.classList.add('is-editing');
+			addrInput.focus();
+			addrInput.select();
+		});
+
+		const finishEditAddr = () => {
+			if (!(addrInput instanceof HTMLInputElement) || !urlDisplay) return;
+			addrInput.hidden = true;
+			urlDisplay.hidden = false;
+			addrForm?.classList.remove('is-editing');
+		};
+		addrInput?.addEventListener('blur', finishEditAddr);
+		addrInput?.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') finishEditAddr();
+		});
+
 		document.getElementById('vsl-nav-back')?.addEventListener('click', () => window.history.back());
 		document.getElementById('vsl-nav-fwd')?.addEventListener('click', () => window.history.forward());
 		document.getElementById('vsl-sidebar-btn')?.addEventListener('click', () => {
@@ -500,7 +545,9 @@ const isThemes = stripped.startsWith('/guides/themes');
 				starlightBtn.click();
 				return;
 			}
-			window.location.href = '/projects/ecosystem/';
+			const docLang = document.documentElement.lang;
+			const pfx = docLang === 'ru' ? '/ru' : docLang === 'ro' ? '/ro' : '';
+			window.location.href = pfx + '/projects/ecosystem/';
 		});
 
 		document.getElementById('vsl-addr-reload')?.addEventListener('click', () => {
