@@ -8,7 +8,8 @@ const isSplashHome =
 	stripped === '/about' ||
 	stripped === '/about/' ||
 	stripped === '/calculator' ||
-	stripped === '/calculator/';
+	stripped === '/calculator/' ||
+	stripped.startsWith('/projects/ecosystem');
 ---
 
 {!isSplashHome && <Default />}

@@ -1,13 +1,21 @@
 ---
 import { PROJECTS } from '../data/ecosystem';
 
-const featuredRail = PROJECTS.slice(0, 3);
-const initialHero = PROJECTS[0];
 const pathname = Astro.url.pathname;
 const isRo = pathname === '/ro' || pathname.startsWith('/ro/');
 const isRu = pathname === '/ru' || pathname.startsWith('/ru/');
 const lang = isRo ? 'ro' : isRu ? 'ru' : 'en';
 const prefix = isRo ? '/ro' : isRu ? '/ru' : '';
+
+const localizedProjects = PROJECTS.map((p) => ({
+	...p,
+	badge: lang === 'ro' ? p.badgeRo : lang === 'ru' ? p.badgeRu : p.badge,
+	description: lang === 'ro' ? p.descriptionRo : lang === 'ru' ? p.descriptionRu : p.description,
+	highlights: lang === 'ro' ? p.highlightsRo : lang === 'ru' ? p.highlightsRu : p.highlights,
+}));
+
+const featuredRail = localizedProjects.slice(0, 3);
+const initialHero = localizedProjects[0];
 
 const i18n = {
 	en: {
@@ -44,9 +52,9 @@ const i18n = {
 		highlightsTitle: 'Key Engineering Highlights',
 		openLiveSite: 'Open Live Site ↗',
 		githubRepo: 'GitHub Repo',
-		bioTitle: 'Polytechnic Alum · Telecom Engineer · Indie Builder',
+		bioTitle: 'M.Sc. UTM (DMIB) · Microelectronics, Biomedical & Telecom Engineer',
 		bioSummary:
-			'Freelancing in my spare time out of pure passion — building websites, Android & Windows apps (Apple in R&D), and custom Arduino/ESP32/STM32 devices. Fair indie prices with zero rip-offs, focused on happy clients and long-term partners.',
+			'Master’s in Microelectronics & Biomedical Engineering (UTM DMIB), former medical equipment metrology inspector & biomedical repair engineer, now in Telecom. Freelancing fairly in spare time across Web, Android/Windows (Apple R&D), and Arduino/ESP32/STM32.',
 		bioTags: ['Web & 3D', 'Android', 'Windows', 'Apple · R&D', 'Arduino · ESP32 · STM32'],
 		bioCalcBtn: '🧮 Calculator',
 		bioMoreBtn: 'About Me →',
@@ -85,9 +93,9 @@ const i18n = {
 		highlightsTitle: 'Detalii Tehnice',
 		openLiveSite: 'Deschide Site-ul ↗',
 		githubRepo: 'Repo GitHub',
-		bioTitle: 'Absolvent Politehnică · Telecomunicații · Freelance din Pasiune',
+		bioTitle: 'Master UTM (DMIB) · Microelectronică, Bioinginerie & Telecomunicații',
 		bioSummary:
-			'Creez în timpul liber site-uri, aplicații Android & Windows (Apple în dezvoltare) și dispozitive la comandă pe Arduino / ESP32 / STM32. Prețuri corecte fără umflături, orientate spre parteneri și clienți mulțumiți.',
+			'Absolvent de masterat UTM DMIB, fost inspector metrolog și bioinginer în reparația aparaturii medicale, acum în Telecomunicații. Freelance onest în timpul liber: site-uri, aplicații Android/Windows (Apple R&D) și dispozitive Arduino/ESP32/STM32.',
 		bioTags: ['Web & 3D', 'Android', 'Windows', 'Apple · R&D', 'Arduino · ESP32 · STM32'],
 		bioCalcBtn: '🧮 Calculator',
 		bioMoreBtn: 'Despre Mine →',
@@ -126,9 +134,9 @@ const i18n = {
 		highlightsTitle: 'Ключевые детали',
 		openLiveSite: 'Открыть сайт ↗',
 		githubRepo: 'GitHub Repo',
-		bioTitle: 'Выпускник Политеха · Телекоммуникации · Фриланс как хобби',
+		bioTitle: 'Магистр UTM (DMIB) · Биоинженерия, Микроэлектроника и Телеком',
 		bioSummary:
-			'В свободное время делаю сайты под задачи людей, приложения под Android и Windows (Apple — в разработке) и кастомные устройства на Arduino, ESP32 и STM32. Беру немного и без накруток — ценю довольных клиентов и партнёров.',
+			'Магистр UTM (DMIB), в прошлом инспектор-метролог и биоинженер по ремонту медоборудования, сейчас работаю в телекоммуникациях. Фриланс как хобби без накруток: сайты, Android/Windows софт (Apple в развитии) и устройства Arduino/ESP32/STM32.',
 		bioTags: ['Web и 3D', 'Android', 'Windows', 'Apple · R&D', 'Arduino · ESP32 · STM32'],
 		bioCalcBtn: '🧮 Калькулятор',
 		bioMoreBtn: 'Обо мне →',
@@ -280,7 +288,7 @@ const i18n = {
 					<span id="vsl-hero-badge">{initialHero.badge}</span>
 				</div>
 				<div class="vsl-hero-dots" id="vsl-hero-dots" role="tablist" aria-label="Spotlight slides">
-					{PROJECTS.map((p, idx) => (
+					{localizedProjects.map((p, idx) => (
 						<button
 							type="button"
 							class={`vsl-hero-dot ${idx === 0 ? 'is-active' : ''}`}
@@ -499,7 +507,7 @@ const i18n = {
 	</div>
 </div>
 
-<script define:vars={{ projectsData: PROJECTS, langCode: lang }}>
+<script define:vars={{ projectsData: localizedProjects, langCode: lang }}>
 	(function () {
 		const L = {
 			en: {

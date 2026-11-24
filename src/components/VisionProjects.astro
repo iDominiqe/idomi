@@ -1,0 +1,745 @@
+---
+import { PROJECTS } from '../data/ecosystem';
+
+const pathname = Astro.url.pathname;
+const isRo = pathname === '/ro' || pathname.startsWith('/ro/');
+const isRu = pathname === '/ru' || pathname.startsWith('/ru/');
+const lang = isRo ? 'ro' : isRu ? 'ru' : 'en';
+const prefix = isRo ? '/ro' : isRu ? '/ru' : '';
+
+const localizedProjects = PROJECTS.map((p) => ({
+	...p,
+	badge: lang === 'ro' ? p.badgeRo : lang === 'ru' ? p.badgeRu : p.badge,
+	description: lang === 'ro' ? p.descriptionRo : lang === 'ru' ? p.descriptionRu : p.description,
+	highlights: lang === 'ro' ? p.highlightsRo : lang === 'ru' ? p.highlightsRu : p.highlights,
+}));
+
+const copy = {
+	en: {
+		eyebrow: '8 Live Subdomains · Cloudflare Anycast Edge',
+		title: 'Live Ecosystem Projects',
+		subtitle:
+			'Independent GitHub repositories deployed across isolated subdomains. Switch layouts, filter by focus area, or launch a live interactive preview.',
+		calcBtn: '🧮 Calculator',
+		filterAll: 'All (8)',
+		filterWebgl: '3D & WebGL (5)',
+		filterSpatial: 'Spatial & Glass OS (3)',
+		viewBento: '⊞ Bento',
+		viewDeck: '▤ Deck',
+		viewMatrix: '≡ Matrix',
+		preview: 'Preview',
+		openSite: 'Open Site ↗',
+		github: 'GitHub',
+		colProject: 'Project',
+		colDomain: 'Live Domain',
+		colRepo: 'Repository',
+		colStack: 'Core Stack',
+		colActions: 'Actions',
+		highlightsTitle: 'Key Engineering Highlights',
+		modalLive: 'Open Live Site ↗',
+		modalRepo: 'GitHub Repo',
+	},
+	ro: {
+		eyebrow: '8 Subdomenii Live · Cloudflare Anycast Edge',
+		title: 'Proiecte Ecosistem Live',
+		subtitle:
+			'Repozitorii GitHub independente găzduite pe subdomenii izolate. Schimbă modul de afișare, filtrează după direcție sau deschide o previzualizare live.',
+		calcBtn: '🧮 Calculator',
+		filterAll: 'Toate (8)',
+		filterWebgl: '3D & WebGL (5)',
+		filterSpatial: 'Spatial & Glass OS (3)',
+		viewBento: '⊞ Galerie',
+		viewDeck: '▤ Detaliat',
+		viewMatrix: '≡ Matrice DNS',
+		preview: 'Previzualizare',
+		openSite: 'Deschide ↗',
+		github: 'GitHub',
+		colProject: 'Proiect',
+		colDomain: 'Domeniu Live',
+		colRepo: 'Repozitoriu',
+		colStack: 'Tehnologii',
+		colActions: 'Acțiuni',
+		highlightsTitle: 'Detalii Tehnice',
+		modalLive: 'Deschide Site-ul ↗',
+		modalRepo: 'Repo GitHub',
+	},
+	ru: {
+		eyebrow: '8 живых поддоменов · Cloudflare Anycast Edge',
+		title: 'Проекты экосистемы вживую',
+		subtitle:
+			'Независимые репозитории GitHub на изолированных поддоменах. Переключайте вид витрины, фильтруйте по направлениям или запускайте живое превью.',
+		calcBtn: '🧮 Калькулятор',
+		filterAll: 'Все (8)',
+		filterWebgl: '3D и WebGL (5)',
+		filterSpatial: 'Spatial и Glass OS (3)',
+		viewBento: '⊞ Витрина',
+		viewDeck: '▤ Детально',
+		viewMatrix: '≡ Таблица DNS',
+		preview: 'Превью',
+		openSite: 'Открыть ↗',
+		github: 'GitHub',
+		colProject: 'Проект',
+		colDomain: 'Живой домен',
+		colRepo: 'Репозиторий',
+		colStack: 'Стек',
+		colActions: 'Действия',
+		highlightsTitle: 'Ключевые детали',
+		modalLive: 'Открыть сайт ↗',
+		modalRepo: 'GitHub Repo',
+	},
+}[lang];
+---
+
+<div class="vsl-proj-page not-content">
+	<header class="vsl-doc-card vsl-proj-head" data-tile="1">
+		<div class="vsl-proj-head-top">
+			<div>
+				<div class="vsl-proj-eyebrow">{copy.eyebrow}</div>
+				<h1 class="vsl-proj-h1">{copy.title}</h1>
+				<p class="vsl-proj-sub">{copy.subtitle}</p>
+			</div>
+			<a href={`${prefix}/calculator/`} class="vsl-btn-white vsl-proj-calc-cta">{copy.calcBtn}</a>
+		</div>
+
+		<div class="vsl-proj-toolbar">
+			<div class="vsl-proj-filters" role="group" aria-label="Category filter">
+				<button type="button" class="vsl-proj-pill is-active" data-proj-filter="all">{copy.filterAll}</button>
+				<button type="button" class="vsl-proj-pill" data-proj-filter="webgl">{copy.filterWebgl}</button>
+				<button type="button" class="vsl-proj-pill" data-proj-filter="spatial">{copy.filterSpatial}</button>
+			</div>
+
+			<div class="vsl-proj-views" role="group" aria-label="Layout mode">
+				<button type="button" class="vsl-proj-view-btn is-active" data-proj-view="bento">{copy.viewBento}</button>
+				<button type="button" class="vsl-proj-view-btn" data-proj-view="deck">{copy.viewDeck}</button>
+				<button type="button" class="vsl-proj-view-btn" data-proj-view="matrix">{copy.viewMatrix}</button>
+			</div>
+		</div>
+	</header>
+
+	<div class="vsl-proj-stage" id="vsl-proj-stage" data-view="bento">
+		<div class="vsl-proj-cards" id="vsl-proj-cards">
+			{localizedProjects.map((project, idx) => (
+				<article
+					class="vsl-doc-card vsl-proj-card"
+					data-cat={project.category}
+					data-tile={String(Math.min(idx + 2, 6))}
+				>
+					<div class="vsl-proj-visual" style={`background:${project.gradient}`}>
+						<svg class="vsl-proj-svg" viewBox="0 0 360 150" fill="none" aria-hidden="true">
+							<circle cx="285" cy="72" r="56" stroke="#ffffff" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="5 5" />
+							<circle cx="285" cy="72" r="30" stroke={project.accent} stroke-opacity="0.7" stroke-width="1.4" />
+							<path d="M165 126 L230 62 L285 72 L338 30" stroke="#ffffff" stroke-opacity="0.34" stroke-width="1.2" />
+							<circle cx="230" cy="62" r="3.5" fill={project.accent} />
+						</svg>
+
+						<div class="vsl-proj-vis-top">
+							<span class="vsl-proj-vis-badge">{project.badge}</span>
+							<span class="vsl-proj-vis-live">
+								<i aria-hidden="true"></i>
+								{project.domainLabel}
+							</span>
+						</div>
+
+						<div class="vsl-proj-vis-bottom">
+							<h2 class="vsl-proj-vis-title">{project.title}</h2>
+							<button
+								type="button"
+								class="vsl-proj-play"
+								data-proj-preview={project.id}
+								title={`${copy.preview} ${project.title}`}
+								aria-label={`${copy.preview} ${project.title}`}
+							>
+								<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+									<polygon points="6 4 20 12 6 20 6 4" />
+								</svg>
+							</button>
+						</div>
+					</div>
+
+					<div class="vsl-proj-body">
+						<div class="vsl-proj-meta-row">
+							<span class="vsl-proj-repo">{project.repoName}</span>
+							<span class="vsl-proj-stack">{project.stack}</span>
+						</div>
+
+						<p class="vsl-proj-desc">{project.description}</p>
+
+						<ul class="vsl-proj-highlights">
+							{project.highlights.map((h) => (
+								<li>{h}</li>
+							))}
+						</ul>
+
+						<div class="vsl-proj-tags">
+							{project.tags.map((t) => (
+								<span class="vsl-proj-tag">{t}</span>
+							))}
+						</div>
+
+						<div class="vsl-proj-actions">
+							<button type="button" class="vsl-btn-white vsl-proj-btn-sm" data-proj-preview={project.id}>
+								▶ {copy.preview}
+							</button>
+							<a
+								href={project.liveUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="vsl-btn-glass vsl-proj-btn-sm"
+							>
+								{copy.openSite}
+							</a>
+							<a
+								href={project.repoUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="vsl-btn-glass vsl-proj-btn-sm"
+							>
+								{copy.github}
+							</a>
+						</div>
+					</div>
+				</article>
+			))}
+		</div>
+
+		<div class="vsl-doc-card vsl-proj-matrix" id="vsl-proj-matrix" hidden>
+			<div class="vsl-proj-matrix-wrap">
+				<table class="vsl-proj-table">
+					<thead>
+						<tr>
+							<th>{copy.colProject}</th>
+							<th>{copy.colDomain}</th>
+							<th>{copy.colRepo}</th>
+							<th>{copy.colStack}</th>
+							<th>{copy.colActions}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{localizedProjects.map((project) => (
+							<tr data-cat={project.category}>
+								<td>
+									<strong>{project.title}</strong>
+									<div class="vsl-proj-matrix-badge">{project.badge}</div>
+								</td>
+								<td>
+									<a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="vsl-proj-matrix-link">
+										<i class="vsl-proj-dot" aria-hidden="true"></i>
+										{project.domainLabel} ↗
+									</a>
+								</td>
+								<td><code>{project.repoName}</code></td>
+								<td class="vsl-proj-matrix-stack">{project.stack}</td>
+								<td>
+									<div class="vsl-proj-matrix-acts">
+										<button type="button" class="vsl-proj-pill is-compact" data-proj-preview={project.id}>
+											▶ {copy.preview}
+										</button>
+										<a
+											href={project.repoUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="vsl-proj-pill is-compact"
+										>
+											GitHub
+										</a>
+									</div>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Live Project Preview Modal -->
+<div id="vsl-proj-modal" class="vsl-modal-backdrop not-content" role="dialog" aria-modal="true" aria-labelledby="vsl-pm-title">
+	<div class="vsl-modal-card">
+		<div class="vsl-modal-head">
+			<div>
+				<div id="vsl-pm-badge" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.62);">
+					Live Node
+				</div>
+				<div id="vsl-pm-title" style="font-size:1.12rem;font-weight:700;">Project Preview</div>
+			</div>
+			<button type="button" id="vsl-pm-close" class="vsl-icon-btn" aria-label="Close Preview">
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+					<line x1="18" y1="6" x2="6" y2="18" />
+					<line x1="6" y1="6" x2="18" y2="18" />
+				</svg>
+			</button>
+		</div>
+
+		<div class="vsl-modal-body">
+			<div class="vsl-modal-frame-wrap">
+				<iframe
+					id="vsl-pm-iframe"
+					class="vsl-modal-iframe"
+					title="Interactive site preview"
+					loading="lazy"
+					sandbox="allow-scripts allow-same-origin allow-forms"
+				></iframe>
+			</div>
+
+			<div class="vsl-modal-specs">
+				<div>
+					<div style="font-size:0.74rem;color:rgba(255,255,255,0.6);font-family:var(--sl-font-mono);" id="vsl-pm-domain"></div>
+					<p id="vsl-pm-desc" style="font-size:0.86rem;line-height:1.58;color:rgba(255,255,255,0.88);margin:8px 0 0;"></p>
+				</div>
+
+				<div>
+					<div style="font-size:0.74rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.62);margin-bottom:6px;">
+						{copy.highlightsTitle}
+					</div>
+					<ul class="vsl-modal-list" id="vsl-pm-highlights"></ul>
+				</div>
+
+				<div style="margin-top:auto;display:flex;flex-wrap:wrap;gap:10px;">
+					<a id="vsl-pm-live" href="https://idominiqe.com/" target="_blank" rel="noopener noreferrer" class="vsl-btn-white">
+						{copy.modalLive}
+					</a>
+					<a id="vsl-pm-repo" href="https://github.com/iDominiqe" target="_blank" rel="noopener noreferrer" class="vsl-btn-glass">
+						{copy.modalRepo}
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script define:vars={{ projectsData: localizedProjects }}>
+	(function () {
+		const LAYOUT_KEY = 'vslProjectsLayout';
+		const stageEl = document.getElementById('vsl-proj-stage');
+		const cardsWrap = document.getElementById('vsl-proj-cards');
+		const matrixWrap = document.getElementById('vsl-proj-matrix');
+		let activeFilter = 'all';
+
+		function setViewMode(mode) {
+			if (!['bento', 'deck', 'matrix'].includes(mode)) mode = 'bento';
+			if (stageEl) stageEl.setAttribute('data-view', mode);
+			if (cardsWrap) cardsWrap.hidden = mode === 'matrix';
+			if (matrixWrap) matrixWrap.hidden = mode !== 'matrix';
+			document.querySelectorAll('[data-proj-view]').forEach((btn) => {
+				btn.classList.toggle('is-active', btn.getAttribute('data-proj-view') === mode);
+			});
+			try {
+				localStorage.setItem(LAYOUT_KEY, mode);
+			} catch (_) {}
+		}
+
+		function setFilter(cat) {
+			activeFilter = cat || 'all';
+			document.querySelectorAll('[data-proj-filter]').forEach((btn) => {
+				btn.classList.toggle('is-active', btn.getAttribute('data-proj-filter') === activeFilter);
+			});
+			document.querySelectorAll('[data-cat]').forEach((el) => {
+				const itemCat = el.getAttribute('data-cat');
+				el.hidden = activeFilter !== 'all' && itemCat !== activeFilter;
+			});
+		}
+
+		document.querySelectorAll('[data-proj-view]').forEach((btn) => {
+			btn.addEventListener('click', () => setViewMode(btn.getAttribute('data-proj-view') || 'bento'));
+		});
+
+		document.querySelectorAll('[data-proj-filter]').forEach((btn) => {
+			btn.addEventListener('click', () => setFilter(btn.getAttribute('data-proj-filter') || 'all'));
+		});
+
+		try {
+			const saved = localStorage.getItem(LAYOUT_KEY);
+			if (saved) setViewMode(saved);
+		} catch (_) {}
+
+		const modal = document.getElementById('vsl-proj-modal');
+		const pmIframe = document.getElementById('vsl-pm-iframe');
+		const pmBadge = document.getElementById('vsl-pm-badge');
+		const pmTitle = document.getElementById('vsl-pm-title');
+		const pmDomain = document.getElementById('vsl-pm-domain');
+		const pmDesc = document.getElementById('vsl-pm-desc');
+		const pmHighlights = document.getElementById('vsl-pm-highlights');
+		const pmLive = document.getElementById('vsl-pm-live');
+		const pmRepo = document.getElementById('vsl-pm-repo');
+
+		function openPreview(id) {
+			const p = projectsData.find((item) => item.id === id) || projectsData[0];
+			if (!p || !modal) return;
+			if (pmBadge) pmBadge.textContent = p.badge + ' · ' + p.stack;
+			if (pmTitle) pmTitle.textContent = p.title;
+			if (pmDomain) pmDomain.textContent = 'https://' + p.domainLabel + '/';
+			if (pmDesc) pmDesc.textContent = p.description;
+			if (pmHighlights) {
+				pmHighlights.replaceChildren();
+				(p.highlights || []).forEach((h) => {
+					const li = document.createElement('li');
+					li.textContent = h;
+					pmHighlights.appendChild(li);
+				});
+			}
+			if (pmLive) pmLive.setAttribute('href', p.liveUrl);
+			if (pmRepo) pmRepo.setAttribute('href', p.repoUrl);
+			if (pmIframe instanceof HTMLIFrameElement) pmIframe.src = p.liveUrl;
+			modal.classList.add('is-open');
+		}
+
+		function closePreview() {
+			if (!modal) return;
+			modal.classList.remove('is-open');
+			if (pmIframe instanceof HTMLIFrameElement) pmIframe.src = 'about:blank';
+		}
+
+		document.addEventListener('click', (e) => {
+			const btn = e.target instanceof Element ? e.target.closest('[data-proj-preview]') : null;
+			if (!btn) return;
+			e.stopPropagation();
+			const id = btn.getAttribute('data-proj-preview');
+			if (id) openPreview(id);
+		});
+
+		document.getElementById('vsl-pm-close')?.addEventListener('click', closePreview);
+		modal?.addEventListener('click', (e) => {
+			if (e.target === modal) closePreview();
+		});
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && modal?.classList.contains('is-open')) closePreview();
+		});
+	})();
+</script>
+
+<style>
+	.vsl-proj-page {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		padding-bottom: 14px;
+	}
+	.vsl-proj-head {
+		padding: 22px 24px 18px;
+		gap: 16px;
+	}
+	.vsl-proj-head-top {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 16px;
+		flex-wrap: wrap;
+	}
+	.vsl-proj-eyebrow {
+		font-size: 0.72rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #60a5fa;
+		margin-bottom: 4px;
+	}
+	html[data-vtheme='flat-light'] .vsl-proj-eyebrow {
+		color: #2563eb;
+	}
+	.vsl-proj-h1 {
+		margin: 0;
+		font-size: clamp(1.45rem, 2.6vw, 2rem);
+		font-weight: 800;
+		color: var(--vsl-text);
+	}
+	.vsl-proj-sub {
+		margin: 6px 0 0;
+		font-size: 0.88rem;
+		line-height: 1.55;
+		color: var(--vsl-text-muted);
+		max-width: 68ch;
+	}
+	.vsl-proj-calc-cta {
+		flex-shrink: 0;
+	}
+	.vsl-proj-toolbar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		flex-wrap: wrap;
+		padding-top: 12px;
+		border-top: 1px solid var(--vsl-hairline);
+	}
+	.vsl-proj-filters,
+	.vsl-proj-views {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		flex-wrap: wrap;
+	}
+	.vsl-proj-views {
+		padding: 3px;
+		border-radius: 999px;
+		border: 1px solid var(--vsl-hairline);
+		background: var(--vsl-surface);
+	}
+	.vsl-proj-pill,
+	.vsl-proj-view-btn {
+		border: 1px solid var(--vsl-hairline);
+		background: var(--vsl-surface);
+		color: var(--vsl-text-muted);
+		font-size: 0.76rem;
+		font-weight: 650;
+		padding: 6px 12px;
+		border-radius: 999px;
+		cursor: pointer;
+		text-decoration: none;
+		transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+	}
+	.vsl-proj-view-btn {
+		border-color: transparent;
+		background: transparent;
+		padding: 5px 11px;
+	}
+	.vsl-proj-pill.is-compact {
+		padding: 4px 10px;
+		font-size: 0.72rem;
+	}
+	.vsl-proj-pill:hover,
+	.vsl-proj-view-btn:hover {
+		color: var(--vsl-text);
+		background: var(--vsl-surface-strong);
+	}
+	.vsl-proj-pill.is-active,
+	.vsl-proj-view-btn.is-active {
+		background: var(--vsl-accent);
+		color: var(--vsl-accent-ink);
+		border-color: transparent;
+	}
+	.vsl-proj-cards {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 16px;
+	}
+	.vsl-proj-stage[data-view='deck'] .vsl-proj-cards {
+		grid-template-columns: 1fr;
+	}
+	.vsl-proj-card {
+		padding: 0;
+		overflow: hidden;
+		gap: 0;
+	}
+	.vsl-proj-card[hidden] {
+		display: none !important;
+	}
+	.vsl-proj-stage[data-view='deck'] .vsl-proj-card {
+		display: grid;
+		grid-template-columns: minmax(270px, 0.92fr) minmax(0, 1.35fr);
+	}
+	.vsl-proj-visual {
+		position: relative;
+		min-height: 152px;
+		padding: 16px 18px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		color: #ffffff;
+		overflow: hidden;
+	}
+	.vsl-proj-stage[data-view='deck'] .vsl-proj-visual {
+		min-height: 220px;
+	}
+	.vsl-proj-svg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+	.vsl-proj-vis-top,
+	.vsl-proj-vis-bottom {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+	}
+	.vsl-proj-vis-badge {
+		font-size: 0.69rem;
+		font-weight: 700;
+		padding: 3px 10px;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.16);
+		backdrop-filter: blur(8px);
+		border: 1px solid rgba(255, 255, 255, 0.22);
+		color: #ffffff;
+	}
+	.vsl-proj-vis-live {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		font-family: var(--sl-font-mono);
+		font-size: 0.68rem;
+		padding: 3px 8px;
+		border-radius: 999px;
+		background: rgba(15, 23, 42, 0.56);
+		border: 1px solid rgba(255, 255, 255, 0.16);
+		color: rgba(255, 255, 255, 0.88);
+	}
+	.vsl-proj-vis-live i,
+	.vsl-proj-dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: #22c55e;
+		display: inline-block;
+	}
+	.vsl-proj-vis-title {
+		margin: 0;
+		font-size: 1.16rem;
+		font-weight: 800;
+		color: #ffffff;
+		text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+	}
+	.vsl-proj-play {
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		border: 1px solid rgba(255, 255, 255, 0.32);
+		background: rgba(255, 255, 255, 0.2);
+		color: #ffffff;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		flex-shrink: 0;
+		transition: transform 0.15s ease, background 0.15s ease;
+	}
+	.vsl-proj-play:hover {
+		transform: scale(1.08);
+		background: rgba(255, 255, 255, 0.34);
+	}
+	.vsl-proj-body {
+		padding: 16px 18px 18px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		flex: 1;
+	}
+	.vsl-proj-meta-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+	.vsl-proj-repo {
+		font-family: var(--sl-font-mono);
+		font-size: 0.72rem;
+		color: var(--vsl-text-soft);
+	}
+	.vsl-proj-stack {
+		font-size: 0.72rem;
+		color: var(--vsl-text-soft);
+	}
+	.vsl-proj-desc {
+		margin: 0;
+		font-size: 0.85rem;
+		line-height: 1.54;
+		color: var(--vsl-text-muted);
+	}
+	.vsl-proj-highlights {
+		margin: 0;
+		padding-left: 18px;
+		font-size: 0.8rem;
+		line-height: 1.5;
+		color: var(--vsl-text-soft);
+		display: none;
+	}
+	.vsl-proj-stage[data-view='deck'] .vsl-proj-highlights {
+		display: block;
+	}
+	.vsl-proj-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+	}
+	.vsl-proj-tag {
+		padding: 3px 9px;
+		border-radius: 8px;
+		background: var(--vsl-surface-strong);
+		font-size: 0.71rem;
+		font-family: var(--sl-font-mono);
+		color: var(--vsl-text-muted);
+	}
+	.vsl-proj-actions {
+		margin-top: auto;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		padding-top: 4px;
+	}
+	.vsl-proj-btn-sm {
+		padding: 7px 13px !important;
+		font-size: 0.76rem !important;
+	}
+	.vsl-proj-matrix {
+		padding: 8px 14px;
+	}
+	.vsl-proj-matrix-wrap {
+		width: 100%;
+		overflow-x: auto;
+	}
+	.vsl-proj-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.83rem;
+	}
+	.vsl-proj-table th,
+	.vsl-proj-table td {
+		text-align: left;
+		padding: 12px 10px;
+		border-bottom: 1px solid var(--vsl-hairline);
+		vertical-align: middle;
+	}
+	.vsl-proj-table tr:last-child td {
+		border-bottom: 0;
+	}
+	.vsl-proj-table th {
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--vsl-text-soft);
+	}
+	.vsl-proj-table tr[hidden] {
+		display: none !important;
+	}
+	.vsl-proj-matrix-badge {
+		font-size: 0.71rem;
+		color: var(--vsl-text-soft);
+		margin-top: 2px;
+	}
+	.vsl-proj-matrix-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-family: var(--sl-font-mono);
+		font-size: 0.76rem;
+		color: var(--vsl-text);
+		text-decoration: none;
+	}
+	.vsl-proj-matrix-link:hover {
+		text-decoration: underline;
+	}
+	.vsl-proj-matrix-stack {
+		font-size: 0.78rem;
+		color: var(--vsl-text-muted);
+	}
+	.vsl-proj-matrix-acts {
+		display: flex;
+		gap: 6px;
+		flex-wrap: nowrap;
+	}
+	@media (max-width: 860px) {
+		.vsl-proj-cards,
+		.vsl-proj-stage[data-view='deck'] .vsl-proj-card {
+			grid-template-columns: 1fr;
+		}
+		.vsl-proj-head {
+			padding: 18px;
+		}
+	}
+</style>
