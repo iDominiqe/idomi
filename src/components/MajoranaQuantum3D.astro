@@ -1,0 +1,857 @@
+---
+interface Props {
+	lang?: 'en' | 'ro' | 'ru';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const T = {
+	en: {
+		badge: 'Interactive 3D Quantum Lab',
+		title: 'Majorana 2 · Topological Qubit & Quantum State Simulation',
+		subtitle: 'Drag the 3D scene to rotate · Switch between InAs-Pb topological hardware, Bloch sphere superposition, and fault-tolerant Majorana braiding.',
+		modes: {
+			topological: 'InAs-Pb Majorana Qubit',
+			bloch: '3D Bloch Sphere',
+			braiding: 'Topological Braiding',
+		},
+		actions: {
+			flipParity: 'Flip Parity |0⟩ ↔ |1⟩',
+			cosmicNoise: 'Cosmic Noise Burst',
+			gateH: 'H (Hadamard)',
+			gateX: 'X (NOT)',
+			gateZ: 'Z (Phase)',
+			reset0: 'Reset |0⟩',
+			swapBraid: 'Swap Pair γ₁ ↔ γ₂',
+			pause: 'Pause',
+			resume: 'Resume',
+		},
+		modeDesc: {
+			topological: 'Two Majorana Zero Modes (γ₁, γ₂) sit at opposite ends of an InAs nanowire shielded by superconducting lead (Pb). Quantum information is encoded in non-local electron parity (even vs odd), deflecting local cosmic noise.',
+			bloch: 'Visualizes any single-qubit superposition |ψ⟩ = α|0⟩ + β|1⟩ on the unit 3D Bloch sphere. Apply quantum logic gates (H, X, Z) to rotate the state vector in real time.',
+			braiding: 'Majorana fermions swap positions in 2D space-time (braiding worldlines), executing protected topological quantum gates immune to continuous geometric jitter.',
+		},
+		stats: {
+			stack: 'InAs-Pb Topoconductor',
+			lifetime: '20s Mean Lifetime (up to 60s)',
+			gate: '1 µs Gate',
+			size: '10 µm (1/100 mm)',
+			rel: '1,000x Reliability vs Majorana 1',
+		},
+		status: {
+			evenParity: 'Parity: EVEN |0⟩ (0 Errors · Shielded by Pb)',
+			oddParity: 'Parity: ODD |1⟩ (0 Errors · Shielded by Pb)',
+			noiseBlocked: 'Cosmic rays deflected by Pb superconducting shield!',
+			braidOp: 'Worldline Braiding · Accumulated Phase: ',
+		},
+	},
+	ro: {
+		badge: 'Laborator Cuantic 3D Interactiv',
+		title: 'Majorana 2 · Simulare 3D Qubit Topologic și Stare Cuantică',
+		subtitle: 'Trage scena 3D pentru a roti · Comută între hardware-ul topologic InAs-Pb, sfera Bloch 3D și împletirea topologică (braiding).',
+		modes: {
+			topological: 'Qubit Majorana InAs-Pb',
+			bloch: 'Sfera Bloch 3D',
+			braiding: 'Împletire Topologică',
+		},
+		actions: {
+			flipParity: 'Comută Paritatea |0⟩ ↔ |1⟩',
+			cosmicNoise: 'Impuls Radiație Cosmică',
+			gateH: 'H (Hadamard)',
+			gateX: 'X (NOT)',
+			gateZ: 'Z (Fază)',
+			reset0: 'Reset |0⟩',
+			swapBraid: 'Schimbă Perechea γ₁ ↔ γ₂',
+			pause: 'Pauză',
+			resume: 'Continuă',
+		},
+		modeDesc: {
+			topological: 'Două moduri zero Majorana (γ₁, γ₂) se află la capetele nanofirului InAs ecranat de plumb supraconductor (Pb). Informația este stocată non-local prin paritatea electronilor (par/impar), respingând zgomotul local.',
+			bloch: 'Vizualizează orice superpoziție a unui qubit |ψ⟩ = α|0⟩ + β|1⟩ pe sfera Bloch 3D. Aplică porți cuantice (H, X, Z) pentru a roti vectorul de stare în timp real.',
+			braiding: 'Fermionii Majorana își schimbă pozițiile în spațiu-timp (împletire de linii de univers), executând porți cuantice protejate topologic împotriva perturbațiilor.',
+		},
+		stats: {
+			stack: 'Topoconductor InAs-Pb',
+			lifetime: 'Durată medie 20s (până la 60s)',
+			gate: 'Operație 1 µs',
+			size: '10 µm (1/100 mm)',
+			rel: 'Fiabilitate de 1.000x față de Majorana 1',
+		},
+		status: {
+			evenParity: 'Paritate: PARĂ |0⟩ (0 Erori · Ecranat de Pb)',
+			oddParity: 'Paritate: IMPARĂ |1⟩ (0 Erori · Ecranat de Pb)',
+			noiseBlocked: 'Radiația cosmică a fost deviată de ecranul supraconductor Pb!',
+			braidOp: 'Împletire Topologică · Fază acumulată: ',
+		},
+	},
+	ru: {
+		badge: 'Интерактивная 3D Квантовая Лаборатория',
+		title: 'Majorana 2 · 3D-симуляция топологического кубита и кванта',
+		subtitle: 'Перетаскивайте сцену для вращения · Переключайтесь между нанопроводом InAs-Pb, сферой Блоха и топологическим плетением (braiding).',
+		modes: {
+			topological: 'Кубит Majorana (InAs-Pb)',
+			bloch: '3D Сфера Блоха',
+			braiding: 'Топологическое плетение',
+		},
+		actions: {
+			flipParity: 'Сменить чётность |0⟩ ↔ |1⟩',
+			cosmicNoise: 'Всплеск космического шума',
+			gateH: 'H (Адамар)',
+			gateX: 'X (НЕ / Flip)',
+			gateZ: 'Z (Фаза)',
+			reset0: 'Сброс |0⟩',
+			swapBraid: 'Обмен пары γ₁ ↔ γ₂',
+			pause: 'Пауза',
+			resume: 'Старт',
+		},
+		modeDesc: {
+			topological: 'Две майорановские нулевые моды (γ₁, γ₂) разнесены по краям полупроводникового нанопровода InAs под сверхпроводящим свинцовым экраном (Pb). Состояние кодируется нелокально — чётностью числа электронов.',
+			bloch: '3D-геометрия суперпозиции кубита |ψ⟩ = α|0⟩ + β|1⟩ на сфере Блоха. Нажимайте квантовые гейты (H, X, Z), чтобы вращать вектор состояния и видеть вероятности.',
+			braiding: 'Перестановка фермионов Майораны в пространстве-времени (плетение мировых линий) реализует отказоустойчивые топологические гейты, защищённые от локальных помех.',
+		},
+		stats: {
+			stack: 'Топокондуктор InAs-Pb',
+			lifetime: '20 с среднее время жизни (до 60 с)',
+			gate: 'Операции за 1 мкс',
+			size: '10 мкм (1/100 мм)',
+			rel: 'Надёжность в 1 000× выше Majorana 1',
+		},
+		status: {
+			evenParity: 'Чётность: ЧЁТНАЯ |0⟩ (0 ошибок · защита Pb)',
+			oddParity: 'Чётность: НЕЧЁТНАЯ |1⟩ (0 ошибок · защита Pb)',
+			noiseBlocked: 'Космическое излучение отражено сверхпроводящим экраном Pb!',
+			braidOp: 'Топологическое плетение · Накопленная фаза: ',
+		},
+	},
+}[lang];
+---
+
+<section class="vsl-m2-lab not-content" data-m2-lab aria-label={T.title}>
+	<div class="vsl-m2-head">
+		<div>
+			<span class="vsl-m2-badge">⚛️ {T.badge}</span>
+			<h3 class="vsl-m2-title">{T.title}</h3>
+			<p class="vsl-m2-sub">{T.subtitle}</p>
+		</div>
+		<button type="button" class="vsl-m2-pill-btn" data-m2-pause>⏸ {T.actions.pause}</button>
+	</div>
+
+	<div class="vsl-m2-tabs" role="tablist">
+		<button type="button" class="vsl-m2-tab is-active" data-m2-mode="topological" role="tab" aria-selected="true">
+			{T.modes.topological}
+		</button>
+		<button type="button" class="vsl-m2-tab" data-m2-mode="bloch" role="tab" aria-selected="false">
+			{T.modes.bloch}
+		</button>
+		<button type="button" class="vsl-m2-tab" data-m2-mode="braiding" role="tab" aria-selected="false">
+			{T.modes.braiding}
+		</button>
+	</div>
+
+	<div class="vsl-m2-canvas-wrap">
+		<canvas class="vsl-m2-canvas" data-m2-canvas width="880" height="420"></canvas>
+		<div class="vsl-m2-hud-pill" data-m2-status>{T.status.evenParity}</div>
+	</div>
+
+	<div class="vsl-m2-controls">
+		<div class="vsl-m2-btn-group" data-m2-ctrl="topological">
+			<button type="button" class="vsl-m2-act is-primary" data-m2-action="parity">{T.actions.flipParity}</button>
+			<button type="button" class="vsl-m2-act" data-m2-action="noise">☄️ {T.actions.cosmicNoise}</button>
+		</div>
+		<div class="vsl-m2-btn-group" data-m2-ctrl="bloch" hidden>
+			<button type="button" class="vsl-m2-act is-primary" data-m2-action="gate-h">{T.actions.gateH}</button>
+			<button type="button" class="vsl-m2-act" data-m2-action="gate-x">{T.actions.gateX}</button>
+			<button type="button" class="vsl-m2-act" data-m2-action="gate-z">{T.actions.gateZ}</button>
+			<button type="button" class="vsl-m2-act" data-m2-action="gate-reset">{T.actions.reset0}</button>
+		</div>
+		<div class="vsl-m2-btn-group" data-m2-ctrl="braiding" hidden>
+			<button type="button" class="vsl-m2-act is-primary" data-m2-action="braid-step">{T.actions.swapBraid}</button>
+		</div>
+		<p class="vsl-m2-explain" data-m2-explain>{T.modeDesc.topological}</p>
+	</div>
+
+	<div class="vsl-m2-specs">
+		<span>🧪 {T.stats.stack}</span>
+		<span>⏱️ {T.stats.lifetime}</span>
+		<span>⚡ {T.stats.gate}</span>
+		<span>🔬 {T.stats.size}</span>
+		<span>🚀 {T.stats.rel}</span>
+	</div>
+</section>
+
+<script define:vars={{ copyData: T }}>
+	(function () {
+		document.querySelectorAll('[data-m2-lab]').forEach((root) => {
+			if (root.getAttribute('data-m2-init') === '1') return;
+			root.setAttribute('data-m2-init', '1');
+
+			const canvas = root.querySelector('[data-m2-canvas]');
+			const statusEl = root.querySelector('[data-m2-status]');
+			const explainEl = root.querySelector('[data-m2-explain]');
+			const pauseBtn = root.querySelector('[data-m2-pause]');
+			if (!(canvas instanceof HTMLCanvasElement)) return;
+			const ctx = canvas.getContext('2d');
+			if (!ctx) return;
+
+			let mode = 'topological';
+			let paused = false;
+			let camYaw = 0.55;
+			let camPitch = 0.32;
+			let dragging = false;
+			let lastX = 0;
+			let lastY = 0;
+			let animTime = 0;
+			let lastTs = performance.now();
+
+			// Topological mode state
+			let parityOdd = false;
+			let noiseTimer = 0;
+			const rays = [];
+
+			// Bloch sphere mode state (exact unit vector on Bloch sphere)
+			let blochCur = { x: 0, y: 0, z: 1 };
+			let blochTarget = { x: 0, y: 0, z: 1 };
+
+			// Braiding mode state
+			let braidStepCount = 1;
+			let braidBoost = 0;
+
+			function resizeCanvas() {
+				const rect = canvas.getBoundingClientRect();
+				const dpr = Math.min(window.devicePixelRatio || 1, 2);
+				const w = Math.max(300, Math.round(rect.width * dpr));
+				const h = Math.max(260, Math.round(rect.height * dpr));
+				if (canvas.width !== w || canvas.height !== h) {
+					canvas.width = w;
+					canvas.height = h;
+				}
+			}
+			resizeCanvas();
+			window.addEventListener('resize', resizeCanvas);
+
+			function updateStatusText() {
+				if (!statusEl) return;
+				if (mode === 'topological') {
+					if (noiseTimer > 0) {
+						statusEl.textContent = copyData.status.noiseBlocked;
+					} else {
+						statusEl.textContent = parityOdd ? copyData.status.oddParity : copyData.status.evenParity;
+					}
+				} else if (mode === 'bloch') {
+					const p0 = Math.max(0, Math.min(100, Math.round(((1 + blochCur.z) / 2) * 100)));
+					const p1 = 100 - p0;
+					statusEl.textContent = `|ψ⟩ Bloch · P(|0⟩)=${p0}% · P(|1⟩)=${p1}%`;
+				} else {
+					const phaseNum = braidStepCount % 8;
+					statusEl.textContent = `${copyData.status.braidOp}e^(i·${phaseNum}π/4)`;
+				}
+			}
+
+			function setMode(nextMode) {
+				mode = nextMode;
+				root.querySelectorAll('[data-m2-mode]').forEach((btn) => {
+					const active = btn.getAttribute('data-m2-mode') === mode;
+					btn.classList.toggle('is-active', active);
+					btn.setAttribute('aria-selected', String(active));
+				});
+				root.querySelectorAll('[data-m2-ctrl]').forEach((grp) => {
+					grp.hidden = grp.getAttribute('data-m2-ctrl') !== mode;
+				});
+				if (explainEl) explainEl.textContent = copyData.modeDesc[mode] || '';
+				updateStatusText();
+			}
+
+			root.querySelectorAll('[data-m2-mode]').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					setMode(btn.getAttribute('data-m2-mode') || 'topological');
+				});
+			});
+
+			pauseBtn?.addEventListener('click', () => {
+				paused = !paused;
+				pauseBtn.textContent = paused ? `▶ ${copyData.actions.resume}` : `⏸ ${copyData.actions.pause}`;
+			});
+
+			function spawnCosmicRays() {
+				noiseTimer = 2.4;
+				for (let i = 0; i < 18; i += 1) {
+					const angle = (Math.PI * 2 * i) / 18 + Math.random() * 0.3;
+					const yOff = (Math.random() - 0.5) * 1.4;
+					rays.push({
+						angle,
+						y: yOff,
+						r: 2.3 + Math.random() * 0.7,
+						speed: 1.5 + Math.random() * 0.8,
+						deflected: false,
+						life: 1.0,
+					});
+				}
+				updateStatusText();
+			}
+
+			root.querySelectorAll('[data-m2-action]').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					const act = btn.getAttribute('data-m2-action');
+					if (act === 'parity') {
+						parityOdd = !parityOdd;
+						updateStatusText();
+					} else if (act === 'noise') {
+						spawnCosmicRays();
+					} else if (act === 'gate-h') {
+						const { x, y, z } = blochTarget;
+						blochTarget = { x: z, y: -y, z: x };
+					} else if (act === 'gate-x') {
+						const { x, y, z } = blochTarget;
+						blochTarget = { x, y: -y, z: -z };
+					} else if (act === 'gate-z') {
+						const { x, y, z } = blochTarget;
+						blochTarget = { x: -x, y: -y, z };
+					} else if (act === 'gate-reset') {
+						blochTarget = { x: 0, y: 0, z: 1 };
+					} else if (act === 'braid-step') {
+						braidStepCount += 1;
+						braidBoost = 1.6;
+						updateStatusText();
+					}
+				});
+			});
+
+			canvas.addEventListener('pointerdown', (e) => {
+				dragging = true;
+				lastX = e.clientX;
+				lastY = e.clientY;
+				canvas.setPointerCapture(e.pointerId);
+			});
+			canvas.addEventListener('pointermove', (e) => {
+				if (!dragging) return;
+				const dx = e.clientX - lastX;
+				const dy = e.clientY - lastY;
+				lastX = e.clientX;
+				lastY = e.clientY;
+				camYaw += dx * 0.009;
+				camPitch = Math.max(-1.2, Math.min(1.2, camPitch + dy * 0.009));
+			});
+			canvas.addEventListener('pointerup', () => {
+				dragging = false;
+			});
+			canvas.addEventListener('pointercancel', () => {
+				dragging = false;
+			});
+
+			function project(x, y, z, w, h, fovScale) {
+				const cy = Math.cos(camYaw);
+				const sy = Math.sin(camYaw);
+				const cp = Math.cos(camPitch);
+				const sp = Math.sin(camPitch);
+
+				const x1 = x * cy - z * sy;
+				const z1 = x * sy + z * cy;
+				const y2 = y * cp - z1 * sp;
+				const z2 = y * sp + z1 * cp;
+
+				const camDist = 4.6;
+				const denom = Math.max(0.4, camDist - z2);
+				const scale = (fovScale * 3.1) / denom;
+				return {
+					sx: w * 0.5 + x1 * scale,
+					sy: h * 0.5 - y2 * scale,
+					depth: z2,
+					scale,
+				};
+			}
+
+			function drawOrb(sx, sy, radius, coreColor, glowColor) {
+				const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, radius * 2.6);
+				grad.addColorStop(0, coreColor);
+				grad.addColorStop(0.38, glowColor);
+				grad.addColorStop(1, 'rgba(0,0,0,0)');
+				ctx.fillStyle = grad;
+				ctx.beginPath();
+				ctx.arc(sx, sy, radius * 2.6, 0, Math.PI * 2);
+				ctx.fill();
+
+				ctx.fillStyle = '#ffffff';
+				ctx.beginPath();
+				ctx.arc(sx, sy, Math.max(2.2, radius * 0.42), 0, Math.PI * 2);
+				ctx.fill();
+			}
+
+			function renderTopological(w, h, fov) {
+				const waveHue = parityOdd ? '244, 114, 182' : '56, 189, 248';
+				const mzmColor = parityOdd ? '#f472b6' : '#38bdf8';
+				const shieldRadius = 0.72;
+				const wireLen = 1.65;
+
+				// 1. Pb Superconducting Shield Rings + Ribs
+				ctx.strokeStyle = 'rgba(148, 163, 184, 0.24)';
+				ctx.lineWidth = Math.max(1, fov * 0.0045);
+				const ringOffsets = [-1.45, -0.72, 0, 0.72, 1.45];
+				ringOffsets.forEach((rx) => {
+					ctx.beginPath();
+					for (let s = 0; s <= 32; s += 1) {
+						const th = (s / 32) * Math.PI * 2;
+						const p = project(rx, Math.cos(th) * shieldRadius, Math.sin(th) * shieldRadius, w, h, fov);
+						if (s === 0) ctx.moveTo(p.sx, p.sy);
+						else ctx.lineTo(p.sx, p.sy);
+					}
+					ctx.stroke();
+				});
+				for (let r = 0; r < 6; r += 1) {
+					const th = (r / 6) * Math.PI * 2;
+					const y = Math.cos(th) * shieldRadius;
+					const z = Math.sin(th) * shieldRadius;
+					const p1 = project(-1.45, y, z, w, h, fov);
+					const p2 = project(1.45, y, z, w, h, fov);
+					ctx.beginPath();
+					ctx.moveTo(p1.sx, p1.sy);
+					ctx.lineTo(p2.sx, p2.sy);
+					ctx.stroke();
+				}
+
+				// 2. Central InAs Nanowire core
+				const coreL = project(-wireLen, 0, 0, w, h, fov);
+				const coreR = project(wireLen, 0, 0, w, h, fov);
+				ctx.strokeStyle = 'rgba(226, 232, 240, 0.55)';
+				ctx.lineWidth = Math.max(2.5, fov * 0.022);
+				ctx.beginPath();
+				ctx.moveTo(coreL.sx, coreL.sy);
+				ctx.lineTo(coreR.sx, coreR.sy);
+				ctx.stroke();
+
+				// 3. Non-local Majorana Parity Standing Wave
+				const freq = parityOdd ? 4.2 : 2.1;
+				const amp = parityOdd ? 0.24 : 0.16;
+				ctx.strokeStyle = `rgba(${waveHue}, 0.88)`;
+				ctx.lineWidth = Math.max(2, fov * 0.011);
+				ctx.beginPath();
+				for (let i = 0; i <= 72; i += 1) {
+					const u = i / 72;
+					const x = -wireLen + u * wireLen * 2;
+					const env = Math.sin(u * Math.PI);
+					const waveY = Math.sin(u * Math.PI * freq - animTime * 3.8) * amp * env;
+					const waveZ = Math.cos(u * Math.PI * freq - animTime * 3.8) * amp * env;
+					const p = project(x, waveY, waveZ, w, h, fov);
+					if (i === 0) ctx.moveTo(p.sx, p.sy);
+					else ctx.lineTo(p.sx, p.sy);
+				}
+				ctx.stroke();
+
+				// 4. Cooper pairs flowing along InAs wire
+				for (let k = 0; k < 10; k += 1) {
+					const u = ((k / 10 + animTime * 0.22) % 1);
+					const x = -1.35 + u * 2.7;
+					const p = project(x, Math.sin(animTime * 4 + k) * 0.05, Math.cos(animTime * 4 + k) * 0.05, w, h, fov);
+					ctx.fillStyle = '#fde047';
+					ctx.beginPath();
+					ctx.arc(p.sx, p.sy, Math.max(2.2, p.scale * 0.032), 0, Math.PI * 2);
+					ctx.fill();
+				}
+
+				// 5. Deflected Cosmic Rays against Lead (Pb) Shield
+				for (let i = rays.length - 1; i >= 0; i -= 1) {
+					const ray = rays[i];
+					if (!ray.deflected) {
+						ray.r -= ray.speed * 0.03;
+						if (ray.r <= shieldRadius + 0.05) {
+							ray.deflected = true;
+							ray.r = shieldRadius + 0.05;
+						}
+					} else {
+						ray.r += ray.speed * 0.028;
+						ray.life -= 0.025;
+					}
+					const rx = ray.y;
+					const ry = Math.cos(ray.angle) * ray.r;
+					const rz = Math.sin(ray.angle) * ray.r;
+					const pHead = project(rx, ry, rz, w, h, fov);
+					const pTail = project(rx * 1.06, Math.cos(ray.angle) * (ray.r + 0.25), Math.sin(ray.angle) * (ray.r + 0.25), w, h, fov);
+					ctx.strokeStyle = `rgba(251, 146, 60, ${Math.max(0, ray.life)})`;
+					ctx.lineWidth = Math.max(1.5, fov * 0.008);
+					ctx.beginPath();
+					ctx.moveTo(pTail.sx, pTail.sy);
+					ctx.lineTo(pHead.sx, pHead.sy);
+					ctx.stroke();
+					if (ray.life <= 0) rays.splice(i, 1);
+				}
+
+				// 6. Majorana Zero Modes γ1 & γ2 (depth-sorted)
+				const m1 = { label: 'γ₁', pos: project(-wireLen, 0, 0, w, h, fov) };
+				const m2 = { label: 'γ₂', pos: project(wireLen, 0, 0, w, h, fov) };
+				[m1, m2]
+					.sort((a, b) => a.pos.depth - b.pos.depth)
+					.forEach((m) => {
+						drawOrb(m.pos.sx, m.pos.sy, m.pos.scale * 0.22, '#ffffff', mzmColor);
+						ctx.fillStyle = '#ffffff';
+						ctx.font = `700 ${Math.round(Math.max(12, fov * 0.06))}px system-ui, sans-serif`;
+						ctx.fillText(m.label, m.pos.sx + 12, m.pos.sy - 12);
+					});
+
+				// Hardware layer label
+				const labelP = project(0, shieldRadius + 0.22, 0, w, h, fov);
+				ctx.fillStyle = 'rgba(203, 213, 225, 0.88)';
+				ctx.font = `600 ${Math.round(Math.max(11, fov * 0.048))}px ui-monospace, monospace`;
+				ctx.textAlign = 'center';
+				ctx.fillText('Pb Shield + InAs Nanowire', labelP.sx, labelP.sy);
+				ctx.textAlign = 'left';
+			}
+
+			function renderBloch(w, h, fov) {
+				const R = 1.25;
+				// Smoothly slerp blochCur toward blochTarget
+				const lerpRate = 0.14;
+				const nx = blochCur.x + (blochTarget.x - blochCur.x) * lerpRate;
+				const ny = blochCur.y + (blochTarget.y - blochCur.y) * lerpRate;
+				const nz = blochCur.z + (blochTarget.z - blochCur.z) * lerpRate;
+				const mag = Math.hypot(nx, ny, nz) || 1;
+				blochCur = { x: nx / mag, y: ny / mag, z: nz / mag };
+
+				// Draw 3 orthogonal great circles + 2 latitude rings (in 3D screen space: Y is Z_bloch!)
+				const drawCircle = (fn, stroke, lw = 1.2) => {
+					ctx.strokeStyle = stroke;
+					ctx.lineWidth = lw;
+					ctx.beginPath();
+					for (let s = 0; s <= 48; s += 1) {
+						const t = (s / 48) * Math.PI * 2;
+						const [bx, by, bz] = fn(t);
+						const p = project(bx * R, bz * R, by * R, w, h, fov);
+						if (s === 0) ctx.moveTo(p.sx, p.sy);
+						else ctx.lineTo(p.sx, p.sy);
+					}
+					ctx.stroke();
+				};
+
+				drawCircle((t) => [Math.cos(t), Math.sin(t), 0], 'rgba(148, 163, 184, 0.34)', 1.5);
+				drawCircle((t) => [Math.cos(t), 0, Math.sin(t)], 'rgba(148, 163, 184, 0.22)', 1.1);
+				drawCircle((t) => [0, Math.cos(t), Math.sin(t)], 'rgba(148, 163, 184, 0.22)', 1.1);
+				drawCircle((t) => [Math.cos(t) * 0.78, Math.sin(t) * 0.78, 0.62], 'rgba(148, 163, 184, 0.14)', 1);
+				drawCircle((t) => [Math.cos(t) * 0.78, Math.sin(t) * 0.78, -0.62], 'rgba(148, 163, 184, 0.14)', 1);
+
+				// Axes Z (|0> to |1>), X (|+> to |->)
+				const zTop = project(0, R * 1.18, 0, w, h, fov);
+				const zBot = project(0, -R * 1.18, 0, w, h, fov);
+				const xPos = project(R * 1.18, 0, 0, w, h, fov);
+				const xNeg = project(-R * 1.18, 0, 0, w, h, fov);
+				const yPos = project(0, 0, R * 1.18, w, h, fov);
+				const origin = project(0, 0, 0, w, h, fov);
+
+				ctx.strokeStyle = 'rgba(255, 255, 255, 0.24)';
+				ctx.lineWidth = 1.2;
+				[
+					[zBot, zTop],
+					[xNeg, xPos],
+					[origin, yPos],
+				].forEach(([a, b]) => {
+					ctx.beginPath();
+					ctx.moveTo(a.sx, a.sy);
+					ctx.lineTo(b.sx, b.sy);
+					ctx.stroke();
+				});
+
+				// Axis labels
+				ctx.font = `700 ${Math.round(Math.max(12, fov * 0.055))}px ui-monospace, monospace`;
+				ctx.fillStyle = '#38bdf8';
+				ctx.fillText('|0⟩', zTop.sx + 8, zTop.sy + 4);
+				ctx.fillStyle = '#f472b6';
+				ctx.fillText('|1⟩', zBot.sx + 8, zBot.sy + 4);
+				ctx.fillStyle = 'rgba(226, 232, 240, 0.85)';
+				ctx.fillText('|+⟩', xPos.sx + 6, xPos.sy + 4);
+				ctx.fillText('|+i⟩', yPos.sx + 6, yPos.sy + 4);
+
+				// State Vector |ψ⟩
+				const tip = project(blochCur.x * R, blochCur.z * R, blochCur.y * R, w, h, fov);
+				ctx.strokeStyle = '#38bdf8';
+				ctx.lineWidth = Math.max(3, fov * 0.015);
+				ctx.beginPath();
+				ctx.moveTo(origin.sx, origin.sy);
+				ctx.lineTo(tip.sx, tip.sy);
+				ctx.stroke();
+
+				drawOrb(tip.sx, tip.sy, tip.scale * 0.18, '#ffffff', '#38bdf8');
+				ctx.fillStyle = '#ffffff';
+				ctx.fillText('|ψ⟩', tip.sx + 10, tip.sy - 10);
+			}
+
+			function renderBraiding(w, h, fov) {
+				const count = 4;
+				const speed = 1.15 + braidBoost * 1.4;
+				const colors = ['#38bdf8', '#f472b6', '#a78bfa', '#34d399'];
+				const labels = ['γ₁', 'γ₂', 'γ₃', 'γ₄'];
+				const segments = [];
+
+				for (let s = 0; s < 56; s += 1) {
+					const u0 = s / 56;
+					const u1 = (s + 1) / 56;
+					const y0 = -1.3 + u0 * 2.6;
+					const y1 = -1.3 + u1 * 2.6;
+					for (let k = 0; k < count; k += 1) {
+						const ph0 = animTime * speed + u0 * Math.PI * (1.8 + braidStepCount * 0.25) + (k * Math.PI * 2) / count;
+						const ph1 = animTime * speed + u1 * Math.PI * (1.8 + braidStepCount * 0.25) + (k * Math.PI * 2) / count;
+						const rad = 0.72;
+						const p0 = project(Math.cos(ph0) * rad, y0, Math.sin(ph0) * rad, w, h, fov);
+						const p1 = project(Math.cos(ph1) * rad, y1, Math.sin(ph1) * rad, w, h, fov);
+						segments.push({
+							p0,
+							p1,
+							depth: (p0.depth + p1.depth) * 0.5,
+							color: colors[k],
+						});
+					}
+				}
+
+				segments.sort((a, b) => a.depth - b.depth);
+				ctx.lineCap = 'round';
+				segments.forEach((seg) => {
+					ctx.strokeStyle = seg.color;
+					ctx.lineWidth = Math.max(3, fov * 0.018);
+					ctx.beginPath();
+					ctx.moveTo(seg.p0.sx, seg.p0.sy);
+					ctx.lineTo(seg.p1.sx, seg.p1.sy);
+					ctx.stroke();
+				});
+
+				// Active Majorana orbs at top readout plane
+				const orbs = [];
+				for (let k = 0; k < count; k += 1) {
+					const ph = animTime * speed + Math.PI * (1.8 + braidStepCount * 0.25) + (k * Math.PI * 2) / count;
+					const p = project(Math.cos(ph) * 0.72, 1.3, Math.sin(ph) * 0.72, w, h, fov);
+					orbs.push({ p, color: colors[k], label: labels[k] });
+				}
+				orbs.sort((a, b) => a.p.depth - b.p.depth);
+				orbs.forEach((o) => {
+					drawOrb(o.p.sx, o.p.sy, o.p.scale * 0.17, '#ffffff', o.color);
+					ctx.fillStyle = '#ffffff';
+					ctx.font = `700 ${Math.round(Math.max(12, fov * 0.055))}px system-ui, sans-serif`;
+					ctx.fillText(o.label, o.p.sx + 10, o.p.sy - 8);
+				});
+			}
+
+			function frame(now) {
+				const dt = Math.min(0.05, (now - lastTs) / 1000);
+				lastTs = now;
+				if (!paused) {
+					animTime += dt;
+					if (!dragging) camYaw += dt * 0.22;
+					if (noiseTimer > 0) {
+						noiseTimer = Math.max(0, noiseTimer - dt);
+						if (noiseTimer === 0) updateStatusText();
+					}
+					if (braidBoost > 0) {
+						braidBoost = Math.max(0, braidBoost - dt * 1.4);
+					}
+				}
+				if (mode === 'bloch') updateStatusText();
+
+				const w = canvas.width;
+				const h = canvas.height;
+				const fov = Math.min(w, h) * 0.36;
+
+				// Deep quantum background gradient
+				const bg = ctx.createRadialGradient(w * 0.5, h * 0.45, 10, w * 0.5, h * 0.5, w * 0.75);
+				bg.addColorStop(0, '#0f1f3a');
+				bg.addColorStop(0.55, '#091122');
+				bg.addColorStop(1, '#040710');
+				ctx.fillStyle = bg;
+				ctx.fillRect(0, 0, w, h);
+
+				// Subtle reference horizon grid
+				ctx.strokeStyle = 'rgba(96, 165, 250, 0.09)';
+				ctx.lineWidth = 1;
+				for (let g = -2; g <= 2; g += 1) {
+					const a = project(g, -1.5, -2, w, h, fov);
+					const b = project(g, -1.5, 2, w, h, fov);
+					ctx.beginPath();
+					ctx.moveTo(a.sx, a.sy);
+					ctx.lineTo(b.sx, b.sy);
+					ctx.stroke();
+
+					const c = project(-2, -1.5, g, w, h, fov);
+					const d = project(2, -1.5, g, w, h, fov);
+					ctx.beginPath();
+					ctx.moveTo(c.sx, c.sy);
+					ctx.lineTo(d.sx, d.sy);
+					ctx.stroke();
+				}
+
+				if (mode === 'topological') renderTopological(w, h, fov);
+				else if (mode === 'bloch') renderBloch(w, h, fov);
+				else renderBraiding(w, h, fov);
+
+				requestAnimationFrame(frame);
+			}
+
+			setMode('topological');
+			requestAnimationFrame(frame);
+		});
+	})();
+</script>
+
+<style>
+	.vsl-m2-lab {
+		margin: 1.5rem 0;
+		padding: 18px 20px;
+		border-radius: 22px;
+		background: var(--vsl-surface);
+		border: 1px solid var(--vsl-hairline);
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+	}
+	.vsl-m2-head {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 12px;
+		flex-wrap: wrap;
+	}
+	.vsl-m2-badge {
+		display: inline-block;
+		font-size: 0.7rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.07em;
+		color: #60a5fa;
+		margin-bottom: 4px;
+	}
+	html[data-vtheme='flat-light'] .vsl-m2-badge {
+		color: #2563eb;
+	}
+	.vsl-m2-title {
+		margin: 0 !important;
+		font-size: 1.12rem !important;
+		font-weight: 750 !important;
+		color: var(--vsl-text) !important;
+	}
+	.vsl-m2-sub {
+		margin: 4px 0 0 !important;
+		font-size: 0.82rem;
+		color: var(--vsl-text-muted);
+	}
+	.vsl-m2-pill-btn {
+		border-radius: 999px;
+		border: 1px solid var(--vsl-hairline);
+		background: var(--vsl-surface-strong);
+		color: var(--vsl-text);
+		font-size: 0.76rem;
+		font-weight: 650;
+		padding: 6px 14px;
+		cursor: pointer;
+	}
+	.vsl-m2-tabs {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+	.vsl-m2-tab {
+		padding: 7px 14px;
+		border-radius: 999px;
+		border: 1px solid var(--vsl-hairline);
+		background: transparent;
+		color: var(--vsl-text-muted);
+		font-size: 0.8rem;
+		font-weight: 650;
+		cursor: pointer;
+		transition: background 0.16s ease, color 0.16s ease;
+	}
+	.vsl-m2-tab:hover {
+		background: var(--vsl-surface-hover);
+		color: var(--vsl-text);
+	}
+	.vsl-m2-tab.is-active {
+		background: var(--vsl-accent);
+		color: var(--vsl-accent-ink);
+		border-color: transparent;
+	}
+	.vsl-m2-canvas-wrap {
+		position: relative;
+		border-radius: 18px;
+		overflow: hidden;
+		border: 1px solid rgba(96, 165, 250, 0.28);
+		background: #040710;
+	}
+	.vsl-m2-canvas {
+		display: block;
+		width: 100%;
+		height: 360px;
+		cursor: grab;
+		touch-action: none;
+	}
+	.vsl-m2-canvas:active {
+		cursor: grabbing;
+	}
+	.vsl-m2-hud-pill {
+		position: absolute;
+		left: 12px;
+		top: 12px;
+		padding: 5px 12px;
+		border-radius: 999px;
+		background: rgba(10, 15, 28, 0.82);
+		border: 1px solid rgba(56, 189, 248, 0.35);
+		color: #e0f2fe;
+		font-family: var(--sl-font-mono);
+		font-size: 0.72rem;
+		font-weight: 600;
+		pointer-events: none;
+	}
+	.vsl-m2-controls {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.vsl-m2-btn-group {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+	.vsl-m2-btn-group[hidden] {
+		display: none !important;
+	}
+	.vsl-m2-act {
+		padding: 7px 14px;
+		border-radius: 999px;
+		border: 1px solid var(--vsl-hairline);
+		background: var(--vsl-surface-strong);
+		color: var(--vsl-text);
+		font-size: 0.78rem;
+		font-weight: 650;
+		cursor: pointer;
+		transition: background 0.16s ease, transform 0.14s ease;
+	}
+	.vsl-m2-act:hover {
+		background: var(--vsl-surface-hover);
+		transform: translateY(-1px);
+	}
+	.vsl-m2-act.is-primary {
+		background: #38bdf8;
+		color: #08101c;
+		border-color: transparent;
+	}
+	.vsl-m2-act.is-primary:hover {
+		background: #7dd3fc;
+	}
+	.vsl-m2-explain {
+		margin: 0 !important;
+		font-size: 0.84rem;
+		line-height: 1.55;
+		color: var(--vsl-text-muted);
+	}
+	.vsl-m2-specs {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		padding-top: 10px;
+		border-top: 1px solid var(--vsl-hairline);
+	}
+	.vsl-m2-specs span {
+		font-size: 0.73rem;
+		font-family: var(--sl-font-mono);
+		padding: 4px 10px;
+		border-radius: 999px;
+		background: var(--vsl-surface-strong);
+		color: var(--vsl-text-muted);
+	}
+	@media (max-width: 640px) {
+		.vsl-m2-canvas {
+			height: 290px;
+		}
+	}
+</style>
