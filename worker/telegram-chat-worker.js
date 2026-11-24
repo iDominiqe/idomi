@@ -120,20 +120,27 @@ async function callTelegram(env, method, payload) {
 		return { ok: false, description: 'Bot token missing' };
 	}
 	const url = `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/${method}`;
-	const response = await fetch(url, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: payload ? JSON.stringify(payload) : '{}',
-	});
-	const data = await response.json().catch(() => ({ ok: false, description: 'Invalid Telegram JSON' }));
-	if (!response.ok || !data?.ok) {
-		logEvent('error', 'telegram_api_error', {
-			method,
-			status: response.status,
-			description: data?.description || 'unknown',
+	try {
+		const response = await fetch(url, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: payload ? JSON.stringify(payload) : '{}',
+			signal: AbortSignal.timeout(7000),
 		});
+		const data = await response.json().catch(() => ({ ok: false, description: 'Invalid Telegram JSON' }));
+		if (!response.ok || !data?.ok) {
+			logEvent('error', 'telegram_api_error', {
+				method,
+				status: response.status,
+				description: data?.description || 'unknown',
+			});
+		}
+		return data;
+	} catch (err) {
+		const description = err instanceof Error ? err.message : 'Telegram request failed';
+		logEvent('error', 'telegram_fetch_exception', { method, description });
+		return { ok: false, description };
 	}
-	return data;
 }
 
 function formatVisitorMessageHtml(name, shortId, text, isQueued = false) {
@@ -173,36 +180,34 @@ async function handleStatus(env, origin) {
 	);
 }
 
-async function handleSetup(request, env, origin) {
+async function handleSetup(request, env, origin, url) {
 	const provided = request.headers.get('X-Setup-Secret') || '';
 	const authorized = await timingSafeEqual(provided, env.TELEGRAM_WEBHOOK_SECRET || '');
 	if (!authorized) {
 		return jsonResponse({ ok: false, error: 'Unauthorized' }, 401, origin);
 	}
 
+	let botInfo = await env.CHAT_KV.get('meta:bot', { type: 'json' });
 	const me = await callTelegram(env, 'getMe', {});
-	if (!me?.ok || !me.result) {
-		return jsonResponse({ ok: false, error: 'Telegram getMe failed', details: me?.description || null }, 502, origin);
+	if (me?.ok && me.result) {
+		botInfo = {
+			id: String(me.result.id),
+			username: me.result.username || '',
+			firstName: me.result.first_name || '',
+		};
+		await env.CHAT_KV.put('meta:bot', JSON.stringify(botInfo));
 	}
-
-	const botInfo = {
-		id: String(me.result.id),
-		username: me.result.username || '',
-		firstName: me.result.first_name || '',
-	};
-	await env.CHAT_KV.put('meta:bot', JSON.stringify(botInfo));
 
 	let ownerChatId = await env.CHAT_KV.get('owner:chat_id');
 	let autoBound = false;
 
-	if (!ownerChatId) {
-		// Remove active webhook momentarily without dropping updates so getUpdates can inspect recent /start chats
+	if (!ownerChatId && url?.searchParams.get('scan') === '1') {
 		await callTelegram(env, 'deleteWebhook', { drop_pending_updates: false });
 		const updates = await callTelegram(env, 'getUpdates', { limit: 25, allowed_updates: ['message'] });
 		if (updates?.ok && Array.isArray(updates.result)) {
 			for (let i = updates.result.length - 1; i >= 0; i -= 1) {
 				const msg = updates.result[i]?.message;
-				if (msg?.chat?.type === 'private' && String(msg.chat.id) !== botInfo.id) {
+				if (msg?.chat?.type === 'private' && (!botInfo || String(msg.chat.id) !== botInfo.id)) {
 					ownerChatId = String(msg.chat.id);
 					autoBound = true;
 					await env.CHAT_KV.put('owner:chat_id', ownerChatId);
@@ -224,7 +229,7 @@ async function handleSetup(request, env, origin) {
 	});
 
 	logEvent('info', 'setup_completed', {
-		botUsername: botInfo.username,
+		botUsername: botInfo?.username || null,
 		ownerBound: Boolean(ownerChatId),
 		autoBound,
 		webhookSet: Boolean(webhookRes?.ok),
@@ -232,11 +237,13 @@ async function handleSetup(request, env, origin) {
 
 	return jsonResponse(
 		{
-			ok: true,
+			ok: Boolean(webhookRes?.ok),
 			bot: botInfo,
+			botError: me?.ok ? undefined : me?.description || 'getMe unavailable',
 			ownerBound: Boolean(ownerChatId),
 			autoBound,
 			webhookSet: Boolean(webhookRes?.ok),
+			webhookError: webhookRes?.ok ? undefined : webhookRes?.description || 'setWebhook failed',
 		},
 		200,
 		origin
@@ -502,7 +509,7 @@ export default {
 				return await handleStatus(env, origin);
 			}
 			if (request.method === 'POST' && url.pathname === '/api/chat/setup') {
-				return await handleSetup(request, env, origin);
+				return await handleSetup(request, env, origin, url);
 			}
 			if (request.method === 'POST' && url.pathname === '/api/chat/send') {
 				return await handleSend(request, env, origin);
