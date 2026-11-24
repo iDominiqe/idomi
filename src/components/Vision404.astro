@@ -1,0 +1,141 @@
+---
+---
+
+<div class="vsl-404-wrap not-content">
+	<div class="vsl-doc-card vsl-404-card">
+		<div class="vsl-404-code">404</div>
+		<h1 id="vsl-404-title" class="vsl-404-title">Route not found in this spatial window</h1>
+		<p id="vsl-404-desc" class="vsl-404-desc">
+			The page you requested may have moved, or the URL has a typo. Jump back to the main hub or use <code>Ctrl+K</code> to search across all docs.
+		</p>
+
+		<div class="vsl-404-actions">
+			<a id="vsl-404-home" href="/" class="vsl-btn-white">← Back to Home</a>
+			<a id="vsl-404-projects" href="/projects/ecosystem/" class="vsl-btn-glass">Projects</a>
+			<a id="vsl-404-blog" href="/blog/" class="vsl-btn-glass">Blog</a>
+			<button type="button" id="vsl-404-search" class="vsl-btn-glass">Search (Ctrl+K)</button>
+		</div>
+
+		<div class="vsl-404-locales">
+			<a href="/">English (/)</a>
+			<span>·</span>
+			<a href="/ro/">Română (/ro/)</a>
+			<span>·</span>
+			<a href="/ru/">Русский (/ru/)</a>
+		</div>
+	</div>
+</div>
+
+<style>
+	.vsl-404-wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 440px;
+		padding: 20px 8px;
+	}
+	.vsl-404-card {
+		max-width: 580px;
+		width: 100%;
+		padding: 36px 32px;
+		text-align: center;
+		align-items: center;
+		gap: 14px;
+	}
+	.vsl-404-code {
+		font-family: var(--sl-font-mono);
+		font-size: clamp(3.2rem, 8vw, 4.8rem);
+		font-weight: 800;
+		line-height: 1;
+		letter-spacing: -0.04em;
+		background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 55%, #f472b6 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+	.vsl-404-title {
+		margin: 0;
+		font-size: 1.38rem;
+		font-weight: 700;
+		color: var(--vsl-text);
+	}
+	.vsl-404-desc {
+		margin: 0;
+		font-size: 0.92rem;
+		line-height: 1.6;
+		color: var(--vsl-text-muted);
+		max-width: 46ch;
+	}
+	.vsl-404-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 10px;
+		margin-top: 8px;
+	}
+	.vsl-404-locales {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-top: 10px;
+		font-size: 0.78rem;
+		color: var(--vsl-text-soft);
+	}
+	.vsl-404-locales a {
+		color: var(--vsl-text-muted);
+		text-decoration: none;
+	}
+	.vsl-404-locales a:hover {
+		color: var(--vsl-text);
+		text-decoration: underline;
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		const path = window.location.pathname || '/';
+		const isRo = path === '/ro' || path.startsWith('/ro/');
+		const isRu = path === '/ru' || path.startsWith('/ru/');
+		const lang = isRo ? 'ro' : isRu ? 'ru' : 'en';
+		const prefix = isRo ? '/ro' : isRu ? '/ru' : '';
+
+		const copy = {
+			ro: {
+				title: 'Pagina nu a fost găsită în această fereastră',
+				desc: 'Ruta solicitată a fost mutată sau conține o greșeală de scriere. Revino la pagina principală sau folosește Ctrl+K pentru căutare.',
+				home: '← Înapoi Acasă',
+				projects: 'Proiecte',
+				blog: 'Blog',
+				search: 'Căutare (Ctrl+K)',
+			},
+			ru: {
+				title: 'Страница не найдена в этом окне',
+				desc: 'Запрошенный адрес был перемещён или содержит опечатку. Вернитесь на главную или нажмите Ctrl+K для поиска по сайту.',
+				home: '← На главную',
+				projects: 'Проекты',
+				blog: 'Блог',
+				search: 'Поиск (Ctrl+K)',
+			},
+		}[lang];
+
+		if (copy) {
+			const t = document.getElementById('vsl-404-title');
+			const d = document.getElementById('vsl-404-desc');
+			const h = document.getElementById('vsl-404-home');
+			const p = document.getElementById('vsl-404-projects');
+			const b = document.getElementById('vsl-404-blog');
+			const s = document.getElementById('vsl-404-search');
+			if (t) t.textContent = copy.title;
+			if (d) d.textContent = copy.desc;
+			if (h) { h.textContent = copy.home; h.setAttribute('href', prefix + '/'); }
+			if (p) { p.textContent = copy.projects; p.setAttribute('href', prefix + '/projects/ecosystem/'); }
+			if (b) { b.textContent = copy.blog; b.setAttribute('href', prefix + '/blog/'); }
+			if (s) s.textContent = copy.search;
+		}
+
+		document.getElementById('vsl-404-search')?.addEventListener('click', () => {
+			const btn = document.querySelector('site-search button[data-open-modal]');
+			if (btn instanceof HTMLElement) btn.click();
+		});
+	})();
+</script>
