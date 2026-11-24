@@ -92,6 +92,7 @@ const langCode = "ro";
 				sendFailed: 'Failed to send message',
 				sentTg: 'Sent to Telegram',
 				savedQueue: 'Saved to Telegram queue',
+				botLabel: 'iDominiqe AI · Auto-FAQ',
 				localeTag: 'en-US',
 				windUnit: 'km/h',
 			},
@@ -118,6 +119,7 @@ const langCode = "ro";
 				sendFailed: 'Nu s-a putut trimite mesajul',
 				sentTg: 'Trimis în Telegram',
 				savedQueue: 'Salvat în coada Telegram',
+				botLabel: 'iDominiqe AI · Auto-FAQ',
 				localeTag: 'ro-RO',
 				windUnit: 'km/h',
 			},
@@ -144,6 +146,7 @@ const langCode = "ro";
 				sendFailed: 'Не удалось отправить сообщение',
 				sentTg: 'Отправлено в Telegram',
 				savedQueue: 'Сохранено в очередь Telegram',
+				botLabel: 'iDominiqe AI · Авто-FAQ',
 				localeTag: 'ru-RU',
 				windUnit: 'км/ч',
 			},
@@ -560,6 +563,8 @@ const langCode = "ro";
 				if (msg.role === 'visitor') {
 					const statusTxt = msg.pending ? L.sending : msg.queued ? L.queued : '✓ Telegram';
 					meta.textContent = `${timeStr ? timeStr + ' · ' : ''}${statusTxt}`;
+				} else if (msg.role === 'bot') {
+					meta.textContent = `${L.botLabel || 'iDominiqe AI · Auto-FAQ'}${timeStr ? ' · ' + timeStr : ''}`;
 				} else {
 					meta.textContent = `iDominiqe · Telegram${timeStr ? ' · ' + timeStr : ''}`;
 				}
@@ -679,6 +684,7 @@ const langCode = "ro";
 					body: JSON.stringify({
 						name,
 						text,
+						lang: langCode,
 						website,
 						sessionId: chatState.sessionId || undefined,
 						sessionToken: chatState.sessionToken || undefined,
