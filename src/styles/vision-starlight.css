@@ -1006,7 +1006,7 @@ site-search #starlight__search .pagefind-ui__result-excerpt {
 
 .vsl-mini-card {
 	position: relative;
-	height: 98px;
+	height: 86px;
 	border-radius: 16px;
 	overflow: hidden;
 	border: 1px solid rgba(255, 255, 255, 0.16);
@@ -1092,6 +1092,12 @@ site-search #starlight__search .pagefind-ui__result-excerpt {
 	display: inline-flex;
 	align-items: center;
 	gap: 5px;
+	flex-shrink: 0;
+}
+
+.vsl-weather-card .vsl-rail-title {
+	white-space: nowrap;
+	font-size: 0.88rem !important;
 }
 
 .vsl-w-chip-btn {
@@ -1104,6 +1110,8 @@ site-search #starlight__search .pagefind-ui__result-excerpt {
 	font-size: 0.69rem;
 	font-weight: 600;
 	text-decoration: none;
+	white-space: nowrap;
+	flex-shrink: 0;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -1248,11 +1256,11 @@ html[data-vtheme='flat-light'] .vsl-w-day {
 /* Hero Spotlight Banner */
 .vsl-hero {
 	position: relative;
-	min-height: 364px;
+	min-height: 318px;
 	border-radius: 26px;
 	overflow: hidden;
 	border: 1px solid rgba(255, 255, 255, 0.22);
-	padding: 22px 26px 24px;
+	padding: 20px 24px 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -1716,6 +1724,7 @@ html[data-vtheme='flat-light'] .vsl-chat-name {
 	color: var(--vsl-text-muted);
 	font-size: 0.72rem;
 	font-weight: 600;
+	white-space: nowrap;
 	cursor: pointer;
 	transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
 }
@@ -1731,7 +1740,7 @@ html[data-vtheme='flat-light'] .vsl-chat-chip {
 }
 
 .vsl-chat-messages {
-	height: 162px;
+	height: 146px;
 	overflow-y: auto;
 	padding: 10px 12px;
 	border-radius: 18px;

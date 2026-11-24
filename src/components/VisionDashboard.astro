@@ -5,7 +5,7 @@ const featuredRail = PROJECTS.slice(0, 3);
 const initialHero = PROJECTS[0];
 ---
 
-<div class="vsl-dash" id="vsl-dashboard">
+<div class="vsl-dash not-content" id="vsl-dashboard">
 	<!-- Left Bento Rail -->
 	<aside class="vsl-rail" aria-label="Featured builds and Chisinau weather">
 		<!-- Top Card: Featured Builds -->
@@ -67,7 +67,7 @@ const initialHero = PROJECTS[0];
 						<i style="background:#FBBC05;"></i>
 						<i style="background:#34A853;"></i>
 					</span>
-					<span>Погода · Кишинёв</span>
+					<span>Кишинёв</span>
 				</h2>
 				<div class="vsl-w-actions">
 					<button type="button" id="vsl-w-unit" class="vsl-w-chip-btn" title="Переключить °C / °F">°C</button>
@@ -298,7 +298,7 @@ const initialHero = PROJECTS[0];
 </div>
 
 <!-- Live Project Preview Modal -->
-<div id="vsl-preview-modal" class="vsl-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="vsl-modal-title">
+<div id="vsl-preview-modal" class="vsl-modal-backdrop not-content" role="dialog" aria-modal="true" aria-labelledby="vsl-modal-title">
 	<div class="vsl-modal-card">
 		<div class="vsl-modal-head">
 			<div>
@@ -597,7 +597,7 @@ const initialHero = PROJECTS[0];
 			}
 			if (wTempEl) wTempEl.textContent = fmtTemp(cur.temperature_2m);
 			if (wCondEl) wCondEl.textContent = meta.label;
-			if (wFeelsEl) wFeelsEl.textContent = `Ощущается как ${fmtTemp(cur.apparent_temperature)} · °${weatherUnit}`;
+			if (wFeelsEl) wFeelsEl.textContent = `Ощущается: ${fmtTemp(cur.apparent_temperature)}`;
 			if (wHumEl) wHumEl.textContent = `${Math.round(Number(cur.relative_humidity_2m))}%`;
 			if (wWindEl) wWindEl.textContent = `${Math.round(Number(cur.wind_speed_10m))} км/ч`;
 
