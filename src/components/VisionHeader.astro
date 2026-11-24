@@ -6,25 +6,32 @@ import { SOCIALS } from '../data/ecosystem';
 const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 const pathname = Astro.url.pathname;
 const isRo = pathname === '/ro' || pathname.startsWith('/ro/');
-const prefix = isRo ? '/ro' : '';
-const stripped = isRo ? pathname.replace(/^\/ro(?=\/|$)/, '') || '/' : pathname;
+const isRu = pathname === '/ru' || pathname.startsWith('/ru/');
+const lang = isRo ? 'ro' : isRu ? 'ru' : 'en';
+const prefix = isRo ? '/ro' : isRu ? '/ru' : '';
+const stripped = (isRo || isRu) ? pathname.replace(/^\/(ro|ru)(?=\/|$)/, '') || '/' : pathname;
 
 const enPath = stripped;
 const roPath = stripped === '/' ? '/ro/' : `/ro${stripped}`;
+const ruPath = stripped === '/' ? '/ru/' : `/ru${stripped}`;
 
-const navTabs = isRo
-	? [
-			{ label: 'Acasă', href: '/ro/', active: stripped === '/' },
-			{ label: 'Proiecte', href: '/ro/projects/ecosystem/', active: stripped.startsWith('/projects') },
-			{ label: 'Blog', href: '/ro/blog/', active: stripped.startsWith('/blog') },
-			{
-				label: 'Ghiduri',
-				href: '/ro/guides/getting-started/',
-				active: stripped.startsWith('/guides/getting-started') || stripped.startsWith('/reference'),
-			},
-			{ label: 'Teme', href: '/ro/guides/themes/', active: stripped.startsWith('/guides/themes') },
-	  ]
-	: [
+const copy = {
+	en: {
+		mainNav: 'Main sections',
+		language: 'Language',
+		ecoStatus: 'Ecosystem Status',
+		profileAria: 'iDominiqe profile & links',
+		liveNodes: '8 Live Nodes',
+		liveTel: 'Live telemetry',
+		edgeTel: 'Edge Telemetry',
+		subRepos: '8 Subdomain Repos',
+		ready: 'Ready',
+		customThemes: 'Customize Theme Studio',
+		presets: '5 Presets',
+		devChannels: 'Developer Channels',
+		ecoHubs: 'Ecosystem Hubs',
+		channels: 'Channels',
+		tabs: [
 			{ label: 'Home', href: '/', active: stripped === '/' },
 			{ label: 'Projects', href: '/projects/ecosystem/', active: stripped.startsWith('/projects') },
 			{ label: 'Blog', href: '/blog/', active: stripped.startsWith('/blog') },
@@ -34,7 +41,65 @@ const navTabs = isRo
 				active: stripped.startsWith('/guides/getting-started') || stripped.startsWith('/reference'),
 			},
 			{ label: 'Themes', href: '/guides/themes/', active: stripped.startsWith('/guides/themes') },
-	  ];
+		],
+	},
+	ro: {
+		mainNav: 'Secțiuni principale',
+		language: 'Limbă',
+		ecoStatus: 'Stare ecosistem',
+		profileAria: 'Profil și linkuri iDominiqe',
+		liveNodes: '8 Noduri Live',
+		liveTel: 'Telemetrie live',
+		edgeTel: 'Telemetrie Edge',
+		subRepos: '8 Repozitorii Subdomeniu',
+		ready: 'Pregătit',
+		customThemes: 'Personalizează Teme',
+		presets: '5 Preseturi',
+		devChannels: 'Canale dezvoltator',
+		ecoHubs: 'Huburi Ecosistem',
+		channels: 'Canale',
+		tabs: [
+			{ label: 'Acasă', href: '/ro/', active: stripped === '/' },
+			{ label: 'Proiecte', href: '/ro/projects/ecosystem/', active: stripped.startsWith('/projects') },
+			{ label: 'Blog', href: '/ro/blog/', active: stripped.startsWith('/blog') },
+			{
+				label: 'Ghiduri',
+				href: '/ro/guides/getting-started/',
+				active: stripped.startsWith('/guides/getting-started') || stripped.startsWith('/reference'),
+			},
+			{ label: 'Teme', href: '/ro/guides/themes/', active: stripped.startsWith('/guides/themes') },
+		],
+	},
+	ru: {
+		mainNav: 'Основные разделы',
+		language: 'Язык',
+		ecoStatus: 'Статус экосистемы',
+		profileAria: 'Профиль и ссылки iDominiqe',
+		liveNodes: '8 Живых Нод',
+		liveTel: 'Живая телеметрия',
+		edgeTel: 'Edge-телеметрия',
+		subRepos: '8 Репозиториев поддоменов',
+		ready: 'Готово',
+		customThemes: 'Настроить Студию Тем',
+		presets: '5 Пресетов',
+		devChannels: 'Каналы разработчика',
+		ecoHubs: 'Хабы экосистемы',
+		channels: 'Каналы',
+		tabs: [
+			{ label: 'Главная', href: '/ru/', active: stripped === '/' },
+			{ label: 'Проекты', href: '/ru/projects/ecosystem/', active: stripped.startsWith('/projects') },
+			{ label: 'Блог', href: '/ru/blog/', active: stripped.startsWith('/blog') },
+			{
+				label: 'Гайды',
+				href: '/ru/guides/getting-started/',
+				active: stripped.startsWith('/guides/getting-started') || stripped.startsWith('/reference'),
+			},
+			{ label: 'Темы', href: '/ru/guides/themes/', active: stripped.startsWith('/guides/themes') },
+		],
+	},
+}[lang];
+
+const navTabs = copy.tabs;
 ---
 
 <div class="vsl-header-row">
@@ -42,7 +107,7 @@ const navTabs = isRo
 		{shouldRenderSearch && <Search />}
 	</div>
 
-	<nav class="vsl-header-tabs" aria-label={isRo ? 'Secțiuni principale' : 'Main sections'}>
+	<nav class="vsl-header-tabs" aria-label={copy.mainNav}>
 		{navTabs.map((tab) => (
 			<a href={tab.href} class={`vsl-tab-link ${tab.active ? 'is-active' : ''}`}>
 				{tab.label}
@@ -51,17 +116,18 @@ const navTabs = isRo
 	</nav>
 
 	<div class="vsl-header-right">
-		<div class="vsl-lang-switch" role="group" aria-label={isRo ? 'Limbă' : 'Language'}>
-			<a href={enPath} class={`vsl-lang-btn ${!isRo ? 'is-active' : ''}`} hreflang="en">EN</a>
-			<a href={roPath} class={`vsl-lang-btn ${isRo ? 'is-active' : ''}`} hreflang="ro">RO</a>
+		<div class="vsl-lang-switch" role="group" aria-label={copy.language}>
+			<a href={enPath} class={`vsl-lang-btn ${lang === 'en' ? 'is-active' : ''}`} hreflang="en">EN</a>
+			<a href={roPath} class={`vsl-lang-btn ${lang === 'ro' ? 'is-active' : ''}`} hreflang="ro">RO</a>
+			<a href={ruPath} class={`vsl-lang-btn ${lang === 'ru' ? 'is-active' : ''}`} hreflang="ru">RU</a>
 		</div>
 
 		<button
 			type="button"
 			id="vsl-notif-btn"
 			class="vsl-bell-btn"
-			title={isRo ? 'Stare ecosistem' : 'Ecosystem Status'}
-			aria-label={isRo ? 'Stare ecosistem' : 'Ecosystem Status'}
+			title={copy.ecoStatus}
+			aria-label={copy.ecoStatus}
 			aria-expanded="false"
 		>
 			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -76,12 +142,12 @@ const navTabs = isRo
 			id="vsl-profile-btn"
 			class="vsl-profile-btn"
 			aria-expanded="false"
-			aria-label={isRo ? 'Profil și linkuri iDominiqe' : 'iDominiqe profile & links'}
+			aria-label={copy.profileAria}
 		>
 			<span class="vsl-avatar" aria-hidden="true">iD</span>
 			<span class="vsl-profile-meta">
 				<span class="vsl-profile-name">iDominiqe</span>
-				<span class="vsl-profile-sub">{isRo ? '8 Noduri Live' : '8 Live Nodes'}</span>
+				<span class="vsl-profile-sub">{copy.liveNodes}</span>
 			</span>
 			<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.65;">
 				<polyline points="6 9 12 15 18 9" />
@@ -89,10 +155,10 @@ const navTabs = isRo
 		</button>
 
 		<!-- Status / Updates Popover -->
-		<div id="vsl-notif-popover" class="vsl-popover" role="region" aria-label={isRo ? 'Telemetrie live' : 'Live telemetry'}>
-			<div class="vsl-popover-title">{isRo ? 'Telemetrie Edge' : 'Edge Telemetry'}</div>
+		<div id="vsl-notif-popover" class="vsl-popover" role="region" aria-label={copy.liveTel}>
+			<div class="vsl-popover-title">{copy.edgeTel}</div>
 			<a href={`${prefix}/projects/ecosystem/`} class="vsl-popover-item">
-				<span>{isRo ? '8 Repozitorii Subdomeniu' : '8 Subdomain Repos'}</span>
+				<span>{copy.subRepos}</span>
 				<span class="vsl-popover-muted" style="color:#22c55e;">● Online</span>
 			</a>
 			<a href={`${prefix}/blog/dns-ns-domains/`} class="vsl-popover-item">
@@ -101,17 +167,17 @@ const navTabs = isRo
 			</a>
 			<a href={`${prefix}/reference/architecture/`} class="vsl-popover-item">
 				<span>Starlight + Pagefind</span>
-				<span class="vsl-popover-muted">{isRo ? 'Pregătit' : 'Ready'}</span>
+				<span class="vsl-popover-muted">{copy.ready}</span>
 			</a>
 			<button type="button" id="vsl-popover-open-themes" class="vsl-popover-item">
-				<span>{isRo ? 'Personalizează Teme' : 'Customize Theme Studio'}</span>
-				<span class="vsl-popover-muted">{isRo ? '5 Preseturi' : '5 Presets'}</span>
+				<span>{copy.customThemes}</span>
+				<span class="vsl-popover-muted">{copy.presets}</span>
 			</button>
 		</div>
 
 		<!-- Profile & Social Links Popover -->
-		<div id="vsl-profile-popover" class="vsl-popover" role="region" aria-label={isRo ? 'Canale dezvoltator' : 'Developer Channels'}>
-			<div class="vsl-popover-title">{isRo ? 'Huburi Ecosistem' : 'Ecosystem Hubs'}</div>
+		<div id="vsl-profile-popover" class="vsl-popover" role="region" aria-label={copy.devChannels}>
+			<div class="vsl-popover-title">{copy.ecoHubs}</div>
 			<a href="https://portfolio.idominiqe.com/" target="_blank" rel="noopener noreferrer" class="vsl-popover-item">
 				<span>VisionOS Portfolio</span>
 				<span class="vsl-popover-muted">portfolio.idominiqe.com ↗</span>
@@ -120,7 +186,7 @@ const navTabs = isRo
 				<span>Liquid Glass v-2 Archive</span>
 				<span class="vsl-popover-muted">v-2.idominiqe.com ↗</span>
 			</a>
-			<div class="vsl-popover-title" style="margin-top:6px;">{isRo ? 'Canale' : 'Channels'}</div>
+			<div class="vsl-popover-title" style="margin-top:6px;">{copy.channels}</div>
 			{SOCIALS.map((s) => (
 				<a href={s.href} target="_blank" rel="noopener noreferrer" class="vsl-popover-item">
 					<span>{s.label}</span>

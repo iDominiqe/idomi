@@ -19,6 +19,10 @@ export default defineConfig({
 					label: 'Română',
 					lang: 'ro',
 				},
+				ru: {
+					label: 'Русский',
+					lang: 'ru',
+				},
 			},
 			customCss: ['./src/styles/vision-starlight.css'],
 			components: {
@@ -75,25 +79,25 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Projects',
-					translations: { ro: 'Proiecte' },
+					translations: { ro: 'Proiecte', ru: 'Проекты' },
 					items: [{ autogenerate: { directory: 'projects' } }],
 				},
 				{
 					label: 'Engineering Blog',
-					translations: { ro: 'Blog Tehnic' },
+					translations: { ro: 'Blog Tehnic', ru: 'Инженерный Блог' },
 					items: [{ autogenerate: { directory: 'blog' } }],
 				},
 				{
 					label: 'Guides & Themes',
-					translations: { ro: 'Ghiduri & Teme' },
+					translations: { ro: 'Ghiduri & Teme', ru: 'Гайды и Темы' },
 					items: [
-						{ label: 'Getting Started', translations: { ro: 'Primii Pași' }, slug: 'guides/getting-started' },
-						{ label: 'Theme Studio & Presets', translations: { ro: 'Teme & Preseturi' }, slug: 'guides/themes' },
+						{ label: 'Getting Started', translations: { ro: 'Primii Pași', ru: 'Начало работы' }, slug: 'guides/getting-started' },
+						{ label: 'Theme Studio & Presets', translations: { ro: 'Teme & Preseturi', ru: 'Студия Тем' }, slug: 'guides/themes' },
 					],
 				},
 				{
 					label: 'Reference',
-					translations: { ro: 'Referință' },
+					translations: { ro: 'Referință', ru: 'Справочник' },
 					items: [{ autogenerate: { directory: 'reference' } }],
 				},
 			],

@@ -6,8 +6,40 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 const pathname = Astro.url.pathname;
 const cleanDisplayPath = pathname === '/' ? 'idominiqe.com/' : `idominiqe.com${pathname}`;
 const isRo = pathname === '/ro' || pathname.startsWith('/ro/');
-const prefix = isRo ? '/ro' : '';
-const stripped = isRo ? pathname.replace(/^\/ro(?=\/|$)/, '') || '/' : pathname;
+const isRu = pathname === '/ru' || pathname.startsWith('/ru/');
+const lang = isRo ? 'ro' : isRu ? 'ru' : 'en';
+const prefix = isRo ? '/ro' : isRu ? '/ru' : '';
+const stripped = (isRo || isRu) ? pathname.replace(/^\/(ro|ru)(?=\/|$)/, '') || '/' : pathname;
+
+const dockCopy = {
+	en: {
+		nav: 'Spatial Navigation Dock',
+		home: 'Home',
+		projects: 'Projects',
+		blog: 'Blog & Security',
+		arch: 'Architecture',
+		themes: 'Theme Studio',
+		openThemesGuide: 'Open Interactive Themes Guide →',
+	},
+	ro: {
+		nav: 'Navigare spațială',
+		home: 'Acasă',
+		projects: 'Proiecte',
+		blog: 'Blog & Securitate',
+		arch: 'Arhitectură',
+		themes: 'Studio Teme',
+		openThemesGuide: 'Deschide Ghidul de Teme →',
+	},
+	ru: {
+		nav: 'Пространственная навигация',
+		home: 'Главная',
+		projects: 'Проекты',
+		blog: 'Блог и Безопасность',
+		arch: 'Архитектура',
+		themes: 'Студия Тем',
+		openThemesGuide: 'Открыть гайд по темам →',
+	},
+}[lang];
 
 const isHome = stripped === '/';
 const isProjects = stripped.startsWith('/projects');
@@ -148,14 +180,14 @@ const isThemes = stripped.startsWith('/guides/themes');
 	</nav>
 
 	<div class="vsl-stage">
-		<aside class="vsl-dock" aria-label={isRo ? 'Navigare spațială' : 'Spatial Navigation Dock'}>
-			<a href={`${prefix}/`} class={`vsl-dock-btn ${isHome ? 'is-active' : ''}`} data-tip={isRo ? 'Acasă' : 'Home'} aria-label={isRo ? 'Acasă' : 'Home'}>
+		<aside class="vsl-dock" aria-label={dockCopy.nav}>
+			<a href={`${prefix}/`} class={`vsl-dock-btn ${isHome ? 'is-active' : ''}`} data-tip={dockCopy.home} aria-label={dockCopy.home}>
 				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<path d="M3 10.5 12 3l9 7.5" />
 					<path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10" />
 				</svg>
 			</a>
-			<a href={`${prefix}/projects/ecosystem/`} class={`vsl-dock-btn ${isProjects ? 'is-active' : ''}`} data-tip={isRo ? 'Proiecte' : 'Projects'} aria-label={isRo ? 'Proiecte' : 'Projects'}>
+			<a href={`${prefix}/projects/ecosystem/`} class={`vsl-dock-btn ${isProjects ? 'is-active' : ''}`} data-tip={dockCopy.projects} aria-label={dockCopy.projects}>
 				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<rect x="3" y="3" width="8" height="8" rx="2" />
 					<rect x="13" y="3" width="8" height="8" rx="2" />
@@ -163,13 +195,13 @@ const isThemes = stripped.startsWith('/guides/themes');
 					<rect x="13" y="13" width="8" height="8" rx="2" />
 				</svg>
 			</a>
-			<a href={`${prefix}/blog/`} class={`vsl-dock-btn ${isBlog ? 'is-active' : ''}`} data-tip={isRo ? 'Blog & Securitate' : 'Blog & Security'} aria-label="Blog">
+			<a href={`${prefix}/blog/`} class={`vsl-dock-btn ${isBlog ? 'is-active' : ''}`} data-tip={dockCopy.blog} aria-label="Blog">
 				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
 					<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
 				</svg>
 			</a>
-			<a href={`${prefix}/reference/architecture/`} class={`vsl-dock-btn ${isArchitecture ? 'is-active' : ''}`} data-tip={isRo ? 'Arhitectură' : 'Architecture'} aria-label={isRo ? 'Arhitectură' : 'Architecture'}>
+			<a href={`${prefix}/reference/architecture/`} class={`vsl-dock-btn ${isArchitecture ? 'is-active' : ''}`} data-tip={dockCopy.arch} aria-label={dockCopy.arch}>
 				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<polygon points="12 2 2 7 12 12 22 7 12 2" />
 					<polyline points="2 17 12 22 22 17" />
@@ -180,8 +212,8 @@ const isThemes = stripped.startsWith('/guides/themes');
 				type="button"
 				id="vsl-dock-themes"
 				class={`vsl-dock-btn ${isThemes ? 'is-active' : ''}`}
-				data-tip={isRo ? 'Studio Teme' : 'Theme Studio'}
-				aria-label={isRo ? 'Studio Teme' : 'Theme Studio'}
+				data-tip={dockCopy.themes}
+				aria-label={dockCopy.themes}
 			>
 				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<circle cx="12" cy="12" r="3" />
@@ -289,7 +321,7 @@ const isThemes = stripped.startsWith('/guides/themes');
 		href={`${prefix}/guides/themes/`}
 		style="margin-top:auto;display:flex;align-items:center;justify-content:center;height:38px;border-radius:12px;background:var(--vsl-surface-strong);color:inherit;text-decoration:none;font-size:0.8rem;font-weight:650;"
 	>
-		{isRo ? 'Deschide Ghidul de Teme →' : 'Open Interactive Themes Guide →'}
+		{dockCopy.openThemesGuide}
 	</a>
 </aside>
 

@@ -2,7 +2,7 @@
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 
 const p = Astro.url.pathname;
-const isSplashHome = p === '/' || p === '/ro' || p === '/ro/';
+const isSplashHome = p === '/' || p === '/ro' || p === '/ro/' || p === '/ru' || p === '/ru/';
 ---
 
 {!isSplashHome && <Default />}

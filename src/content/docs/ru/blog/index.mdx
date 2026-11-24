@@ -1,0 +1,33 @@
+---
+title: Инженерный Блог и Заметки по Безопасности
+description: Технические разборы по DNS, маршрутизации NS, заголовкам безопасности, защите персональных данных и архитектуре Cloudflare Edge.
+sidebar:
+  order: 0
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Технические заметки об **архитектуре доменов, криптографическом DNS, современных HTTP-заголовках безопасности, приватности и кешировании Cloudflare Edge**, на которых работает `idominiqe.com`.
+
+<CardGrid>
+	<LinkCard
+		title="DNS, NS-записи и маршрутизация поддоменов"
+		description="A, AAAA, CNAME flattening, авторитативные серверы имён, DNSSEC и изоляция поддоменов между репозиториями GitHub Pages."
+		href="/ru/blog/dns-ns-domains/"
+	/>
+	<LinkCard
+		title="Веб-кибербезопасность и CSP-защита"
+		description="Эшелонированная защита с Content-Security-Policy, HSTS preload, Subresource Integrity и правилами zero-trust WAF."
+		href="/ru/blog/cybersecurity-defense/"
+	/>
+	<LinkCard
+		title="Приватность и защита персональных данных"
+		description="Паттерны фронтенда без телеметрии, очистка EXIF-метаданных, локальное хранение настроек и разграничение токенов."
+		href="/ru/blog/privacy-data-protection/"
+	/>
+	<LinkCard
+		title="Cloudflare Edge и доставка статики"
+		description="Терминация TLS 1.3 на Anycast, сценарии сброса кеша, маршрутизация HTTP/3 и независимый деплой репозиториев."
+		href="/ru/blog/cloudflare-edge-architecture/"
+	/>
+</CardGrid>
