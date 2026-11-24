@@ -2,7 +2,13 @@
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 
 const p = Astro.url.pathname;
-const isSplashHome = p === '/' || p === '/ro' || p === '/ro/' || p === '/ru' || p === '/ru/';
+const stripped = p.replace(/^\/(ro|ru)(?=\/|$)/, '') || '/';
+const isSplashHome =
+	stripped === '/' ||
+	stripped === '/about' ||
+	stripped === '/about/' ||
+	stripped === '/calculator' ||
+	stripped === '/calculator/';
 ---
 
 {!isSplashHome && <Default />}

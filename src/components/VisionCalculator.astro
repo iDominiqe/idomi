@@ -1,0 +1,1074 @@
+---
+const pathname = Astro.url.pathname;
+const isRo = pathname === '/ro' || pathname.startsWith('/ro/');
+const isRu = pathname === '/ru' || pathname.startsWith('/ru/');
+const lang = isRo ? 'ro' : isRu ? 'ru' : 'en';
+const prefix = isRo ? '/ro' : isRu ? '/ru' : '';
+
+const copy = {
+	en: {
+		eyebrow: 'Fair Indie Estimator · Direct to Telegram',
+		title: 'Project & Hardware Cost Calculator',
+		subtitle:
+			'Configure a website, Android/Windows app, Apple R&D inquiry, or custom Arduino / ESP32 / STM32 device. Transparent indie pricing with no agency markups.',
+		step1: '1. Select Direction',
+		step2: '2. Optional Modules',
+		step3: '3. Scale & Partnership',
+		partnerLabel: '🤝 Long-term partnership / interesting co-build (-15%)',
+		estimateTitle: 'Estimated Indie Budget',
+		timelineLabel: 'Estimated timeline',
+		daysWord: 'days',
+		fairNote:
+			'Modest hobby-freelance pricing focused on real utility, workspace growth, and happy long-term partners.',
+		appleWarn:
+			'Apple (iOS/macOS) builds are currently in R&D because Apple Developer requires a paid annual license — select options below and send an inquiry to discuss.',
+		hwWarn:
+			'Custom hardware estimates cover engineering, firmware & wiring; physical components/PCBs depend on BOM requirements.',
+		contactPlaceholder: 'Your name or @telegram / phone',
+		notePlaceholder: 'Briefly describe what you need (features, sensors, idea)...',
+		submitBtn: 'Send Estimate to Telegram',
+		sendingBtn: 'Sending...',
+		sentOk: 'Estimate sent straight to Telegram! Continue discussing anytime in the live chat on Home.',
+		sentQueue: 'Saved to Telegram queue! iDominiqe will reply soon.',
+		sendErr: 'Could not send right now — please message @idominiqe on Telegram.',
+		aboutLink: 'Read Bio & Capabilities →',
+		homeChatLink: 'Open Live Chat →',
+		types: [
+			{
+				id: 'web',
+				title: 'Website / Landing',
+				desc: 'Fast responsive site or Astro portal',
+				badge: 'Available',
+				tone: 'ok',
+				min: 70,
+				max: 150,
+				daysMin: 3,
+				daysMax: 7,
+			},
+			{
+				id: 'webgl',
+				title: '3D / WebGL Experience',
+				desc: 'Three.js scene, shaders, spatial UI',
+				badge: 'Available',
+				tone: 'ok',
+				min: 160,
+				max: 300,
+				daysMin: 7,
+				daysMax: 14,
+			},
+			{
+				id: 'android',
+				title: 'Android App',
+				desc: 'APK utility, dashboard, IoT control',
+				badge: 'Available',
+				tone: 'ok',
+				min: 140,
+				max: 270,
+				daysMin: 7,
+				daysMax: 18,
+			},
+			{
+				id: 'windows',
+				title: 'Windows Desktop App',
+				desc: 'Utility, local tool, hardware UI',
+				badge: 'Available',
+				tone: 'ok',
+				min: 130,
+				max: 250,
+				daysMin: 6,
+				daysMax: 14,
+			},
+			{
+				id: 'apple',
+				title: 'Apple App (iOS / macOS)',
+				desc: 'Requires paid Apple Dev license',
+				badge: 'In R&D',
+				tone: 'warn',
+				min: 190,
+				max: 340,
+				daysMin: 14,
+				daysMax: 28,
+			},
+			{
+				id: 'hardware',
+				title: 'Arduino / ESP32 / STM32',
+				desc: 'Custom device, firmware & sensors',
+				badge: 'Custom R&D',
+				tone: 'tech',
+				min: 150,
+				max: 320,
+				daysMin: 10,
+				daysMax: 25,
+			},
+		],
+		addons: [
+			{ id: 'i18n', title: 'Multilingual (EN / RO / RU)', min: 25, max: 45, days: 2 },
+			{ id: 'tg', title: 'Telegram Bot & Live Notifications', min: 30, max: 55, days: 2 },
+			{ id: 'dns', title: 'Domain, Cloudflare DNS & SSL', min: 20, max: 35, days: 1 },
+			{ id: 'motion', title: 'Custom 3D / Glass Motion UI', min: 40, max: 75, days: 3 },
+			{ id: 'telemetry', title: 'Sensors / API / Serial Telemetry', min: 45, max: 85, days: 4 },
+		],
+		scales: [
+			{ id: 'mvp', label: 'MVP / Simple', mult: 0.85 },
+			{ id: 'std', label: 'Standard', mult: 1.0 },
+			{ id: 'adv', label: 'Complex R&D', mult: 1.3 },
+		],
+	},
+	ro: {
+		eyebrow: 'Estimator Onest · Direct în Telegram',
+		title: 'Calculator Proiecte & Hardware',
+		subtitle:
+			'Configurează un site web, o aplicație Android / Windows, un prototip Apple sau un dispozitiv pe Arduino / ESP32 / STM32. Prețuri corecte, fără adaosuri de agenție.',
+		step1: '1. Alege Direcția',
+		step2: '2. Module Opționale',
+		step3: '3. Complexitate & Parteneriat',
+		partnerLabel: '🤝 Parteneriat pe termen lung / proiect comun (-15%)',
+		estimateTitle: 'Buget Estimativ Corect',
+		timelineLabel: 'Termen estimat',
+		daysWord: 'zile',
+		fairNote:
+			'Tarife accesibile de hobby-freelance: pun accent pe calitate, echiparea atelierului și clienți mulțumiți.',
+		appleWarn:
+			'Aplicațiile Apple (iOS/macOS) sunt în dezvoltare deoarece contul Apple Developer necesită licență anuală plătită — poți trimite totuși o cerere de discuție.',
+		hwWarn:
+			'Estimarea pentru dispozitive Arduino / ESP32 / STM32 acoperă ingineria și firmware-ul; componentele fizice se calculează separat.',
+		contactPlaceholder: 'Numele tău sau @telegram / telefon',
+		notePlaceholder: 'Descrie pe scurt ideea, funcțiile sau senzorii doriți...',
+		submitBtn: 'Trimite Calculul în Telegram',
+		sendingBtn: 'Se trimite...',
+		sentOk: 'Calculul a fost trimis în Telegram! Poți continua discuția și în chatul de pe pagina principală.',
+		sentQueue: 'Salvat în coada Telegram! Vei primi răspuns în curând.',
+		sendErr: 'Nu s-a putut trimite — scrie direct pe @idominiqe în Telegram.',
+		aboutLink: 'Despre mine & Capabilități →',
+		homeChatLink: 'Deschide Chat Live →',
+		types: [
+			{
+				id: 'web',
+				title: 'Site Web / Landing',
+				desc: 'Site rapid, modern sau portal Astro',
+				badge: 'Disponibil',
+				tone: 'ok',
+				min: 70,
+				max: 150,
+				daysMin: 3,
+				daysMax: 7,
+			},
+			{
+				id: 'webgl',
+				title: 'Site 3D / WebGL',
+				desc: 'Scene Three.js, shadere, UI spațial',
+				badge: 'Disponibil',
+				tone: 'ok',
+				min: 160,
+				max: 300,
+				daysMin: 7,
+				daysMax: 14,
+			},
+			{
+				id: 'android',
+				title: 'Aplicație Android',
+				desc: 'Utilitar APK, panou IoT, client mobil',
+				badge: 'Disponibil',
+				tone: 'ok',
+				min: 140,
+				max: 270,
+				daysMin: 7,
+				daysMax: 18,
+			},
+			{
+				id: 'windows',
+				title: 'Program Windows Desktop',
+				desc: 'Utilitar desktop sau interfață hardware',
+				badge: 'Disponibil',
+				tone: 'ok',
+				min: 130,
+				max: 250,
+				daysMin: 6,
+				daysMax: 14,
+			},
+			{
+				id: 'apple',
+				title: 'Aplicație Apple (iOS / macOS)',
+				desc: 'Necesită licență Apple Developer plătită',
+				badge: 'În R&D',
+				tone: 'warn',
+				min: 190,
+				max: 340,
+				daysMin: 14,
+				daysMax: 28,
+			},
+			{
+				id: 'hardware',
+				title: 'Arduino / ESP32 / STM32',
+				desc: 'Dispozitiv la comandă, firmware, senzori',
+				badge: 'La Comandă R&D',
+				tone: 'tech',
+				min: 150,
+				max: 320,
+				daysMin: 10,
+				daysMax: 25,
+			},
+		],
+		addons: [
+			{ id: 'i18n', title: 'Multilingv (EN / RO / RU)', min: 25, max: 45, days: 2 },
+			{ id: 'tg', title: 'Bot Telegram & Notificări Live', min: 30, max: 55, days: 2 },
+			{ id: 'dns', title: 'Domeniu, Cloudflare DNS & SSL', min: 20, max: 35, days: 1 },
+			{ id: 'motion', title: 'Animații 3D / Glass Motion UI', min: 40, max: 75, days: 3 },
+			{ id: 'telemetry', title: 'Senzori / API / Telemetrie Serială', min: 45, max: 85, days: 4 },
+		],
+		scales: [
+			{ id: 'mvp', label: 'MVP / Simplu', mult: 0.85 },
+			{ id: 'std', label: 'Standard', mult: 1.0 },
+			{ id: 'adv', label: 'R&D Complex', mult: 1.3 },
+		],
+	},
+	ru: {
+		eyebrow: 'Честный расчёт · Отправка сразу в Telegram',
+		title: 'Калькулятор проектов и устройств',
+		subtitle:
+			'Соберите конфигурацию сайта, приложения для Android или Windows, R&D-заявки под Apple или кастомного устройства на Arduino / ESP32 / STM32. Прозрачные цены без накруток.',
+		step1: '1. Выберите направление',
+		step2: '2. Дополнительные модули',
+		step3: '3. Масштаб и партнёрство',
+		partnerLabel: '🤝 Долгосрочное партнёрство / совместный проект (-15%)',
+		estimateTitle: 'Ориентировочный бюджет',
+		timelineLabel: 'Примерный срок',
+		daysWord: 'дн.',
+		fairNote:
+			'Беру немного: для меня это любимое дело и способ развивать окружение, находить партнёров и довольных клиентов без развода на деньги.',
+		appleWarn:
+			'Направление Apple (iOS/macOS) сейчас в разработке, так как аккаунт разработчика там платный — но вы можете отправить заявку для обсуждения.',
+		hwWarn:
+			'Расчёт для Arduino / ESP32 / STM32 покрывает разработку схемы, прошивки и логики; стоимость самих деталей и датчиков зависит от ТЗ.',
+		contactPlaceholder: 'Ваше имя или @telegram / телефон',
+		notePlaceholder: 'Коротко опишите задачу, нужные функции или датчики...',
+		submitBtn: 'Отправить расчёт в Telegram',
+		sendingBtn: 'Отправка...',
+		sentOk: 'Расчёт отправлен в Telegram! Продолжить общение можно прямо в чате на Главной.',
+		sentQueue: 'Сохранено в очередь Telegram! Скоро отвечу.',
+		sendErr: 'Не удалось отправить — напишите напрямую @idominiqe в Telegram.',
+		aboutLink: 'Обо мне и возможностях →',
+		homeChatLink: 'Перейти в чат →',
+		types: [
+			{
+				id: 'web',
+				title: 'Сайт / Лендинг',
+				desc: 'Быстрый адаптивный сайт или хаб на Astro',
+				badge: 'Доступно',
+				tone: 'ok',
+				min: 70,
+				max: 150,
+				daysMin: 3,
+				daysMax: 7,
+			},
+			{
+				id: 'webgl',
+				title: '3D / WebGL Сайт',
+				desc: 'Three.js сцена, шейдеры, пространственный UI',
+				badge: 'Доступно',
+				tone: 'ok',
+				min: 160,
+				max: 300,
+				daysMin: 7,
+				daysMax: 14,
+			},
+			{
+				id: 'android',
+				title: 'Приложение для Android',
+				desc: 'APK-утилита, клиент, пульт для устройств',
+				badge: 'Доступно',
+				tone: 'ok',
+				min: 140,
+				max: 270,
+				daysMin: 7,
+				daysMax: 18,
+			},
+			{
+				id: 'windows',
+				title: 'Программа для Windows',
+				desc: 'Десктопная утилита или софт для железа',
+				badge: 'Доступно',
+				tone: 'ok',
+				min: 130,
+				max: 250,
+				daysMin: 6,
+				daysMax: 14,
+			},
+			{
+				id: 'apple',
+				title: 'Для Apple (iOS / macOS)',
+				desc: 'В разработке (платная лицензия Apple)',
+				badge: 'В разработке',
+				tone: 'warn',
+				min: 190,
+				max: 340,
+				daysMin: 14,
+				daysMax: 28,
+			},
+			{
+				id: 'hardware',
+				title: 'Arduino / ESP32 / STM32',
+				desc: 'Устройство под заказ, прошивка и датчики',
+				badge: 'Под заказ · R&D',
+				tone: 'tech',
+				min: 150,
+				max: 320,
+				daysMin: 10,
+				daysMax: 25,
+			},
+		],
+		addons: [
+			{ id: 'i18n', title: 'Мультиязычность (EN / RO / RU)', min: 25, max: 45, days: 2 },
+			{ id: 'tg', title: 'Telegram-бот и уведомления', min: 30, max: 55, days: 2 },
+			{ id: 'dns', title: 'Домен, Cloudflare DNS и SSL', min: 20, max: 35, days: 1 },
+			{ id: 'motion', title: 'Кастомный 3D / Glass Motion UI', min: 40, max: 75, days: 3 },
+			{ id: 'telemetry', title: 'Датчики / API / Телеметрия', min: 45, max: 85, days: 4 },
+		],
+		scales: [
+			{ id: 'mvp', label: 'MVP / Базовый', mult: 0.85 },
+			{ id: 'std', label: 'Стандарт', mult: 1.0 },
+			{ id: 'adv', label: 'Сложный R&D', mult: 1.3 },
+		],
+	},
+}[lang];
+---
+
+<div class="vsl-calc-page not-content" id="vsl-calculator">
+	<header class="vsl-doc-card vsl-calc-hero" data-tile="1">
+		<div class="vsl-calc-eyebrow">{copy.eyebrow}</div>
+		<h1 class="vsl-calc-h1">{copy.title}</h1>
+		<p class="vsl-calc-sub">{copy.subtitle}</p>
+	</header>
+
+	<div class="vsl-calc-grid">
+		<div class="vsl-calc-controls">
+			<section class="vsl-doc-card vsl-calc-block" data-tile="2">
+				<h2 class="vsl-calc-h2">{copy.step1}</h2>
+				<div class="vsl-calc-types" role="radiogroup" aria-label={copy.step1}>
+					{copy.types.map((t, idx) => (
+						<button
+							type="button"
+							role="radio"
+							aria-checked={idx === 0 ? 'true' : 'false'}
+							class={`vsl-calc-type-card ${idx === 0 ? 'is-selected' : ''}`}
+							data-calc-type={t.id}
+							data-title={t.title}
+							data-min={t.min}
+							data-max={t.max}
+							data-days-min={t.daysMin}
+							data-days-max={t.daysMax}
+						>
+							<span class="vsl-calc-type-top">
+								<strong>{t.title}</strong>
+								<span class={`vsl-calc-badge is-${t.tone}`}>{t.badge}</span>
+							</span>
+							<span class="vsl-calc-type-desc">{t.desc}</span>
+						</button>
+					))}
+				</div>
+			</section>
+
+			<section class="vsl-doc-card vsl-calc-block" data-tile="3">
+				<h2 class="vsl-calc-h2">{copy.step2}</h2>
+				<div class="vsl-calc-addons">
+					{copy.addons.map((a) => (
+						<label class="vsl-calc-addon">
+							<input
+								type="checkbox"
+								data-calc-addon={a.id}
+								data-title={a.title}
+								data-add-min={a.min}
+								data-add-max={a.max}
+								data-add-days={a.days}
+							/>
+							<span class="vsl-calc-addon-title">{a.title}</span>
+							<span class="vsl-calc-addon-price" data-base-min={a.min} data-base-max={a.max}>
+								+€{a.min}–€{a.max}
+							</span>
+						</label>
+					))}
+				</div>
+			</section>
+
+			<section class="vsl-doc-card vsl-calc-block" data-tile="4">
+				<h2 class="vsl-calc-h2">{copy.step3}</h2>
+				<div class="vsl-calc-scales" role="group" aria-label={copy.step3}>
+					{copy.scales.map((s) => (
+						<button
+							type="button"
+							class={`vsl-calc-scale-btn ${s.id === 'std' ? 'is-selected' : ''}`}
+							data-calc-scale={s.id}
+							data-mult={s.mult}
+						>
+							{s.label}
+						</button>
+					))}
+				</div>
+
+				<label class="vsl-calc-partner">
+					<input type="checkbox" id="vsl-calc-partner" />
+					<span>{copy.partnerLabel}</span>
+				</label>
+			</section>
+		</div>
+
+		<aside class="vsl-doc-card vsl-calc-summary-card" data-tile="5">
+			<div class="vsl-calc-sum-head">
+				<span class="vsl-calc-sum-label">{copy.estimateTitle}</span>
+				<div class="vsl-calc-curr" role="group" aria-label="Currency">
+					<button type="button" class="vsl-curr-btn is-active" data-curr="EUR">EUR</button>
+					<button type="button" class="vsl-curr-btn" data-curr="USD">USD</button>
+					<button type="button" class="vsl-curr-btn" data-curr="MDL">MDL</button>
+				</div>
+			</div>
+
+			<div class="vsl-calc-price" id="vsl-calc-price">€70 – €150</div>
+			<div class="vsl-calc-days">
+				<span>{copy.timelineLabel}:</span>
+				<strong id="vsl-calc-days">3–7 {copy.daysWord}</strong>
+			</div>
+
+			<div class="vsl-calc-tags" id="vsl-calc-summary"></div>
+
+			<div class="vsl-calc-callout is-warn" id="vsl-calc-apple-note" hidden>
+				{copy.appleWarn}
+			</div>
+			<div class="vsl-calc-callout is-tech" id="vsl-calc-hw-note" hidden>
+				{copy.hwWarn}
+			</div>
+
+			<p class="vsl-calc-fair">{copy.fairNote}</p>
+
+			<form class="vsl-calc-form" id="vsl-calc-form">
+				<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
+				<input
+					id="vsl-calc-contact"
+					class="vsl-calc-input"
+					type="text"
+					maxlength="48"
+					placeholder={copy.contactPlaceholder}
+					aria-label={copy.contactPlaceholder}
+				/>
+				<textarea
+					id="vsl-calc-note"
+					class="vsl-calc-textarea"
+					rows="3"
+					maxlength="360"
+					placeholder={copy.notePlaceholder}
+					aria-label={copy.notePlaceholder}
+				></textarea>
+				<button type="submit" id="vsl-calc-submit" class="vsl-btn-white vsl-calc-submit">
+					{copy.submitBtn}
+				</button>
+			</form>
+
+			<div class="vsl-calc-status" id="vsl-calc-status" role="status" aria-live="polite" hidden></div>
+
+			<div class="vsl-calc-links">
+				<a href={`${prefix}/about/`}>{copy.aboutLink}</a>
+				<a href={`${prefix}/#vsl-chat-card`}>{copy.homeChatLink}</a>
+			</div>
+		</aside>
+	</div>
+</div>
+
+<script
+	define:vars={{
+		langCode: lang,
+		daysWord: copy.daysWord,
+		submitBtnText: copy.submitBtn,
+		sendingBtnText: copy.sendingBtn,
+		sentOkText: copy.sentOk,
+		sentQueueText: copy.sentQueue,
+		sendErrText: copy.sendErr,
+		partnerShort: copy.partnerLabel,
+	}}
+>
+	(function () {
+		const RATES = {
+			EUR: { symbol: '€', mult: 1, step: 5, suffix: '' },
+			USD: { symbol: '$', mult: 1.08, step: 5, suffix: '' },
+			MDL: { symbol: '', mult: 19.5, step: 50, suffix: ' L' },
+		};
+
+		let currentCurr = 'EUR';
+		let selectedTypeBtn = document.querySelector('[data-calc-type].is-selected');
+		let selectedScaleBtn = document.querySelector('[data-calc-scale].is-selected');
+		const partnerCheck = document.getElementById('vsl-calc-partner');
+
+		const priceEl = document.getElementById('vsl-calc-price');
+		const daysEl = document.getElementById('vsl-calc-days');
+		const summaryEl = document.getElementById('vsl-calc-summary');
+		const appleNote = document.getElementById('vsl-calc-apple-note');
+		const hwNote = document.getElementById('vsl-calc-hw-note');
+
+		const fmtMoney = (eurAmount) => {
+			const cfg = RATES[currentCurr] || RATES.EUR;
+			const raw = eurAmount * cfg.mult;
+			const rounded = Math.round(raw / cfg.step) * cfg.step;
+			return `${cfg.symbol}${rounded}${cfg.suffix}`;
+		};
+
+		function recalculate() {
+			if (!selectedTypeBtn) return;
+			const baseMin = Number(selectedTypeBtn.getAttribute('data-min') || 70);
+			const baseMax = Number(selectedTypeBtn.getAttribute('data-max') || 150);
+			const baseDaysMin = Number(selectedTypeBtn.getAttribute('data-days-min') || 3);
+			const baseDaysMax = Number(selectedTypeBtn.getAttribute('data-days-max') || 7);
+			const typeId = selectedTypeBtn.getAttribute('data-calc-type') || 'web';
+			const typeTitle = selectedTypeBtn.getAttribute('data-title') || typeId;
+
+			let addMin = 0;
+			let addMax = 0;
+			let addDays = 0;
+			const chosenAddons = [];
+
+			document.querySelectorAll('[data-calc-addon]').forEach((el) => {
+				if (!(el instanceof HTMLInputElement)) return;
+				if (el.checked) {
+					addMin += Number(el.getAttribute('data-add-min') || 0);
+					addMax += Number(el.getAttribute('data-add-max') || 0);
+					addDays += Number(el.getAttribute('data-add-days') || 0);
+					chosenAddons.push(el.getAttribute('data-title') || '');
+				}
+			});
+
+			const scaleMult = Number(selectedScaleBtn?.getAttribute('data-mult') || 1);
+			const scaleLabel = selectedScaleBtn?.textContent?.trim() || 'Standard';
+			const isPartner = partnerCheck instanceof HTMLInputElement && partnerCheck.checked;
+			const discountMult = isPartner ? 0.85 : 1;
+
+			const totalMin = (baseMin + addMin) * scaleMult * discountMult;
+			const totalMax = (baseMax + addMax) * scaleMult * discountMult;
+			const daysMin = Math.max(2, Math.round((baseDaysMin + addDays * 0.7) * (scaleMult > 1 ? 1.15 : 1)));
+			const daysMax = Math.max(daysMin + 2, Math.round((baseDaysMax + addDays) * (scaleMult > 1 ? 1.2 : 1)));
+
+			if (priceEl) priceEl.textContent = `${fmtMoney(totalMin)} – ${fmtMoney(totalMax)}`;
+			if (daysEl) daysEl.textContent = `${daysMin}–${daysMax} ${daysWord}`;
+
+			document.querySelectorAll('.vsl-calc-addon-price').forEach((span) => {
+				const bMin = Number(span.getAttribute('data-base-min') || 0);
+				const bMax = Number(span.getAttribute('data-base-max') || 0);
+				span.textContent = `+${fmtMoney(bMin)}–${fmtMoney(bMax)}`;
+			});
+
+			if (appleNote) appleNote.hidden = typeId !== 'apple';
+			if (hwNote) hwNote.hidden = typeId !== 'hardware';
+
+			if (summaryEl) {
+				summaryEl.replaceChildren();
+				const pills = [typeTitle, scaleLabel, ...chosenAddons];
+				if (isPartner) pills.push('-15%');
+				pills.forEach((txt) => {
+					const chip = document.createElement('span');
+					chip.className = 'vsl-calc-tag';
+					chip.textContent = txt;
+					summaryEl.appendChild(chip);
+				});
+			}
+
+			return {
+				typeTitle,
+				scaleLabel,
+				chosenAddons,
+				isPartner,
+				estimate: `${fmtMoney(totalMin)} – ${fmtMoney(totalMax)}`,
+				timeline: `${daysMin}–${daysMax} ${daysWord}`,
+			};
+		}
+
+		document.querySelectorAll('[data-calc-type]').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				document.querySelectorAll('[data-calc-type]').forEach((b) => {
+					b.classList.remove('is-selected');
+					b.setAttribute('aria-checked', 'false');
+				});
+				btn.classList.add('is-selected');
+				btn.setAttribute('aria-checked', 'true');
+				selectedTypeBtn = btn;
+				recalculate();
+			});
+		});
+
+		document.querySelectorAll('[data-calc-addon]').forEach((chk) => {
+			chk.addEventListener('change', recalculate);
+		});
+
+		document.querySelectorAll('[data-calc-scale]').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				document.querySelectorAll('[data-calc-scale]').forEach((b) => b.classList.remove('is-selected'));
+				btn.classList.add('is-selected');
+				selectedScaleBtn = btn;
+				recalculate();
+			});
+		});
+
+		partnerCheck?.addEventListener('change', recalculate);
+
+		document.querySelectorAll('[data-curr]').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const c = btn.getAttribute('data-curr') || 'EUR';
+				if (!RATES[c]) return;
+				currentCurr = c;
+				document.querySelectorAll('[data-curr]').forEach((b) => b.classList.toggle('is-active', b === btn));
+				recalculate();
+			});
+		});
+
+		const form = document.getElementById('vsl-calc-form');
+		const contactEl = document.getElementById('vsl-calc-contact');
+		const noteEl = document.getElementById('vsl-calc-note');
+		const submitBtn = document.getElementById('vsl-calc-submit');
+		const statusEl = document.getElementById('vsl-calc-status');
+
+		const isLocalHost = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+		const CHAT_API = isLocalHost ? 'https://idominiqe.com/api/chat' : '/api/chat';
+		const CHAT_SESSION_KEY = 'vslChatSession';
+
+		form?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const snap = recalculate();
+			if (!snap) return;
+
+			const contact = contactEl instanceof HTMLInputElement ? contactEl.value.trim() : '';
+			const note = noteEl instanceof HTMLTextAreaElement ? noteEl.value.trim() : '';
+			const honeyInput = form.querySelector('input[name="website"]');
+			const website = honeyInput instanceof HTMLInputElement ? honeyInput.value : '';
+
+			const addonsText = snap.chosenAddons.length > 0 ? snap.chosenAddons.join(', ') : 'None';
+			const prefixTag = langCode === 'ru' ? '[Калькулятор]' : '[Calculator]';
+			const summaryMsg = [
+				`${prefixTag} ${snap.typeTitle} (${snap.scaleLabel}${snap.isPartner ? ', -15% partner' : ''})`,
+				`Budget: ${snap.estimate} | Timeline: ${snap.timeline}`,
+				`Modules: ${addonsText}`,
+				note ? `Note: ${note}` : '',
+			]
+				.filter(Boolean)
+				.join('\n')
+				.slice(0, 780);
+
+			let existing = { sessionId: '', sessionToken: '', messages: [] };
+			try {
+				const raw = localStorage.getItem(CHAT_SESSION_KEY);
+				if (raw) existing = JSON.parse(raw);
+			} catch (_) {}
+
+			if (submitBtn instanceof HTMLButtonElement) {
+				submitBtn.disabled = true;
+				submitBtn.textContent = sendingBtnText;
+			}
+			if (statusEl) {
+				statusEl.hidden = true;
+				statusEl.classList.remove('is-error');
+			}
+
+			try {
+				const res = await fetch(`${CHAT_API}/send`, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						name: contact || 'Calculator Visitor',
+						text: summaryMsg,
+						lang: langCode,
+						website,
+						sessionId: existing.sessionId || undefined,
+						sessionToken: existing.sessionToken || undefined,
+					}),
+				});
+				const data = await res.json().catch(() => null);
+				if (!res.ok || !data?.ok) {
+					throw new Error(data?.error || sendErrText);
+				}
+
+				try {
+					localStorage.setItem(
+						CHAT_SESSION_KEY,
+						JSON.stringify({
+							sessionId: data.sessionId,
+							sessionToken: data.sessionToken,
+							messages: data.messages || [],
+						})
+					);
+				} catch (_) {}
+
+				if (noteEl instanceof HTMLTextAreaElement) noteEl.value = '';
+				if (statusEl) {
+					statusEl.hidden = false;
+					statusEl.textContent = data.delivered ? sentOkText : sentQueueText;
+				}
+				window.__vslToast?.(data.delivered ? sentOkText : sentQueueText);
+			} catch (err) {
+				if (statusEl) {
+					statusEl.hidden = false;
+					statusEl.classList.add('is-error');
+					statusEl.textContent = err instanceof Error ? err.message : sendErrText;
+				}
+				window.__vslToast?.(sendErrText);
+			} finally {
+				if (submitBtn instanceof HTMLButtonElement) {
+					submitBtn.disabled = false;
+					submitBtn.textContent = submitBtnText;
+				}
+			}
+		});
+
+		recalculate();
+	})();
+</script>
+
+<style>
+	.vsl-calc-page {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		padding-bottom: 12px;
+	}
+	.vsl-calc-hero {
+		padding: 22px 26px;
+		gap: 8px;
+	}
+	.vsl-calc-eyebrow {
+		font-size: 0.74rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #60a5fa;
+	}
+	html[data-vtheme='flat-light'] .vsl-calc-eyebrow {
+		color: #2563eb;
+	}
+	.vsl-calc-h1 {
+		margin: 0;
+		font-size: clamp(1.4rem, 2.5vw, 1.95rem);
+		font-weight: 800;
+		color: var(--vsl-text);
+	}
+	.vsl-calc-sub {
+		margin: 0;
+		font-size: 0.9rem;
+		line-height: 1.55;
+		color: var(--vsl-text-muted);
+		max-width: 72ch;
+	}
+	.vsl-calc-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.45fr) minmax(300px, 1fr);
+		gap: 16px;
+		align-items: start;
+	}
+	.vsl-calc-controls {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+	}
+	.vsl-calc-block {
+		padding: 18px 20px;
+		gap: 12px;
+	}
+	.vsl-calc-h2 {
+		margin: 0;
+		font-size: 0.96rem;
+		font-weight: 750;
+		color: var(--vsl-text);
+	}
+	.vsl-calc-types {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 10px;
+	}
+	.vsl-calc-type-card {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 5px;
+		padding: 12px 13px;
+		border-radius: 15px;
+		border: 1px solid var(--vsl-hairline);
+		background: var(--vsl-surface);
+		color: var(--vsl-text);
+		text-align: left;
+		cursor: pointer;
+		transition: border-color 0.16s ease, background 0.16s ease, transform 0.14s ease;
+	}
+	.vsl-calc-type-card:hover {
+		background: var(--vsl-surface-hover);
+		transform: translateY(-1px);
+	}
+	.vsl-calc-type-card.is-selected {
+		border-color: #60a5fa;
+		background: var(--vsl-surface-strong);
+		box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.35);
+	}
+	.vsl-calc-type-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 6px;
+		font-size: 0.85rem;
+	}
+	.vsl-calc-badge {
+		padding: 2px 7px;
+		border-radius: 999px;
+		font-size: 0.65rem;
+		font-weight: 700;
+		flex-shrink: 0;
+	}
+	.vsl-calc-badge.is-ok {
+		background: rgba(34, 197, 94, 0.18);
+		color: #86efac;
+	}
+	.vsl-calc-badge.is-warn {
+		background: rgba(245, 158, 11, 0.2);
+		color: #fcd34d;
+	}
+	.vsl-calc-badge.is-tech {
+		background: rgba(96, 165, 250, 0.2);
+		color: #93c5fd;
+	}
+	html[data-vtheme='flat-light'] .vsl-calc-badge.is-ok { color: #15803d; }
+	html[data-vtheme='flat-light'] .vsl-calc-badge.is-warn { color: #b45309; }
+	html[data-vtheme='flat-light'] .vsl-calc-badge.is-tech { color: #1d4ed8; }
+	.vsl-calc-type-desc {
+		font-size: 0.76rem;
+		color: var(--vsl-text-muted);
+		line-height: 1.4;
+	}
+	.vsl-calc-addons {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+	.vsl-calc-addon {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 10px 12px;
+		border-radius: 13px;
+		border: 1px solid var(--vsl-hairline);
+		background: var(--vsl-surface);
+		cursor: pointer;
+		transition: background 0.15s ease, border-color 0.15s ease;
+	}
+	.vsl-calc-addon:hover {
+		background: var(--vsl-surface-strong);
+	}
+	.vsl-calc-addon input {
+		accent-color: #60a5fa;
+		width: 16px;
+		height: 16px;
+		flex-shrink: 0;
+	}
+	.vsl-calc-addon-title {
+		flex: 1;
+		font-size: 0.83rem;
+		font-weight: 600;
+		color: var(--vsl-text);
+	}
+	.vsl-calc-addon-price {
+		font-family: var(--sl-font-mono);
+		font-size: 0.75rem;
+		color: var(--vsl-text-soft);
+	}
+	.vsl-calc-scales {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 8px;
+	}
+	.vsl-calc-scale-btn {
+		height: 36px;
+		border-radius: 11px;
+		border: 1px solid var(--vsl-hairline);
+		background: var(--vsl-surface);
+		color: var(--vsl-text-muted);
+		font-size: 0.8rem;
+		font-weight: 650;
+		cursor: pointer;
+		transition: all 0.15s ease;
+	}
+	.vsl-calc-scale-btn.is-selected {
+		background: var(--vsl-accent);
+		color: var(--vsl-accent-ink);
+		border-color: transparent;
+	}
+	.vsl-calc-partner {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: var(--vsl-text);
+		cursor: pointer;
+		padding-top: 2px;
+	}
+	.vsl-calc-partner input {
+		accent-color: #34d399;
+		width: 16px;
+		height: 16px;
+	}
+	.vsl-calc-summary-card {
+		position: sticky;
+		top: 18px;
+		padding: 20px;
+		gap: 12px;
+	}
+	.vsl-calc-sum-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+	}
+	.vsl-calc-sum-label {
+		font-size: 0.78rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--vsl-text-soft);
+	}
+	.vsl-calc-curr {
+		display: inline-flex;
+		padding: 3px;
+		border-radius: 999px;
+		border: 1px solid var(--vsl-hairline);
+		background: var(--vsl-surface);
+	}
+	.vsl-curr-btn {
+		border: 0;
+		background: transparent;
+		color: var(--vsl-text-muted);
+		font-size: 0.7rem;
+		font-weight: 700;
+		padding: 3px 9px;
+		border-radius: 999px;
+		cursor: pointer;
+	}
+	.vsl-curr-btn.is-active {
+		background: var(--vsl-accent);
+		color: var(--vsl-accent-ink);
+	}
+	.vsl-calc-price {
+		font-size: clamp(1.75rem, 3vw, 2.25rem);
+		font-weight: 800;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: var(--vsl-text);
+	}
+	.vsl-calc-days {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 0.84rem;
+		color: var(--vsl-text-muted);
+	}
+	.vsl-calc-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+	}
+	.vsl-calc-tag {
+		padding: 3px 9px;
+		border-radius: 999px;
+		background: var(--vsl-surface-strong);
+		border: 1px solid var(--vsl-hairline);
+		font-size: 0.71rem;
+		font-weight: 600;
+		color: var(--vsl-text);
+	}
+	.vsl-calc-callout {
+		padding: 10px 12px;
+		border-radius: 12px;
+		font-size: 0.78rem;
+		line-height: 1.48;
+	}
+	.vsl-calc-callout.is-warn {
+		background: rgba(245, 158, 11, 0.14);
+		border: 1px solid rgba(245, 158, 11, 0.35);
+		color: #fde68a;
+	}
+	.vsl-calc-callout.is-tech {
+		background: rgba(96, 165, 250, 0.14);
+		border: 1px solid rgba(96, 165, 250, 0.35);
+		color: #bfdbfe;
+	}
+	html[data-vtheme='flat-light'] .vsl-calc-callout.is-warn { color: #92400e; }
+	html[data-vtheme='flat-light'] .vsl-calc-callout.is-tech { color: #1e40af; }
+	.vsl-calc-fair {
+		margin: 0;
+		font-size: 0.78rem;
+		line-height: 1.5;
+		color: var(--vsl-text-soft);
+	}
+	.vsl-calc-form {
+		display: flex;
+		flex-direction: column;
+		gap: 9px;
+	}
+	.vsl-calc-input,
+	.vsl-calc-textarea {
+		width: 100%;
+		border-radius: 12px;
+		border: 1px solid var(--vsl-hairline);
+		background: var(--vsl-chrome-inner);
+		color: var(--vsl-text);
+		padding: 9px 12px;
+		font-size: 0.82rem;
+		font-family: inherit;
+		outline: none;
+	}
+	html[data-vtheme='flat-light'] .vsl-calc-input,
+	html[data-vtheme='flat-light'] .vsl-calc-textarea {
+		background: #ffffff;
+	}
+	.vsl-calc-input:focus,
+	.vsl-calc-textarea:focus {
+		border-color: rgba(96, 165, 250, 0.75);
+	}
+	.vsl-calc-submit {
+		width: 100%;
+		justify-content: center;
+	}
+	.vsl-calc-status {
+		padding: 10px 12px;
+		border-radius: 12px;
+		background: rgba(34, 197, 94, 0.16);
+		border: 1px solid rgba(34, 197, 94, 0.38);
+		color: #bbf7d0;
+		font-size: 0.8rem;
+		line-height: 1.45;
+	}
+	.vsl-calc-status.is-error {
+		background: rgba(239, 68, 68, 0.16);
+		border-color: rgba(239, 68, 68, 0.38);
+		color: #fecaca;
+	}
+	html[data-vtheme='flat-light'] .vsl-calc-status { color: #166534; }
+	html[data-vtheme='flat-light'] .vsl-calc-status.is-error { color: #991b1b; }
+	.vsl-calc-links {
+		display: flex;
+		justify-content: space-between;
+		gap: 10px;
+		font-size: 0.76rem;
+		padding-top: 4px;
+	}
+	.vsl-calc-links a {
+		color: var(--vsl-text-muted);
+		text-decoration: none;
+	}
+	.vsl-calc-links a:hover {
+		color: var(--vsl-text);
+		text-decoration: underline;
+	}
+	@media (max-width: 920px) {
+		.vsl-calc-grid {
+			grid-template-columns: 1fr;
+		}
+		.vsl-calc-summary-card {
+			position: static;
+		}
+	}
+	@media (max-width: 600px) {
+		.vsl-calc-types,
+		.vsl-calc-scales {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

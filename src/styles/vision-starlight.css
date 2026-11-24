@@ -1886,6 +1886,73 @@ html[data-vtheme='flat-light'] .vsl-chat-input {
 	cursor: not-allowed;
 }
 
+/* Homepage Compact Bio & Capabilities Strip */
+.vsl-bio-strip {
+	margin-top: 14px;
+	padding: 18px 22px;
+	border-radius: 22px;
+	background: var(--vsl-surface);
+	border: 1px solid var(--vsl-hairline);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 18px;
+}
+
+.vsl-bio-strip-main {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.vsl-bio-strip-title {
+	font-size: 0.94rem;
+	font-weight: 750;
+	color: var(--vsl-text);
+}
+
+.vsl-bio-strip-desc {
+	margin: 0;
+	font-size: 0.82rem;
+	line-height: 1.5;
+	color: var(--vsl-text-muted);
+	max-width: 82ch;
+}
+
+.vsl-bio-strip-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	padding-top: 2px;
+}
+
+.vsl-bio-strip-pill {
+	padding: 3px 9px;
+	border-radius: 999px;
+	background: var(--vsl-surface-strong);
+	border: 1px solid var(--vsl-hairline);
+	font-size: 0.71rem;
+	font-weight: 600;
+	color: var(--vsl-text);
+}
+
+.vsl-bio-strip-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+	.vsl-bio-strip {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 16px;
+	}
+}
+
 /* Entrance Tile Stagger Animation */
 @keyframes vslRevealUp {
 	from {

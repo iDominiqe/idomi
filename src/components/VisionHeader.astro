@@ -31,16 +31,19 @@ const copy = {
 		devChannels: 'Developer Channels',
 		ecoHubs: 'Ecosystem Hubs',
 		channels: 'Channels',
+		aboutMe: 'About Me & Bio',
+		calculator: 'Project Calculator',
+		guidesLink: 'Guides & Presets',
 		tabs: [
 			{ label: 'Home', href: '/', active: stripped === '/' },
 			{ label: 'Projects', href: '/projects/ecosystem/', active: stripped.startsWith('/projects') },
-			{ label: 'Blog', href: '/blog/', active: stripped.startsWith('/blog') },
+			{ label: 'Calculator', href: '/calculator/', active: stripped.startsWith('/calculator') },
+			{ label: 'About', href: '/about/', active: stripped.startsWith('/about') },
 			{
-				label: 'Guides',
-				href: '/guides/getting-started/',
-				active: stripped.startsWith('/guides/getting-started') || stripped.startsWith('/reference'),
+				label: 'Blog',
+				href: '/blog/',
+				active: stripped.startsWith('/blog') || stripped.startsWith('/guides') || stripped.startsWith('/reference'),
 			},
-			{ label: 'Themes', href: '/guides/themes/', active: stripped.startsWith('/guides/themes') },
 		],
 	},
 	ro: {
@@ -58,16 +61,19 @@ const copy = {
 		devChannels: 'Canale dezvoltator',
 		ecoHubs: 'Huburi Ecosistem',
 		channels: 'Canale',
+		aboutMe: 'Despre Mine & Bio',
+		calculator: 'Calculator Proiect',
+		guidesLink: 'Ghiduri & Teme',
 		tabs: [
 			{ label: 'Acasă', href: '/ro/', active: stripped === '/' },
 			{ label: 'Proiecte', href: '/ro/projects/ecosystem/', active: stripped.startsWith('/projects') },
-			{ label: 'Blog', href: '/ro/blog/', active: stripped.startsWith('/blog') },
+			{ label: 'Calculator', href: '/ro/calculator/', active: stripped.startsWith('/calculator') },
+			{ label: 'Despre', href: '/ro/about/', active: stripped.startsWith('/about') },
 			{
-				label: 'Ghiduri',
-				href: '/ro/guides/getting-started/',
-				active: stripped.startsWith('/guides/getting-started') || stripped.startsWith('/reference'),
+				label: 'Blog',
+				href: '/ro/blog/',
+				active: stripped.startsWith('/blog') || stripped.startsWith('/guides') || stripped.startsWith('/reference'),
 			},
-			{ label: 'Teme', href: '/ro/guides/themes/', active: stripped.startsWith('/guides/themes') },
 		],
 	},
 	ru: {
@@ -85,16 +91,19 @@ const copy = {
 		devChannels: 'Каналы разработчика',
 		ecoHubs: 'Хабы экосистемы',
 		channels: 'Каналы',
+		aboutMe: 'Обо мне и Био',
+		calculator: 'Калькулятор проекта',
+		guidesLink: 'Гайды и Темы',
 		tabs: [
 			{ label: 'Главная', href: '/ru/', active: stripped === '/' },
 			{ label: 'Проекты', href: '/ru/projects/ecosystem/', active: stripped.startsWith('/projects') },
-			{ label: 'Блог', href: '/ru/blog/', active: stripped.startsWith('/blog') },
+			{ label: 'Расчёт', href: '/ru/calculator/', active: stripped.startsWith('/calculator') },
+			{ label: 'Обо мне', href: '/ru/about/', active: stripped.startsWith('/about') },
 			{
-				label: 'Гайды',
-				href: '/ru/guides/getting-started/',
-				active: stripped.startsWith('/guides/getting-started') || stripped.startsWith('/reference'),
+				label: 'Блог',
+				href: '/ru/blog/',
+				active: stripped.startsWith('/blog') || stripped.startsWith('/guides') || stripped.startsWith('/reference'),
 			},
-			{ label: 'Темы', href: '/ru/guides/themes/', active: stripped.startsWith('/guides/themes') },
 		],
 	},
 }[lang];
@@ -178,6 +187,18 @@ const navTabs = copy.tabs;
 		<!-- Profile & Social Links Popover -->
 		<div id="vsl-profile-popover" class="vsl-popover" role="region" aria-label={copy.devChannels}>
 			<div class="vsl-popover-title">{copy.ecoHubs}</div>
+			<a href={`${prefix}/about/`} class="vsl-popover-item">
+				<span>{copy.aboutMe}</span>
+				<span class="vsl-popover-muted">Bio · Hardware</span>
+			</a>
+			<a href={`${prefix}/calculator/`} class="vsl-popover-item">
+				<span>{copy.calculator}</span>
+				<span class="vsl-popover-muted">Web · App · MCU</span>
+			</a>
+			<a href={`${prefix}/guides/getting-started/`} class="vsl-popover-item">
+				<span>{copy.guidesLink}</span>
+				<span class="vsl-popover-muted">{copy.presets}</span>
+			</a>
 			<a href="https://portfolio.idominiqe.com/" target="_blank" rel="noopener noreferrer" class="vsl-popover-item">
 				<span>VisionOS Portfolio</span>
 				<span class="vsl-popover-muted">portfolio.idominiqe.com ↗</span>

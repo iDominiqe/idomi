@@ -78,6 +78,14 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
+					label: 'About & Calculator',
+					translations: { ro: 'Despre & Calculator', ru: 'Обо мне и Расчёт' },
+					items: [
+						{ label: 'About Me & Bio', translations: { ro: 'Despre Mine', ru: 'Обо мне' }, slug: 'about' },
+						{ label: 'Project Calculator', translations: { ro: 'Calculator Proiect', ru: 'Калькулятор проекта' }, slug: 'calculator' },
+					],
+				},
+				{
 					label: 'Projects',
 					translations: { ro: 'Proiecte', ru: 'Проекты' },
 					items: [{ autogenerate: { directory: 'projects' } }],

@@ -1,0 +1,401 @@
+---
+const pathname = Astro.url.pathname;
+const isRo = pathname === '/ro' || pathname.startsWith('/ro/');
+const isRu = pathname === '/ru' || pathname.startsWith('/ru/');
+const lang = isRo ? 'ro' : isRu ? 'ru' : 'en';
+const prefix = isRo ? '/ro' : isRu ? '/ru' : '';
+
+const copy = {
+	en: {
+		eyebrow: 'Engineer · Telecom · Indie Freelancer',
+		title: 'About iDominiqe — Craft, Transparency & Real Engineering',
+		story1:
+			'I am a former Polytechnic University student currently working professionally in the telecommunications field. In my spare time, freelancing and building digital products is my genuine hobby and passion.',
+		story2:
+			'My philosophy is simple: I do not chase inflated agency fees or try to overcharge anyone. I keep pricing fair and accessible — my real goal is upgrading my engineering workspace, growing technically, and building a circle of reliable partners and clients who leave satisfied with honest results.',
+		story3:
+			'Beyond websites and 3D WebGL experiences, I develop Android mobile apps, Windows desktop tools, Apple apps (currently in R&D while setting up the paid developer license), and custom embedded electronics on Arduino, ESP32, and STM32.',
+		badges: ['Polytechnic Alum', 'Telecommunications', 'Fair Pricing · No Rip-Offs', 'Open to Partnerships'],
+		ctaCalc: '🧮 Open Project Calculator',
+		ctaChat: '💬 Chat on Telegram',
+		ctaProjects: '📂 Live Projects',
+		capsHeading: 'What I Build & Explore',
+		cards: [
+			{
+				badge: 'Web & 3D · Available',
+				tone: 'ok',
+				title: 'Websites, SaaS Hubs & 3D WebGL',
+				desc: 'Custom websites, landing pages, Astro Starlight hubs, Three.js / WebGL scenes, interactive dashboards, and Cloudflare + DNS security tailored to your exact task.',
+				tags: ['Astro', 'Three.js', 'TypeScript', 'Cloudflare'],
+			},
+			{
+				badge: 'Desktop & Mobile · Available',
+				tone: 'ok',
+				title: 'Android & Windows Applications',
+				desc: 'Practical Android mobile apps (client utilities, IoT companions, dashboards) and native Windows desktop utilities built cleanly without bloat.',
+				tags: ['Android APK', 'Windows Desktop', 'REST / MQTT', 'WebSocket'],
+			},
+			{
+				badge: 'Apple Ecosystem · In Development',
+				tone: 'warn',
+				title: 'iOS & macOS Applications (R&D)',
+				desc: 'Apple app builds are currently in development — publishing and signing require a paid Apple Developer account. Open to early prototypes and co-funded partner builds.',
+				tags: ['iOS / macOS', 'In Development', 'Paid Apple Dev License'],
+			},
+			{
+				badge: 'Hardware & IoT · Custom R&D',
+				tone: 'tech',
+				title: 'Custom Devices: Arduino · ESP32 · STM32',
+				desc: 'Bespoke controllers, sensor nodes, Wi-Fi / BLE telemetry bridges, and automation prototypes. These are deeper engineering builds — we grow by taking on ambitious tasks.',
+				tags: ['Arduino', 'ESP32', 'STM32', 'Sensors & Telemetry'],
+			},
+		],
+		pillars: [
+			{
+				title: 'No Inflated Estimates',
+				text: 'Clear breakdown before starting work. You pay fairly for real effort — zero agency fluff.',
+			},
+			{
+				title: 'Built Around Your Needs',
+				text: 'Whether you need a fast business site, an Android tool, or an ESP32 prototype, everything adapts to your goal.',
+			},
+			{
+				title: 'Partnerships & Long-Term Circle',
+				text: 'Looking for like-minded partners and happy clients to collaborate on meaningful, growing products.',
+			},
+		],
+	},
+	ro: {
+		eyebrow: 'Inginer · Telecomunicații · Freelance din Pasiune',
+		title: 'Despre iDominiqe — Inginerie Onestă fără Costuri Umflate',
+		story1:
+			'Sunt fost student al Universității Tehnice (Politehnică) și activez profesional în domeniul telecomunicațiilor. În timpul liber, freelancing-ul este hobby-ul meu preferat — creez site-uri și soluții software exact după nevoile oamenilor.',
+		story2:
+			'Nu urmăresc să cer sume exagerate și nici nu vreau ca cineva să simtă că este înșelat pe bani. Păstrez prețuri corecte și accesibile: obiectivul meu este să-mi dezvolt atelierul tehnic, să cresc profesional și să găsesc parteneri și clienți mulțumiți pe termen lung.',
+		story3:
+			'Pe lângă site-uri și scene 3D WebGL, dezvolt aplicații pentru Android, aplicații desktop pentru Windows, soluții pentru Apple (momentan în dezvoltare, deoarece contul Apple Developer este contra cost), precum și dispozitive hardware la comandă pe Arduino, ESP32 și STM32.',
+		badges: ['Absolvent Politehnică', 'Telecomunicații', 'Prețuri Corecte', 'Deschis la Parteneriate'],
+		ctaCalc: '🧮 Calculator Proiect',
+		ctaChat: '💬 Scrie pe Telegram',
+		ctaProjects: '📂 Proiecte Live',
+		capsHeading: 'Direcții de Dezvoltare & R&D',
+		cards: [
+			{
+				badge: 'Web & 3D · Disponibil',
+				tone: 'ok',
+				title: 'Site-uri, Platforme & 3D WebGL',
+				desc: 'Landing page-uri rapide, portaluri pe Astro Starlight, scene 3D Three.js / WebGL, widget-uri interactive și configurare sigură Cloudflare DNS / SSL.',
+				tags: ['Astro', 'Three.js', 'TypeScript', 'Cloudflare'],
+			},
+			{
+				badge: 'Mobile & Desktop · Disponibil',
+				tone: 'ok',
+				title: 'Aplicații Android & Windows',
+				desc: 'Aplicații practice pentru Android (utilitare, panouri de control IoT, clienți API) și programe desktop pentru Windows adaptate fluxului tău de lucru.',
+				tags: ['Android APK', 'Windows App', 'REST / MQTT', 'WebSocket'],
+			},
+			{
+				badge: 'Ecosistem Apple · În Dezvoltare',
+				tone: 'warn',
+				title: 'Aplicații iOS & macOS (R&D)',
+				desc: 'Direcția Apple este în curs de dezvoltare, deoarece programul Apple Developer necesită o licență anuală plătită. Putem discuta prototipuri sau colaborări dedicate.',
+				tags: ['iOS / macOS', 'În Dezvoltare', 'Licență Apple Plătită'],
+			},
+			{
+				badge: 'Hardware & IoT · La Comandă R&D',
+				tone: 'tech',
+				title: 'Dispozitive Arduino · ESP32 · STM32',
+				desc: 'Module cu senzori, telemetrie Wi-Fi / BLE și prototipuri de automatizare pe microcontrolere Arduino, ESP32 și STM32 — proiecte complexe prin care evoluăm continuu.',
+				tags: ['Arduino', 'ESP32', 'STM32', 'Senzori & Telemetrie'],
+			},
+		],
+		pillars: [
+			{
+				title: 'Fără Prețuri Umflate',
+				text: 'Estimare clară și onestă de la început, fără adaosuri ascunse de agenție.',
+			},
+			{
+				title: 'Adaptat Nevoilor Tale',
+				text: 'De la un site de prezentare până la o aplicație Android sau un dispozitiv pe ESP32 — construim ce îți trebuie.',
+			},
+			{
+				title: 'Parteneri și Clienți Mulțumiți',
+				text: 'Construiesc un cerc de oameni și parteneri cu care să realizăm proiecte serioase și de durată.',
+			},
+		],
+	},
+	ru: {
+		eyebrow: 'Инженер · Телекоммуникации · Фриланс как хобби',
+		title: 'Обо мне — Честная разработка, технологии и партнёрство',
+		story1:
+			'Я бывший студент Политехнического университета, сейчас работаю в сфере телекоммуникаций. В свободное время моё любимое хобби — фриланс: создавать для людей сайты, программы и полезные сервисы строго под их реальные задачи.',
+		story2:
+			'Я не гонюсь за завышенными ценниками и не «развожу» на деньги: мне важнее развивать своё техническое окружение, оттачивать мастерство и находить надёжных партнёров и клиентов, которые останутся по-настоящему довольны результатом.',
+		story3:
+			'Помимо сайтов и 3D/WebGL-проектов, я могу разрабатывать приложения под Android и Windows, осваиваю направление Apple (сейчас в разработке, так как аккаунт и публикация там платные), а также собираю кастомные устройства на базе Arduino, ESP32 и STM32 — это более сложные задачи, но мы постоянно стремимся к развитию.',
+		badges: ['Политех (UTM)', 'Телекоммуникации', 'Честная цена без накруток', 'Открыт к партнёрству'],
+		ctaCalc: '🧮 Калькулятор проекта',
+		ctaChat: '💬 Написать в Telegram',
+		ctaProjects: '📂 Живые проекты',
+		capsHeading: 'Что я делаю и развиваю',
+		cards: [
+			{
+				badge: 'Web и 3D · Доступно',
+				tone: 'ok',
+				title: 'Сайты, порталы и 3D WebGL',
+				desc: 'Сайты-визитки, лендинги, хабы на Astro Starlight, интерактивные 3D-сцены на Three.js / WebGL, интеграция с Telegram-ботами и защита через Cloudflare.',
+				tags: ['Astro', 'Three.js', 'TypeScript', 'Cloudflare'],
+			},
+			{
+				badge: 'Android и Windows · Доступно',
+				tone: 'ok',
+				title: 'Приложения для Android и Windows',
+				desc: 'Удобные Android-приложения (клиенты, утилиты, пульты для датчиков) и десктопные программы для Windows под конкретные задачи бизнеса или быта.',
+				tags: ['Android APK', 'Windows App', 'REST / MQTT', 'WebSocket'],
+			},
+			{
+				badge: 'Apple iOS / macOS · В разработке',
+				tone: 'warn',
+				title: 'Приложения для Apple (R&D)',
+				desc: 'Направление под Apple сейчас в разработке, поскольку программа Apple Developer и публикация платные. Открыт к обсуждению прототипов и совместных партнёрских запусков.',
+				tags: ['iOS / macOS', 'В разработке', 'Платная лицензия Apple'],
+			},
+			{
+				badge: 'Электроника под заказ · R&D',
+				tone: 'tech',
+				title: 'Устройства на Arduino · ESP32 · STM32',
+				desc: 'Индивидуальные устройства под заказ: датчики, Wi-Fi / BLE-телеметрия, автоматика и контроллеры на Arduino, ESP32 и STM32. Более сложные проекты для роста и развития.',
+				tags: ['Arduino', 'ESP32', 'STM32', 'Сенсоры и IoT'],
+			},
+		],
+		pillars: [
+			{
+				title: 'Без накруток и обмана',
+				text: 'Адекватная, прозрачная стоимость без агентских наценок — чтобы клиент не пожалел и вернулся снова.',
+			},
+			{
+				title: 'Под реальную потребность',
+				text: 'Не навязываю лишние функции: собираем сайт, приложение или контроллер именно так, как удобно вам.',
+			},
+			{
+				title: 'Окружение и партнёры',
+				text: 'Ценю долгосрочное сотрудничество, сильных единомышленников и совместные технические проекты.',
+			},
+		],
+	},
+}[lang];
+---
+
+<div class="vsl-bio-page not-content">
+	<section class="vsl-doc-card vsl-bio-hero" data-tile="1">
+		<div class="vsl-bio-eyebrow">{copy.eyebrow}</div>
+		<h1 class="vsl-bio-h1">{copy.title}</h1>
+		<div class="vsl-bio-badges">
+			{copy.badges.map((b) => (
+				<span class="vsl-bio-pill">{b}</span>
+			))}
+		</div>
+		<p class="vsl-bio-lead">{copy.story1}</p>
+		<p class="vsl-bio-text">{copy.story2}</p>
+		<p class="vsl-bio-text">{copy.story3}</p>
+
+		<div class="vsl-bio-actions">
+			<a href={`${prefix}/calculator/`} class="vsl-btn-white">{copy.ctaCalc}</a>
+			<a href={`${prefix}/#vsl-chat-card`} class="vsl-btn-glass">{copy.ctaChat}</a>
+			<a href={`${prefix}/projects/ecosystem/`} class="vsl-btn-glass">{copy.ctaProjects}</a>
+		</div>
+	</section>
+
+	<section class="vsl-bio-section" data-tile="2">
+		<h2 class="vsl-bio-h2">{copy.capsHeading}</h2>
+		<div class="vsl-bio-grid">
+			{copy.cards.map((card) => (
+				<article class="vsl-doc-card vsl-bio-cap-card">
+					<span class={`vsl-bio-status is-${card.tone}`}>{card.badge}</span>
+					<h3 class="vsl-bio-h3">{card.title}</h3>
+					<p class="vsl-bio-card-desc">{card.desc}</p>
+					<div class="vsl-bio-tags">
+						{card.tags.map((t) => (
+							<span class="vsl-bio-tag">{t}</span>
+						))}
+					</div>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="vsl-bio-pillars" data-tile="3">
+		{copy.pillars.map((p) => (
+			<div class="vsl-doc-card vsl-bio-pillar">
+				<h3 class="vsl-bio-pillar-title">{p.title}</h3>
+				<p class="vsl-bio-card-desc">{p.text}</p>
+			</div>
+		))}
+	</section>
+</div>
+
+<style>
+	.vsl-bio-page {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+		padding-bottom: 12px;
+	}
+	.vsl-bio-hero {
+		padding: 26px 28px;
+		gap: 12px;
+	}
+	.vsl-bio-eyebrow {
+		font-size: 0.74rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #60a5fa;
+	}
+	html[data-vtheme='flat-light'] .vsl-bio-eyebrow {
+		color: #2563eb;
+	}
+	.vsl-bio-h1 {
+		margin: 0;
+		font-size: clamp(1.45rem, 2.6vw, 2.05rem);
+		line-height: 1.2;
+		font-weight: 800;
+		color: var(--vsl-text);
+	}
+	.vsl-bio-badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin: 2px 0;
+	}
+	.vsl-bio-pill {
+		padding: 4px 11px;
+		border-radius: 999px;
+		background: var(--vsl-surface-strong);
+		border: 1px solid var(--vsl-hairline);
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: var(--vsl-text);
+	}
+	.vsl-bio-lead {
+		margin: 4px 0 0;
+		font-size: 0.98rem;
+		line-height: 1.62;
+		color: var(--vsl-text);
+	}
+	.vsl-bio-text {
+		margin: 0;
+		font-size: 0.91rem;
+		line-height: 1.62;
+		color: var(--vsl-text-muted);
+	}
+	.vsl-bio-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: 8px;
+	}
+	.vsl-bio-section {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.vsl-bio-h2 {
+		margin: 4px 0 0;
+		font-size: 1.15rem;
+		font-weight: 750;
+		color: var(--vsl-text);
+	}
+	.vsl-bio-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 14px;
+	}
+	.vsl-bio-cap-card {
+		padding: 20px;
+		gap: 10px;
+	}
+	.vsl-bio-status {
+		align-self: flex-start;
+		padding: 4px 10px;
+		border-radius: 999px;
+		font-size: 0.71rem;
+		font-weight: 700;
+		letter-spacing: 0.02em;
+	}
+	.vsl-bio-status.is-ok {
+		background: rgba(34, 197, 94, 0.16);
+		border: 1px solid rgba(34, 197, 94, 0.38);
+		color: #86efac;
+	}
+	.vsl-bio-status.is-warn {
+		background: rgba(245, 158, 11, 0.16);
+		border: 1px solid rgba(245, 158, 11, 0.42);
+		color: #fcd34d;
+	}
+	.vsl-bio-status.is-tech {
+		background: rgba(96, 165, 250, 0.16);
+		border: 1px solid rgba(96, 165, 250, 0.4);
+		color: #93c5fd;
+	}
+	html[data-vtheme='flat-light'] .vsl-bio-status.is-ok {
+		color: #15803d;
+	}
+	html[data-vtheme='flat-light'] .vsl-bio-status.is-warn {
+		color: #b45309;
+	}
+	html[data-vtheme='flat-light'] .vsl-bio-status.is-tech {
+		color: #1d4ed8;
+	}
+	.vsl-bio-h3 {
+		margin: 0;
+		font-size: 1.04rem;
+		font-weight: 750;
+		color: var(--vsl-text);
+	}
+	.vsl-bio-card-desc {
+		margin: 0;
+		font-size: 0.85rem;
+		line-height: 1.56;
+		color: var(--vsl-text-muted);
+	}
+	.vsl-bio-tags {
+		margin-top: auto;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		padding-top: 4px;
+	}
+	.vsl-bio-tag {
+		padding: 3px 9px;
+		border-radius: 8px;
+		background: var(--vsl-surface-strong);
+		font-size: 0.72rem;
+		font-family: var(--sl-font-mono);
+		color: var(--vsl-text-muted);
+	}
+	.vsl-bio-pillars {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 14px;
+	}
+	.vsl-bio-pillar {
+		padding: 18px;
+		gap: 6px;
+	}
+	.vsl-bio-pillar-title {
+		margin: 0;
+		font-size: 0.94rem;
+		font-weight: 750;
+		color: var(--vsl-text);
+	}
+	@media (max-width: 820px) {
+		.vsl-bio-grid,
+		.vsl-bio-pillars {
+			grid-template-columns: 1fr;
+		}
+		.vsl-bio-hero {
+			padding: 20px 18px;
+		}
+	}
+</style>

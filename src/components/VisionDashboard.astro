@@ -34,8 +34,9 @@ const i18n = {
 		chips: [
 			{ label: '🚀 Order a site', prompt: 'Hi! I would like to discuss building a website or web app.' },
 			{ label: '🧊 3D / WebGL', prompt: 'Interested in a Three.js / WebGL 3D experience for my project.' },
+			{ label: '🔌 ESP32 / App', prompt: 'Can you build an Android/Windows app or an Arduino/ESP32/STM32 device?' },
 			{ label: '🛡️ DNS & Security', prompt: 'I have a question about DNS, Cloudflare, domains, or cybersecurity.' },
-			{ label: '👋 Question', prompt: 'Hi! Wanted to ask a quick question about your projects.' },
+			{ label: '👋 About you', prompt: 'Tell me about yourself and how we can collaborate!' },
 		],
 		welcomeMsg: 'Hi! Write a message below — it goes straight to my Telegram, and my reply will appear right here in real time.',
 		inputPlaceholder: 'Write a message — sent straight to Telegram...',
@@ -43,6 +44,12 @@ const i18n = {
 		highlightsTitle: 'Key Engineering Highlights',
 		openLiveSite: 'Open Live Site ↗',
 		githubRepo: 'GitHub Repo',
+		bioTitle: 'Polytechnic Alum · Telecom Engineer · Indie Builder',
+		bioSummary:
+			'Freelancing in my spare time out of pure passion — building websites, Android & Windows apps (Apple in R&D), and custom Arduino/ESP32/STM32 devices. Fair indie prices with zero rip-offs, focused on happy clients and long-term partners.',
+		bioTags: ['Web & 3D', 'Android', 'Windows', 'Apple · R&D', 'Arduino · ESP32 · STM32'],
+		bioCalcBtn: '🧮 Calculator',
+		bioMoreBtn: 'About Me →',
 	},
 	ro: {
 		featuredBuilds: 'Proiecte Recomandate',
@@ -68,8 +75,9 @@ const i18n = {
 		chips: [
 			{ label: '🚀 Comandă site', prompt: 'Salut! Vreau să discutăm despre crearea unui site sau a unei aplicații web.' },
 			{ label: '🧊 3D / WebGL', prompt: 'Sunt interesat de o scenă 3D pe Three.js / WebGL pentru un proiect.' },
+			{ label: '🔌 ESP32 / App', prompt: 'Poți face o aplicație Android/Windows sau un dispozitiv pe Arduino/ESP32/STM32?' },
 			{ label: '🛡️ DNS & Securitate', prompt: 'Am o întrebare despre DNS, Cloudflare, domeniu sau securitate cibernetică.' },
-			{ label: '👋 Întrebare', prompt: 'Salut! Aș dori să pun o întrebare despre proiecte.' },
+			{ label: '👋 Despre tine', prompt: 'Povestește-mi despre tine și cum putem colabora!' },
 		],
 		welcomeMsg: 'Salut! Scrie un mesaj mai jos — ajunge instant în Telegram-ul meu, iar răspunsul meu apare chiar aici în timp real.',
 		inputPlaceholder: 'Scrie un mesaj — ajunge direct în Telegram...',
@@ -77,6 +85,12 @@ const i18n = {
 		highlightsTitle: 'Detalii Tehnice',
 		openLiveSite: 'Deschide Site-ul ↗',
 		githubRepo: 'Repo GitHub',
+		bioTitle: 'Absolvent Politehnică · Telecomunicații · Freelance din Pasiune',
+		bioSummary:
+			'Creez în timpul liber site-uri, aplicații Android & Windows (Apple în dezvoltare) și dispozitive la comandă pe Arduino / ESP32 / STM32. Prețuri corecte fără umflături, orientate spre parteneri și clienți mulțumiți.',
+		bioTags: ['Web & 3D', 'Android', 'Windows', 'Apple · R&D', 'Arduino · ESP32 · STM32'],
+		bioCalcBtn: '🧮 Calculator',
+		bioMoreBtn: 'Despre Mine →',
 	},
 	ru: {
 		featuredBuilds: 'Избранные проекты',
@@ -102,8 +116,9 @@ const i18n = {
 		chips: [
 			{ label: '🚀 Заказать сайт', prompt: 'Привет! Хочу обсудить разработку сайта или веб-приложения.' },
 			{ label: '🧊 3D / WebGL', prompt: 'Интересует 3D-сцена на Three.js / WebGL для проекта.' },
+			{ label: '🔌 ESP32 / Софт', prompt: 'Делаете ли приложения для Android/Windows или устройства на Arduino/ESP32/STM32?' },
 			{ label: '🛡️ DNS и Защита', prompt: 'Есть вопрос по DNS, Cloudflare, домену или кибербезопасности.' },
-			{ label: '👋 Вопрос', prompt: 'Привет! Подскажите по вашим проектам.' },
+			{ label: '👋 О тебе', prompt: 'Расскажите о себе и условиях сотрудничества!' },
 		],
 		welcomeMsg: 'Привет! Напишите сообщение ниже — оно сразу придёт ко мне в Telegram, а ответ появится прямо здесь в реальном времени.',
 		inputPlaceholder: 'Напишите сообщение — оно уйдёт прямо в Telegram...',
@@ -111,6 +126,12 @@ const i18n = {
 		highlightsTitle: 'Ключевые детали',
 		openLiveSite: 'Открыть сайт ↗',
 		githubRepo: 'GitHub Repo',
+		bioTitle: 'Выпускник Политеха · Телекоммуникации · Фриланс как хобби',
+		bioSummary:
+			'В свободное время делаю сайты под задачи людей, приложения под Android и Windows (Apple — в разработке) и кастомные устройства на Arduino, ESP32 и STM32. Беру немного и без накруток — ценю довольных клиентов и партнёров.',
+		bioTags: ['Web и 3D', 'Android', 'Windows', 'Apple · R&D', 'Arduino · ESP32 · STM32'],
+		bioCalcBtn: '🧮 Калькулятор',
+		bioMoreBtn: 'Обо мне →',
 	},
 }[lang];
 ---
@@ -405,6 +426,23 @@ const i18n = {
 		</section>
 	</div>
 </div>
+
+<!-- Compact Bio & Capabilities Teaser Strip -->
+<section class="vsl-bio-strip not-content" data-tile="5" aria-label={i18n.bioTitle}>
+	<div class="vsl-bio-strip-main">
+		<div class="vsl-bio-strip-title">{i18n.bioTitle}</div>
+		<p class="vsl-bio-strip-desc">{i18n.bioSummary}</p>
+		<div class="vsl-bio-strip-tags">
+			{i18n.bioTags.map((tag) => (
+				<span class="vsl-bio-strip-pill">{tag}</span>
+			))}
+		</div>
+	</div>
+	<div class="vsl-bio-strip-actions">
+		<a href={`${prefix}/calculator/`} class="vsl-btn-white">{i18n.bioCalcBtn}</a>
+		<a href={`${prefix}/about/`} class="vsl-btn-glass">{i18n.bioMoreBtn}</a>
+	</div>
+</section>
 
 <!-- Live Project Preview Modal -->
 <div id="vsl-preview-modal" class="vsl-modal-backdrop not-content" role="dialog" aria-modal="true" aria-labelledby="vsl-modal-title">

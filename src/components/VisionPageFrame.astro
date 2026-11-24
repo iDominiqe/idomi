@@ -16,6 +16,8 @@ const dockCopy = {
 		nav: 'Spatial Navigation Dock',
 		home: 'Home',
 		projects: 'Projects',
+		calculator: 'Calculator',
+		about: 'About & Bio',
 		blog: 'Blog & Security',
 		arch: 'Architecture',
 		themes: 'Theme Studio',
@@ -25,6 +27,8 @@ const dockCopy = {
 		nav: 'Navigare spațială',
 		home: 'Acasă',
 		projects: 'Proiecte',
+		calculator: 'Calculator',
+		about: 'Despre Mine',
 		blog: 'Blog & Securitate',
 		arch: 'Arhitectură',
 		themes: 'Studio Teme',
@@ -34,6 +38,8 @@ const dockCopy = {
 		nav: 'Пространственная навигация',
 		home: 'Главная',
 		projects: 'Проекты',
+		calculator: 'Калькулятор',
+		about: 'Обо мне',
 		blog: 'Блог и Безопасность',
 		arch: 'Архитектура',
 		themes: 'Студия Тем',
@@ -43,6 +49,8 @@ const dockCopy = {
 
 const isHome = stripped === '/';
 const isProjects = stripped.startsWith('/projects');
+const isCalculator = stripped.startsWith('/calculator');
+const isAbout = stripped.startsWith('/about');
 const isBlog = stripped.startsWith('/blog');
 const isArchitecture = stripped.startsWith('/reference') || stripped.startsWith('/guides/getting-started');
 const isThemes = stripped.startsWith('/guides/themes');
@@ -193,6 +201,24 @@ const isThemes = stripped.startsWith('/guides/themes');
 					<rect x="13" y="3" width="8" height="8" rx="2" />
 					<rect x="3" y="13" width="8" height="8" rx="2" />
 					<rect x="13" y="13" width="8" height="8" rx="2" />
+				</svg>
+			</a>
+			<a href={`${prefix}/calculator/`} class={`vsl-dock-btn ${isCalculator ? 'is-active' : ''}`} data-tip={dockCopy.calculator} aria-label={dockCopy.calculator}>
+				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<rect x="4" y="2" width="16" height="20" rx="2.5" />
+					<line x1="8" y1="6" x2="16" y2="6" />
+					<line x1="8" y1="11" x2="8.01" y2="11" />
+					<line x1="12" y1="11" x2="12.01" y2="11" />
+					<line x1="16" y1="11" x2="16.01" y2="11" />
+					<line x1="8" y1="15" x2="8.01" y2="15" />
+					<line x1="12" y1="15" x2="12.01" y2="15" />
+					<line x1="16" y1="15" x2="16.01" y2="15" />
+				</svg>
+			</a>
+			<a href={`${prefix}/about/`} class={`vsl-dock-btn ${isAbout ? 'is-active' : ''}`} data-tip={dockCopy.about} aria-label={dockCopy.about}>
+				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<circle cx="12" cy="8" r="4" />
+					<path d="M5 20a7 7 0 0 1 14 0" />
 				</svg>
 			</a>
 			<a href={`${prefix}/blog/`} class={`vsl-dock-btn ${isBlog ? 'is-active' : ''}`} data-tip={dockCopy.blog} aria-label="Blog">
