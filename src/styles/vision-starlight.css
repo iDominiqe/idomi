@@ -681,6 +681,36 @@ html[data-vtheme='flat-light'] .vsl-header-left site-search kbd {
 	color: var(--vsl-text-soft);
 }
 
+.vsl-lang-switch {
+	display: inline-flex;
+	align-items: center;
+	padding: 3px;
+	border-radius: 999px;
+	border: 1px solid var(--vsl-hairline);
+	background: var(--vsl-surface);
+	gap: 2px;
+}
+
+.vsl-lang-btn {
+	padding: 4px 9px;
+	border-radius: 999px;
+	font-size: 0.72rem;
+	font-weight: 650;
+	color: var(--vsl-text-muted);
+	text-decoration: none;
+	line-height: 1.2;
+	transition: background 0.16s ease, color 0.16s ease;
+}
+
+.vsl-lang-btn:hover {
+	color: var(--vsl-text);
+}
+
+.vsl-lang-btn.is-active {
+	background: var(--vsl-accent);
+	color: var(--vsl-accent-ink);
+}
+
 /* Header Dropdown Popover (Feed & Profile) */
 .vsl-popover {
 	position: absolute;

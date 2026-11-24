@@ -3,19 +3,92 @@ import { PROJECTS } from '../data/ecosystem';
 
 const featuredRail = PROJECTS.slice(0, 3);
 const initialHero = PROJECTS[0];
+const pathname = Astro.url.pathname;
+const isRo = pathname === '/ro' || pathname.startsWith('/ro/');
+const prefix = isRo ? '/ro' : '';
+
+const i18n = isRo
+	? {
+			featuredBuilds: 'Proiecte Recomandate',
+			liveCount: '8 Live ⇅',
+			weatherAria: 'Vremea în Chișinău',
+			city: 'Chișinău',
+			unitToggleTitle: 'Comută °C / °F',
+			refreshWeather: 'Actualizează vremea',
+			openGoogleWeather: 'Deschide în Google Weather',
+			loading: 'Se încarcă...',
+			humidity: 'Umiditate',
+			wind: 'Vânt',
+			timeMd: 'Ora MD',
+			forecastAria: 'Prognoză 4 zile',
+			livePreview: 'Previzualizare',
+			openSite: 'Deschide',
+			chatAria: 'Chat live cu iDominiqe pe Telegram',
+			chatTitle: 'Chat cu iDominiqe',
+			chatLive: 'Telegram Live',
+			chatQueue: 'Bot pregătit · așteptare',
+			yourName: 'Numele tău',
+			newChatTitle: 'Șterge istoricul local',
+			chips: [
+				{ label: '🚀 Comandă site', prompt: 'Salut! Vreau să discutăm despre crearea unui site sau a unei aplicații web.' },
+				{ label: '🧊 3D / WebGL', prompt: 'Sunt interesat de o scenă 3D pe Three.js / WebGL pentru un proiect.' },
+				{ label: '🛡️ DNS & Securitate', prompt: 'Am o întrebare despre DNS, Cloudflare, domeniu sau securitate cibernetică.' },
+				{ label: '👋 Întrebare', prompt: 'Salut! Aș dori să pun o întrebare despre proiecte.' },
+			],
+			welcomeMsg: 'Salut! Scrie un mesaj mai jos — ajunge instant în Telegram-ul meu, iar răspunsul meu apare chiar aici în timp real.',
+			inputPlaceholder: 'Scrie un mesaj — ajunge direct în Telegram...',
+			sendBtn: 'Trimite',
+			highlightsTitle: 'Detalii Tehnice',
+			openLiveSite: 'Deschide Site-ul ↗',
+			githubRepo: 'Repo GitHub',
+	  }
+	: {
+			featuredBuilds: 'Featured Builds',
+			liveCount: '8 Live ⇅',
+			weatherAria: 'Weather in Chișinău',
+			city: 'Chișinău',
+			unitToggleTitle: 'Switch °C / °F',
+			refreshWeather: 'Refresh weather',
+			openGoogleWeather: 'Open in Google Weather',
+			loading: 'Loading...',
+			humidity: 'Humidity',
+			wind: 'Wind',
+			timeMd: 'MD Time',
+			forecastAria: '4-day forecast',
+			livePreview: 'Live Preview',
+			openSite: 'Open Site',
+			chatAria: 'Live Telegram chat with iDominiqe',
+			chatTitle: 'Chat with iDominiqe',
+			chatLive: 'Telegram Live',
+			chatQueue: 'Bot ready · queue',
+			yourName: 'Your name',
+			newChatTitle: 'Clear local chat history',
+			chips: [
+				{ label: '🚀 Order a site', prompt: 'Hi! I would like to discuss building a website or web app.' },
+				{ label: '🧊 3D / WebGL', prompt: 'Interested in a Three.js / WebGL 3D experience for my project.' },
+				{ label: '🛡️ DNS & Security', prompt: 'I have a question about DNS, Cloudflare, domains, or cybersecurity.' },
+				{ label: '👋 Question', prompt: 'Hi! Wanted to ask a quick question about your projects.' },
+			],
+			welcomeMsg: 'Hi! Write a message below — it goes straight to my Telegram, and my reply will appear right here in real time.',
+			inputPlaceholder: 'Write a message — sent straight to Telegram...',
+			sendBtn: 'Send',
+			highlightsTitle: 'Key Engineering Highlights',
+			openLiveSite: 'Open Live Site ↗',
+			githubRepo: 'GitHub Repo',
+	  };
 ---
 
 <div class="vsl-dash not-content" id="vsl-dashboard">
 	<!-- Left Bento Rail -->
-	<aside class="vsl-rail" aria-label="Featured builds and Chisinau weather">
+	<aside class="vsl-rail" aria-label={i18n.featuredBuilds}>
 		<!-- Top Card: Featured Builds -->
 		<section class="vsl-rail-card" data-tile="1">
 			<div class="vsl-rail-head">
 				<h2 class="vsl-rail-title">
 					<span aria-hidden="true" style="color:#fb923c;">✦</span>
-					Featured Builds
+					{i18n.featuredBuilds}
 				</h2>
-				<a href="/projects/ecosystem/" class="vsl-rail-meta" style="text-decoration:none;">8 Live ⇅</a>
+				<a href={`${prefix}/projects/ecosystem/`} class="vsl-rail-meta" style="text-decoration:none;">{i18n.liveCount}</a>
 			</div>
 
 			<div class="vsl-mini-stack">
@@ -58,7 +131,7 @@ const initialHero = PROJECTS[0];
 		</section>
 
 		<!-- Bottom Card: Google-Style Weather Widget (Chișinău) -->
-		<section class="vsl-rail-card vsl-weather-card" id="vsl-weather-card" data-tile="2" aria-label="Погода в Кишинёве">
+		<section class="vsl-rail-card vsl-weather-card" id="vsl-weather-card" data-tile="2" aria-label={i18n.weatherAria}>
 			<div class="vsl-rail-head">
 				<h2 class="vsl-rail-title">
 					<span class="vsl-g-dots" aria-hidden="true">
@@ -67,17 +140,17 @@ const initialHero = PROJECTS[0];
 						<i style="background:#FBBC05;"></i>
 						<i style="background:#34A853;"></i>
 					</span>
-					<span>Кишинёв</span>
+					<span>{i18n.city}</span>
 				</h2>
 				<div class="vsl-w-actions">
-					<button type="button" id="vsl-w-unit" class="vsl-w-chip-btn" title="Переключить °C / °F">°C</button>
-					<button type="button" id="vsl-w-refresh" class="vsl-w-chip-btn" title="Обновить погоду" aria-label="Обновить погоду">↻</button>
+					<button type="button" id="vsl-w-unit" class="vsl-w-chip-btn" title={i18n.unitToggleTitle}>°C</button>
+					<button type="button" id="vsl-w-refresh" class="vsl-w-chip-btn" title={i18n.refreshWeather} aria-label={i18n.refreshWeather}>↻</button>
 					<a
 						href="https://www.google.com/search?q=weather+Chisinau"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="vsl-w-chip-btn"
-						title="Открыть в Google Погоде"
+						title={i18n.openGoogleWeather}
 					>
 						Google ↗
 					</a>
@@ -95,27 +168,27 @@ const initialHero = PROJECTS[0];
 					<div id="vsl-w-temp" class="vsl-w-temp">--°</div>
 				</div>
 				<div class="vsl-w-hero-right">
-					<div id="vsl-w-cond" class="vsl-w-cond">Загрузка...</div>
-					<div id="vsl-w-feels" class="vsl-w-sub">Кишинёв · Europe/Chisinau</div>
+					<div id="vsl-w-cond" class="vsl-w-cond">{i18n.loading}</div>
+					<div id="vsl-w-feels" class="vsl-w-sub">Chișinău · Europe/Chisinau</div>
 				</div>
 			</div>
 
 			<div class="vsl-w-metrics">
 				<div class="vsl-w-metric">
-					<span class="vsl-w-metric-label">Влажность</span>
+					<span class="vsl-w-metric-label">{i18n.humidity}</span>
 					<strong id="vsl-w-hum">--%</strong>
 				</div>
 				<div class="vsl-w-metric">
-					<span class="vsl-w-metric-label">Ветер</span>
-					<strong id="vsl-w-wind">-- км/ч</strong>
+					<span class="vsl-w-metric-label">{i18n.wind}</span>
+					<strong id="vsl-w-wind">-- km/h</strong>
 				</div>
 				<div class="vsl-w-metric">
-					<span class="vsl-w-metric-label">Время MD</span>
+					<span class="vsl-w-metric-label">{i18n.timeMd}</span>
 					<strong id="vsl-w-time">--:--</strong>
 				</div>
 			</div>
 
-			<div id="vsl-w-forecast" class="vsl-w-days" aria-label="Прогноз на 4 дня">
+			<div id="vsl-w-forecast" class="vsl-w-days" aria-label={i18n.forecastAria}>
 				<div class="vsl-w-day"><span>--</span><strong>--° / --°</strong></div>
 				<div class="vsl-w-day"><span>--</span><strong>--° / --°</strong></div>
 				<div class="vsl-w-day"><span>--</span><strong>--° / --°</strong></div>
@@ -176,7 +249,7 @@ const initialHero = PROJECTS[0];
 						<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
 							<polygon points="5 3 19 12 5 21 5 3" />
 						</svg>
-						<span>Live Preview</span>
+						<span>{i18n.livePreview}</span>
 					</button>
 					<a
 						id="vsl-hero-visit"
@@ -185,7 +258,7 @@ const initialHero = PROJECTS[0];
 						rel="noopener noreferrer"
 						class="vsl-btn-glass"
 					>
-						<span>Open Site</span>
+						<span>{i18n.openSite}</span>
 						<span aria-hidden="true">↗</span>
 					</a>
 					<a
@@ -217,14 +290,14 @@ const initialHero = PROJECTS[0];
 		</section>
 
 		<!-- Bottom Card: Two-Way Live Chat with Telegram Bot -->
-		<section class="vsl-chat-card" id="vsl-chat-card" data-tile="4" aria-label="Прямой чат с iDominiqe в Telegram">
+		<section class="vsl-chat-card" id="vsl-chat-card" data-tile="4" aria-label={i18n.chatAria}>
 			<div class="vsl-chat-head">
 				<div class="vsl-chat-title-wrap">
 					<span class="vsl-chat-dot" id="vsl-chat-dot" aria-hidden="true"></span>
 					<div>
 						<h2 class="vsl-strip-title" style="display:flex;align-items:center;gap:8px;">
-							<span>Чат с iDominiqe</span>
-							<span class="vsl-chat-status" id="vsl-chat-status">Telegram Live</span>
+							<span>{i18n.chatTitle}</span>
+							<span class="vsl-chat-status" id="vsl-chat-status">{i18n.chatLive}</span>
 						</h2>
 					</div>
 				</div>
@@ -235,8 +308,8 @@ const initialHero = PROJECTS[0];
 						class="vsl-chat-name"
 						type="text"
 						maxlength="48"
-						placeholder="Ваше имя"
-						aria-label="Ваше имя"
+						placeholder={i18n.yourName}
+						aria-label={i18n.yourName}
 					/>
 					<a
 						href="https://t.me/idominiqe"
@@ -250,27 +323,26 @@ const initialHero = PROJECTS[0];
 						type="button"
 						id="vsl-chat-reset"
 						class="vsl-w-chip-btn"
-						title="Очистить локальную историю чата"
-						aria-label="Новый диалог"
+						title={i18n.newChatTitle}
+						aria-label={i18n.newChatTitle}
 					>
 						↻
 					</button>
 				</div>
 			</div>
 
-			<div class="vsl-chat-chips" aria-label="Быстрые темы">
-				<button type="button" class="vsl-chat-chip" data-chat-prompt="Привет! Хочу обсудить создание сайта или веб-приложения.">🚀 Заказать сайт</button>
-				<button type="button" class="vsl-chat-chip" data-chat-prompt="Интересует 3D-сцена на Three.js / WebGL для проекта.">🧊 3D / WebGL</button>
-				<button type="button" class="vsl-chat-chip" data-chat-prompt="Есть вопрос по DNS, Cloudflare, домену или кибербезопасности.">🛡️ DNS & Security</button>
-				<button type="button" class="vsl-chat-chip" data-chat-prompt="Привет! Хотел задать вопрос по проектам.">👋 Вопрос</button>
+			<div class="vsl-chat-chips" aria-label="Quick prompts">
+				{i18n.chips.map((c) => (
+					<button type="button" class="vsl-chat-chip" data-chat-prompt={c.prompt}>
+						{c.label}
+					</button>
+				))}
 			</div>
 
 			<div class="vsl-chat-messages" id="vsl-chat-messages" aria-live="polite">
 				<div class="vsl-msg vsl-msg--owner">
 					<div class="vsl-msg-meta">iDominiqe · Telegram</div>
-					<div class="vsl-msg-text">
-						Привет! Напишите сообщение ниже — оно мгновенно уйдёт мне в Telegram, а ответ появится прямо здесь в чате.
-					</div>
+					<div class="vsl-msg-text">{i18n.welcomeMsg}</div>
 				</div>
 			</div>
 
@@ -282,11 +354,11 @@ const initialHero = PROJECTS[0];
 					type="text"
 					maxlength="800"
 					required
-					placeholder="Напишите сообщение — оно сразу уйдёт мне в Telegram..."
-					aria-label="Сообщение в Telegram"
+					placeholder={i18n.inputPlaceholder}
+					aria-label={i18n.inputPlaceholder}
 				/>
 				<button type="submit" id="vsl-chat-send" class="vsl-chat-send">
-					<span>Отправить</span>
+					<span>{i18n.sendBtn}</span>
 					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
 						<line x1="22" y1="2" x2="11" y2="13" />
 						<polygon points="22 2 15 22 11 13 2 9 22 2" />
@@ -334,17 +406,17 @@ const initialHero = PROJECTS[0];
 
 				<div>
 					<div style="font-size:0.74rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.62);margin-bottom:6px;">
-						Key Engineering Highlights
+						{i18n.highlightsTitle}
 					</div>
 					<ul class="vsl-modal-list" id="vsl-modal-highlights"></ul>
 				</div>
 
 				<div style="margin-top:auto;display:flex;flex-wrap:wrap;gap:10px;">
 					<a id="vsl-modal-live" href="https://idominiqe.com/" target="_blank" rel="noopener noreferrer" class="vsl-btn-white">
-						Open Live Site ↗
+						{i18n.openLiveSite}
 					</a>
 					<a id="vsl-modal-repo" href="https://github.com/iDominiqe" target="_blank" rel="noopener noreferrer" class="vsl-btn-glass">
-						GitHub Repo
+						{i18n.githubRepo}
 					</a>
 				</div>
 			</div>
@@ -352,8 +424,63 @@ const initialHero = PROJECTS[0];
 	</div>
 </div>
 
-<script define:vars={{ projectsData: PROJECTS }}>
+<script define:vars={{ projectsData: PROJECTS, langCode: isRo ? 'ro' : 'en' }}>
 	(function () {
+		const isRo = langCode === 'ro';
+		const L = isRo
+			? {
+					feelsLike: 'Se simte',
+					today: 'Azi',
+					offlineWeather: 'Fără conexiune · deschide Google',
+					weatherUpdated: 'Vremea Chișinău actualizată',
+					clear: 'Senin',
+					clearNight: 'Noapte senină',
+					partly: 'Parțial noros',
+					overcast: 'Înnorat',
+					fog: 'Ceață',
+					rain: 'Ploaie',
+					snow: 'Ninsoare',
+					storm: 'Furtună',
+					mixed: 'Variabil',
+					welcomeMsg: 'Salut! Scrie un mesaj mai jos — ajunge instant în Telegram-ul meu, iar răspunsul meu apare chiar aici în timp real.',
+					sending: 'Se trimite...',
+					queued: '⏳ În așteptare',
+					tgLive: 'Telegram Live',
+					tgQueue: 'Bot pregătit · așteptare',
+					historyCleared: 'Istoricul local al chatului a fost șters',
+					sendFailed: 'Nu s-a putut trimite mesajul',
+					sentTg: 'Trimis în Telegram',
+					savedQueue: 'Salvat în coada Telegram',
+					localeTag: 'ro-RO',
+					windUnit: 'km/h',
+			  }
+			: {
+					feelsLike: 'Feels like',
+					today: 'Today',
+					offlineWeather: 'Offline · open Google',
+					weatherUpdated: 'Chișinău weather updated',
+					clear: 'Clear sky',
+					clearNight: 'Clear night',
+					partly: 'Partly cloudy',
+					overcast: 'Overcast',
+					fog: 'Fog',
+					rain: 'Rain',
+					snow: 'Snow',
+					storm: 'Thunderstorm',
+					mixed: 'Variable',
+					welcomeMsg: 'Hi! Write a message below — it goes straight to my Telegram, and my reply will appear right here in real time.',
+					sending: 'Sending...',
+					queued: '⏳ Queued',
+					tgLive: 'Telegram Live',
+					tgQueue: 'Bot ready · queue',
+					historyCleared: 'Local chat history cleared',
+					sendFailed: 'Failed to send message',
+					sentTg: 'Sent to Telegram',
+					savedQueue: 'Saved to Telegram queue',
+					localeTag: 'en-US',
+					windUnit: 'km/h',
+			  };
+
 		// ======================== 1. HERO SPOTLIGHT & MODAL ========================
 		const projects = projectsData;
 		let currentIdx = 0;
@@ -498,7 +625,7 @@ const initialHero = PROJECTS[0];
 		function updateChisinauClock() {
 			if (!wTimeEl) return;
 			try {
-				wTimeEl.textContent = new Intl.DateTimeFormat('ru-RU', {
+				wTimeEl.textContent = new Intl.DateTimeFormat('en-GB', {
 					timeZone: 'Europe/Chisinau',
 					hour: '2-digit',
 					minute: '2-digit',
@@ -511,14 +638,14 @@ const initialHero = PROJECTS[0];
 		setInterval(updateChisinauClock, 30000);
 
 		function weatherMeta(code, isDay = 1) {
-			if (code === 0) return { label: isDay ? 'Ясно' : 'Ясная ночь', kind: isDay ? 'sun' : 'moon' };
-			if (code === 1 || code === 2) return { label: 'Малооблачно', kind: 'partly' };
-			if (code === 3) return { label: 'Облачно', kind: 'cloud' };
-			if (code === 45 || code === 48) return { label: 'Туман', kind: 'cloud' };
-			if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return { label: 'Дождь', kind: 'rain' };
-			if ([71, 73, 75, 77, 85, 86].includes(code)) return { label: 'Снег', kind: 'snow' };
-			if ([95, 96, 99].includes(code)) return { label: 'Гроза', kind: 'storm' };
-			return { label: 'Переменно', kind: 'partly' };
+			if (code === 0) return { label: isDay ? L.clear : L.clearNight, kind: isDay ? 'sun' : 'moon' };
+			if (code === 1 || code === 2) return { label: L.partly, kind: 'partly' };
+			if (code === 3) return { label: L.overcast, kind: 'cloud' };
+			if (code === 45 || code === 48) return { label: L.fog, kind: 'cloud' };
+			if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return { label: L.rain, kind: 'rain' };
+			if ([71, 73, 75, 77, 85, 86].includes(code)) return { label: L.snow, kind: 'snow' };
+			if ([95, 96, 99].includes(code)) return { label: L.storm, kind: 'storm' };
+			return { label: L.mixed, kind: 'partly' };
 		}
 
 		function createWeatherSvg(kind, size = 38) {
@@ -592,24 +719,22 @@ const initialHero = PROJECTS[0];
 
 			const cur = data.current;
 			const meta = weatherMeta(Number(cur.weather_code), Number(cur.is_day ?? 1));
-			if (wIconEl) {
-				wIconEl.replaceChildren(createWeatherSvg(meta.kind, 38));
-			}
+			if (wIconEl) wIconEl.replaceChildren(createWeatherSvg(meta.kind, 38));
 			if (wTempEl) wTempEl.textContent = fmtTemp(cur.temperature_2m);
 			if (wCondEl) wCondEl.textContent = meta.label;
-			if (wFeelsEl) wFeelsEl.textContent = `Ощущается: ${fmtTemp(cur.apparent_temperature)}`;
+			if (wFeelsEl) wFeelsEl.textContent = `${L.feelsLike}: ${fmtTemp(cur.apparent_temperature)}`;
 			if (wHumEl) wHumEl.textContent = `${Math.round(Number(cur.relative_humidity_2m))}%`;
-			if (wWindEl) wWindEl.textContent = `${Math.round(Number(cur.wind_speed_10m))} км/ч`;
+			if (wWindEl) wWindEl.textContent = `${Math.round(Number(cur.wind_speed_10m))} ${L.windUnit}`;
 
 			if (wForecastEl && Array.isArray(data.daily.time)) {
 				wForecastEl.replaceChildren();
-				const dayFmt = new Intl.DateTimeFormat('ru-RU', { weekday: 'short', timeZone: 'Europe/Chisinau' });
+				const dayFmt = new Intl.DateTimeFormat(L.localeTag, { weekday: 'short', timeZone: 'Europe/Chisinau' });
 				data.daily.time.slice(0, 4).forEach((isoDate, i) => {
 					const box = document.createElement('div');
 					box.className = 'vsl-w-day';
 
 					const nameEl = document.createElement('span');
-					nameEl.textContent = i === 0 ? 'Сег' : dayFmt.format(new Date(`${isoDate}T12:00:00Z`)).replace('.', '');
+					nameEl.textContent = i === 0 ? L.today : dayFmt.format(new Date(`${isoDate}T12:00:00Z`)).replace('.', '');
 
 					const code = Number(data.daily.weather_code?.[i] ?? 1);
 					const miniIcon = createWeatherSvg(weatherMeta(code, 1).kind, 18);
@@ -648,7 +773,7 @@ const initialHero = PROJECTS[0];
 				} catch (_) {}
 				renderWeather(data);
 			} catch (_) {
-				if (wCondEl) wCondEl.textContent = 'Нет связи · откройте Google';
+				if (wCondEl) wCondEl.textContent = L.offlineWeather;
 			}
 		}
 
@@ -662,7 +787,7 @@ const initialHero = PROJECTS[0];
 
 		wRefreshBtn?.addEventListener('click', () => {
 			loadWeather(true);
-			window.__vslToast?.('Погода Кишинёва обновлена');
+			window.__vslToast?.(L.weatherUpdated);
 		});
 
 		loadWeather(false);
@@ -710,7 +835,7 @@ const initialHero = PROJECTS[0];
 
 		function formatMsgTime(ts) {
 			try {
-				return new Date(ts).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+				return new Date(ts).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 			} catch (_) {
 				return '';
 			}
@@ -728,8 +853,7 @@ const initialHero = PROJECTS[0];
 			wMeta.textContent = 'iDominiqe · Telegram';
 			const wText = document.createElement('div');
 			wText.className = 'vsl-msg-text';
-			wText.textContent =
-				'Привет! Напишите сообщение ниже — оно мгновенно уйдёт мне в Telegram, а ответ появится прямо здесь в чате.';
+			wText.textContent = L.welcomeMsg;
 			welcome.append(wMeta, wText);
 			chatMessagesEl.appendChild(welcome);
 
@@ -741,11 +865,7 @@ const initialHero = PROJECTS[0];
 				meta.className = 'vsl-msg-meta';
 				const timeStr = msg.ts ? formatMsgTime(msg.ts) : '';
 				if (msg.role === 'visitor') {
-					const statusTxt = msg.pending
-						? 'Отправка...'
-						: msg.queued
-						? '⏳ В очереди'
-						: '✓ Telegram';
+					const statusTxt = msg.pending ? L.sending : msg.queued ? L.queued : '✓ Telegram';
 					meta.textContent = `${timeStr ? timeStr + ' · ' : ''}${statusTxt}`;
 				} else {
 					meta.textContent = `iDominiqe · Telegram${timeStr ? ' · ' + timeStr : ''}`;
@@ -763,12 +883,8 @@ const initialHero = PROJECTS[0];
 		}
 
 		function updateStatusBadge(ownerBound) {
-			if (chatDot) {
-				chatDot.classList.toggle('is-queued', !ownerBound);
-			}
-			if (chatStatusEl) {
-				chatStatusEl.textContent = ownerBound ? 'Telegram Live' : 'Бот готов · очередь';
-			}
+			if (chatDot) chatDot.classList.toggle('is-queued', !ownerBound);
+			if (chatStatusEl) chatStatusEl.textContent = ownerBound ? L.tgLive : L.tgQueue;
 		}
 
 		async function fetchChatStatus() {
@@ -776,9 +892,7 @@ const initialHero = PROJECTS[0];
 				const res = await fetch(`${CHAT_API}/status?_t=${Date.now()}`, { cache: 'no-store' });
 				if (!res.ok) return;
 				const data = await res.json();
-				if (data?.ok) {
-					updateStatusBadge(Boolean(data.ownerBound));
-				}
+				if (data?.ok) updateStatusBadge(Boolean(data.ownerBound));
 			} catch (_) {}
 		}
 
@@ -844,7 +958,7 @@ const initialHero = PROJECTS[0];
 			} catch (_) {}
 			if (pollTimer) clearInterval(pollTimer);
 			renderChatMessages();
-			window.__vslToast?.('История локального чата очищена');
+			window.__vslToast?.(L.historyCleared);
 		});
 
 		chatForm?.addEventListener('submit', async (e) => {
@@ -879,7 +993,7 @@ const initialHero = PROJECTS[0];
 				});
 				const data = await res.json().catch(() => null);
 				if (!res.ok || !data?.ok) {
-					throw new Error(data?.error || 'Не удалось отправить сообщение');
+					throw new Error(data?.error || L.sendFailed);
 				}
 
 				const hydrated = (data.messages || []).map((m, idx, arr) =>
@@ -894,10 +1008,10 @@ const initialHero = PROJECTS[0];
 				updateStatusBadge(Boolean(data.ownerBound));
 				renderChatMessages();
 				ensurePolling();
-				window.__vslToast?.(data.delivered ? 'Отправлено в Telegram' : 'Сохранено в очередь Telegram');
+				window.__vslToast?.(data.delivered ? L.sentTg : L.savedQueue);
 			} catch (err) {
 				renderChatMessages();
-				window.__vslToast?.(err instanceof Error ? err.message : 'Ошибка отправки');
+				window.__vslToast?.(err instanceof Error ? err.message : L.sendFailed);
 			} finally {
 				if (chatSendBtn instanceof HTMLButtonElement) chatSendBtn.disabled = false;
 			}
@@ -906,7 +1020,7 @@ const initialHero = PROJECTS[0];
 		renderChatMessages();
 		fetchChatStatus();
 		if (chatState.sessionId && chatState.sessionToken) {
-			pollMessages();
+			pollMessages(true);
 			ensurePolling();
 		}
 	})();

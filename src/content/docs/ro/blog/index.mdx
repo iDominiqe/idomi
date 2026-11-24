@@ -1,0 +1,33 @@
+---
+title: Blog Tehnic & Note de Securitate
+description: Articole tehnice despre DNS, servere NS autoritative, headere de securitate web, protecția datelor personale și arhitectura Cloudflare Edge.
+sidebar:
+  order: 0
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Note tehnice aplicate despre **arhitectura domeniilor, DNS criptografic, securitatea aplicațiilor web, confidențialitate și livrarea statică prin Cloudflare Edge** pe `idominiqe.com`.
+
+<CardGrid>
+	<LinkCard
+		title="DNS, Înregistrări NS & Rutare Subdomenii"
+		description="A, AAAA, CNAME flattening, nameservere autoritative, DNSSEC și izolarea subdomeniilor pe repozitorii GitHub Pages."
+		href="/ro/blog/dns-ns-domains/"
+	/>
+	<LinkCard
+		title="Securitate Web & Apărare CSP"
+		description="Protecție în profunzime cu Content-Security-Policy, HSTS preload, Subresource Integrity și reguli WAF la marginea rețelei."
+		href="/ro/blog/cybersecurity-defense/"
+	/>
+	<LinkCard
+		title="Confidențialitate & Protecția Datelor"
+		description="Arhitectură fără telemetrie invazivă, curățarea metadatelor EXIF, stocare locală și igiena cheilor API."
+		href="/ro/blog/privacy-data-protection/"
+	/>
+	<LinkCard
+		title="Cloudflare Edge & Livrare Statică"
+		description="Terminare TLS 1.3 prin Anycast, invalidarea instantanee a cache-ului, HTTP/3 și decuplarea deploy-urilor."
+		href="/ro/blog/cloudflare-edge-architecture/"
+	/>
+</CardGrid>

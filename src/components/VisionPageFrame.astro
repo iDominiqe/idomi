@@ -5,12 +5,15 @@ import { THEMES } from '../data/ecosystem';
 const { hasSidebar } = Astro.locals.starlightRoute;
 const pathname = Astro.url.pathname;
 const cleanDisplayPath = pathname === '/' ? 'idominiqe.com/' : `idominiqe.com${pathname}`;
+const isRo = pathname === '/ro' || pathname.startsWith('/ro/');
+const prefix = isRo ? '/ro' : '';
+const stripped = isRo ? pathname.replace(/^\/ro(?=\/|$)/, '') || '/' : pathname;
 
-const isHome = pathname === '/';
-const isProjects = pathname.startsWith('/projects');
-const isBlog = pathname.startsWith('/blog');
-const isArchitecture = pathname.startsWith('/reference') || pathname.startsWith('/guides/getting-started');
-const isThemes = pathname.startsWith('/guides/themes');
+const isHome = stripped === '/';
+const isProjects = stripped.startsWith('/projects');
+const isBlog = stripped.startsWith('/blog');
+const isArchitecture = stripped.startsWith('/reference') || stripped.startsWith('/guides/getting-started');
+const isThemes = stripped.startsWith('/guides/themes');
 ---
 
 <div class="vsl-backdrop" aria-hidden="true">
@@ -145,14 +148,14 @@ const isThemes = pathname.startsWith('/guides/themes');
 	</nav>
 
 	<div class="vsl-stage">
-		<aside class="vsl-dock" aria-label="Spatial Navigation Dock">
-			<a href="/" class={`vsl-dock-btn ${isHome ? 'is-active' : ''}`} data-tip="Home" aria-label="Home">
+		<aside class="vsl-dock" aria-label={isRo ? 'Navigare spațială' : 'Spatial Navigation Dock'}>
+			<a href={`${prefix}/`} class={`vsl-dock-btn ${isHome ? 'is-active' : ''}`} data-tip={isRo ? 'Acasă' : 'Home'} aria-label={isRo ? 'Acasă' : 'Home'}>
 				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<path d="M3 10.5 12 3l9 7.5" />
 					<path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10" />
 				</svg>
 			</a>
-			<a href="/projects/ecosystem/" class={`vsl-dock-btn ${isProjects ? 'is-active' : ''}`} data-tip="Projects" aria-label="Projects">
+			<a href={`${prefix}/projects/ecosystem/`} class={`vsl-dock-btn ${isProjects ? 'is-active' : ''}`} data-tip={isRo ? 'Proiecte' : 'Projects'} aria-label={isRo ? 'Proiecte' : 'Projects'}>
 				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<rect x="3" y="3" width="8" height="8" rx="2" />
 					<rect x="13" y="3" width="8" height="8" rx="2" />
@@ -160,13 +163,13 @@ const isThemes = pathname.startsWith('/guides/themes');
 					<rect x="13" y="13" width="8" height="8" rx="2" />
 				</svg>
 			</a>
-			<a href="/blog/" class={`vsl-dock-btn ${isBlog ? 'is-active' : ''}`} data-tip="Blog & Security" aria-label="Blog">
+			<a href={`${prefix}/blog/`} class={`vsl-dock-btn ${isBlog ? 'is-active' : ''}`} data-tip={isRo ? 'Blog & Securitate' : 'Blog & Security'} aria-label="Blog">
 				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
 					<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
 				</svg>
 			</a>
-			<a href="/reference/architecture/" class={`vsl-dock-btn ${isArchitecture ? 'is-active' : ''}`} data-tip="Architecture" aria-label="Architecture">
+			<a href={`${prefix}/reference/architecture/`} class={`vsl-dock-btn ${isArchitecture ? 'is-active' : ''}`} data-tip={isRo ? 'Arhitectură' : 'Architecture'} aria-label={isRo ? 'Arhitectură' : 'Architecture'}>
 				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<polygon points="12 2 2 7 12 12 22 7 12 2" />
 					<polyline points="2 17 12 22 22 17" />
@@ -177,8 +180,8 @@ const isThemes = pathname.startsWith('/guides/themes');
 				type="button"
 				id="vsl-dock-themes"
 				class={`vsl-dock-btn ${isThemes ? 'is-active' : ''}`}
-				data-tip="Theme Studio"
-				aria-label="Theme Studio"
+				data-tip={isRo ? 'Studio Teme' : 'Theme Studio'}
+				aria-label={isRo ? 'Studio Teme' : 'Theme Studio'}
 			>
 				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<circle cx="12" cy="12" r="3" />
@@ -283,10 +286,10 @@ const isThemes = pathname.startsWith('/guides/themes');
 	</div>
 
 	<a
-		href="/guides/themes/"
+		href={`${prefix}/guides/themes/`}
 		style="margin-top:auto;display:flex;align-items:center;justify-content:center;height:38px;border-radius:12px;background:var(--vsl-surface-strong);color:inherit;text-decoration:none;font-size:0.8rem;font-weight:650;"
 	>
-		Open Interactive Themes Guide →
+		{isRo ? 'Deschide Ghidul de Teme →' : 'Open Interactive Themes Guide →'}
 	</a>
 </aside>
 
@@ -458,5 +461,265 @@ const isThemes = pathname.startsWith('/guides/themes');
 			if (!raw.endsWith('/')) raw += '/';
 			window.location.href = raw;
 		});
+	})();
+</script>
+
+<!-- Animated Black Cat Favicon with Adaptive Sticker Contour -->
+<script is:inline>
+	(function () {
+		const SPEED_MS = 170;
+		const STICKER_COLOR = '#ffffff';
+		const STICKER_THICKNESS_32 = 2;
+		const FRAMES = [
+			{ yOffset: 34, eyeOpen: 1, pupilY: -2, showPaws: false, sparkles: 0 },
+			{ yOffset: 18, eyeOpen: 1, pupilY: -1, showPaws: false, sparkles: 0 },
+			{ yOffset: 4, eyeOpen: 1, pupilX: 0, showPaws: true, pawClaws: false, sparkles: 0 },
+			{ yOffset: 0, eyeOpen: 1, pupilX: -2, showPaws: true, pawClaws: true, sparkles: 0 },
+			{ yOffset: 0, eyeOpen: 1, pupilX: 2, showPaws: true, pawClaws: true, sparkles: 0 },
+			{ yOffset: 0, eyeOpen: 0.1, earWiggle: 4, showPaws: true, pawClaws: false, sparkles: 0.4 },
+			{ yOffset: -2, eyeOpen: 1, tilt: -0.14, earWiggle: -3, showPaws: true, sparkles: 1 },
+			{ yOffset: -2, eyeOpen: 1, tilt: 0.14, earWiggle: 3, showPaws: true, sparkles: 0.8 },
+			{ yOffset: 0, eyeOpen: 1, tilt: 0, showPaws: true, sparkles: 0.3 },
+			{ yOffset: 0, eyeOpen: 0.1, showPaws: true, sparkles: 0 },
+			{ yOffset: 12, eyeOpen: 1, showPaws: false, sparkles: 0 },
+			{ yOffset: 28, eyeOpen: 1, showPaws: false, sparkles: 0 },
+		];
+
+		const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+		let isStickerEnabled = darkQuery.matches;
+		darkQuery.addEventListener('change', (e) => {
+			isStickerEnabled = e.matches;
+		});
+
+		document.querySelectorAll('link[rel*="icon"]:not(#cat-favicon)').forEach((el) => el.remove());
+		const link =
+			document.getElementById('cat-favicon') ||
+			(() => {
+				const l = document.createElement('link');
+				l.id = 'cat-favicon';
+				l.rel = 'icon';
+				document.head.appendChild(l);
+				return l;
+			})();
+		link.type = 'image/png';
+
+		const SIZE = 64;
+		const outCanvas = document.createElement('canvas');
+		outCanvas.width = SIZE;
+		outCanvas.height = SIZE;
+		const outCtx = outCanvas.getContext('2d');
+
+		const rawCanvas = document.createElement('canvas');
+		rawCanvas.width = SIZE;
+		rawCanvas.height = SIZE;
+		const rawCtx = rawCanvas.getContext('2d');
+
+		const tintCanvas = document.createElement('canvas');
+		tintCanvas.width = SIZE;
+		tintCanvas.height = SIZE;
+		const tintCtx = tintCanvas.getContext('2d');
+
+		if (!outCtx || !rawCtx || !tintCtx) return;
+
+		const ANGLES = Array.from({ length: 16 }, (_, i) => (i * Math.PI * 2) / 16);
+
+		function drawRawCat(ctx, state) {
+			const scale = SIZE / 128;
+			ctx.save();
+			ctx.clearRect(0, 0, SIZE, SIZE);
+			ctx.scale(scale, scale);
+
+			const {
+				yOffset = 0,
+				tilt = 0,
+				earWiggle = 0,
+				eyeOpen = 1,
+				pupilX = 0,
+				pupilY = 0,
+				showPaws = false,
+				pawClaws = false,
+				sparkles = 0,
+			} = state;
+
+			ctx.save();
+			ctx.translate(64, 74 + yOffset);
+			ctx.rotate(tilt);
+
+			ctx.beginPath();
+			ctx.moveTo(-38, -8);
+			ctx.quadraticCurveTo(-42, -44 + earWiggle, -34, -50 + earWiggle);
+			ctx.quadraticCurveTo(-20, -44, -13, -30);
+			ctx.quadraticCurveTo(0, -34, 13, -30);
+			ctx.quadraticCurveTo(20, -44, 34, -50 - earWiggle);
+			ctx.quadraticCurveTo(42, -44 - earWiggle, 38, -8);
+			ctx.quadraticCurveTo(46, 14, 36, 34);
+			ctx.lineTo(-36, 34);
+			ctx.quadraticCurveTo(-46, 14, -38, -8);
+			ctx.closePath();
+			ctx.fillStyle = '#111115';
+			ctx.fill();
+
+			ctx.strokeStyle = '#111115';
+			ctx.lineWidth = 3.2;
+			ctx.lineCap = 'round';
+			ctx.beginPath();
+			ctx.moveTo(-34, 6);
+			ctx.lineTo(-49, 1);
+			ctx.moveTo(-35, 13);
+			ctx.lineTo(-50, 14);
+			ctx.moveTo(34, 6);
+			ctx.lineTo(49, 1);
+			ctx.moveTo(35, 13);
+			ctx.lineTo(50, 14);
+			ctx.stroke();
+
+			[-18, 18].forEach((ex) => {
+				ctx.save();
+				ctx.translate(ex, -2);
+				if (eyeOpen > 0.3) {
+					ctx.beginPath();
+					ctx.arc(0, 0, 14, 0, Math.PI * 2);
+					ctx.fillStyle = '#ffffff';
+					ctx.fill();
+					ctx.beginPath();
+					ctx.arc(pupilX, pupilY, 10, 0, Math.PI * 2);
+					ctx.fillStyle = '#111115';
+					ctx.fill();
+					ctx.beginPath();
+					ctx.arc(pupilX - 3.2, pupilY - 3.2, 3.5, 0, Math.PI * 2);
+					ctx.fillStyle = '#ffffff';
+					ctx.fill();
+				} else {
+					ctx.beginPath();
+					ctx.arc(0, 2, 10.5, Math.PI * 1.1, Math.PI * 1.9);
+					ctx.lineWidth = 3.8;
+					ctx.strokeStyle = '#ffffff';
+					ctx.lineCap = 'round';
+					ctx.stroke();
+				}
+				ctx.restore();
+			});
+
+			ctx.beginPath();
+			ctx.moveTo(-3.5, 10.5);
+			ctx.lineTo(3.5, 10.5);
+			ctx.lineTo(0, 15);
+			ctx.closePath();
+			ctx.fillStyle = '#ffffff';
+			ctx.fill();
+			ctx.restore();
+
+			if (showPaws) {
+				const pawY = 110 + Math.min(0, yOffset * 0.4);
+				[27, 101].forEach((px) => {
+					ctx.save();
+					ctx.translate(px, pawY);
+					ctx.beginPath();
+					ctx.ellipse(0, 0, 12.5, 9, 0, 0, Math.PI * 2);
+					ctx.fillStyle = '#ffffff';
+					ctx.fill();
+					ctx.lineWidth = 2.6;
+					ctx.strokeStyle = '#111115';
+					ctx.stroke();
+					ctx.beginPath();
+					ctx.moveTo(-4.5, -3);
+					ctx.lineTo(-4.5, 4);
+					ctx.moveTo(0, -4);
+					ctx.lineTo(0, 4);
+					ctx.moveTo(4.5, -3);
+					ctx.lineTo(4.5, 4);
+					ctx.lineWidth = 2;
+					ctx.stroke();
+					if (pawClaws) {
+						[-4.5, 0, 4.5].forEach((c) => {
+							ctx.beginPath();
+							ctx.moveTo(c - 1.5, 6.5);
+							ctx.lineTo(c, 12.5);
+							ctx.lineTo(c + 1.5, 6.5);
+							ctx.closePath();
+							ctx.fillStyle = '#ffffff';
+							ctx.fill();
+							ctx.lineWidth = 1.6;
+							ctx.stroke();
+						});
+					}
+					ctx.restore();
+				});
+			}
+
+			if (sparkles > 0) {
+				[
+					[17, 28, 8.5],
+					[111, 22, 10.5],
+					[106, 50, 6.5],
+				].forEach(([sx, sy, baseR]) => {
+					const r = baseR * sparkles;
+					ctx.save();
+					ctx.translate(sx, sy);
+					ctx.beginPath();
+					ctx.moveTo(0, -r);
+					ctx.quadraticCurveTo(0, 0, r, 0);
+					ctx.quadraticCurveTo(0, 0, 0, r);
+					ctx.quadraticCurveTo(0, 0, -r, 0);
+					ctx.quadraticCurveTo(0, 0, 0, -r);
+					ctx.fillStyle = '#fbbf24';
+					ctx.fill();
+					ctx.lineWidth = 1.6;
+					ctx.strokeStyle = '#111115';
+					ctx.stroke();
+					ctx.restore();
+				});
+			}
+			ctx.restore();
+		}
+
+		function renderFrame(state) {
+			outCtx.clearRect(0, 0, SIZE, SIZE);
+			drawRawCat(rawCtx, state);
+
+			if (isStickerEnabled && STICKER_THICKNESS_32 > 0) {
+				tintCtx.save();
+				tintCtx.clearRect(0, 0, SIZE, SIZE);
+				tintCtx.drawImage(rawCanvas, 0, 0);
+				tintCtx.globalCompositeOperation = 'source-in';
+				tintCtx.fillStyle = STICKER_COLOR;
+				tintCtx.fillRect(0, 0, SIZE, SIZE);
+				tintCtx.restore();
+
+				const radius = (STICKER_THICKNESS_32 / 32) * SIZE;
+				const rings = radius > 4 ? [radius * 0.5, radius] : [radius];
+				rings.forEach((r) => {
+					for (let i = 0; i < ANGLES.length; i += 1) {
+						outCtx.drawImage(tintCanvas, Math.cos(ANGLES[i]) * r, Math.sin(ANGLES[i]) * r);
+					}
+				});
+			}
+			outCtx.drawImage(rawCanvas, 0, 0);
+		}
+
+		let idx = 0;
+		let timer = null;
+		const step = () => {
+			renderFrame(FRAMES[idx]);
+			try {
+				link.href = outCanvas.toDataURL('image/png');
+			} catch (_) {}
+			idx = (idx + 1) % FRAMES.length;
+		};
+		const start = () => {
+			if (!timer) {
+				step();
+				timer = setInterval(step, SPEED_MS);
+			}
+		};
+		const stop = () => {
+			if (timer) {
+				clearInterval(timer);
+				timer = null;
+			}
+		};
+
+		document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+		start();
 	})();
 </script>

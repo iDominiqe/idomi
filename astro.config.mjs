@@ -9,6 +9,17 @@ export default defineConfig({
 		starlight({
 			title: 'iDominiqe',
 			description: 'iDominiqe — VisionOS Spatial Hub, Engineering Blog & Live WebGL Ecosystem',
+			defaultLocale: 'root',
+			locales: {
+				root: {
+					label: 'English',
+					lang: 'en',
+				},
+				ro: {
+					label: 'Română',
+					lang: 'ro',
+				},
+			},
 			customCss: ['./src/styles/vision-starlight.css'],
 			components: {
 				PageFrame: './src/components/VisionPageFrame.astro',
@@ -16,6 +27,15 @@ export default defineConfig({
 				PageTitle: './src/components/VisionPageTitle.astro',
 			},
 			head: [
+				{
+					tag: 'link',
+					attrs: {
+						id: 'cat-favicon',
+						rel: 'icon',
+						type: 'image/svg+xml',
+						href: '/favicon.svg',
+					},
+				},
 				{
 					tag: 'link',
 					attrs: {
@@ -55,21 +75,25 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Projects',
+					translations: { ro: 'Proiecte' },
 					items: [{ autogenerate: { directory: 'projects' } }],
 				},
 				{
 					label: 'Engineering Blog',
+					translations: { ro: 'Blog Tehnic' },
 					items: [{ autogenerate: { directory: 'blog' } }],
 				},
 				{
 					label: 'Guides & Themes',
+					translations: { ro: 'Ghiduri & Teme' },
 					items: [
-						{ label: 'Getting Started', slug: 'guides/getting-started' },
-						{ label: 'Theme Studio & Presets', slug: 'guides/themes' },
+						{ label: 'Getting Started', translations: { ro: 'Primii Pași' }, slug: 'guides/getting-started' },
+						{ label: 'Theme Studio & Presets', translations: { ro: 'Teme & Preseturi' }, slug: 'guides/themes' },
 					],
 				},
 				{
 					label: 'Reference',
+					translations: { ro: 'Referință' },
 					items: [{ autogenerate: { directory: 'reference' } }],
 				},
 			],

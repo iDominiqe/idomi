@@ -1,0 +1,38 @@
+---
+title: Teme & Preseturi VisionOS
+description: Comută interactiv între sticla fumurie Vision Loft, Obsidian Glass, Aurora Prism și modurile Flat Dark / Flat Light.
+sidebar:
+  order: 2
+---
+
+import { THEMES } from '../../../../data/ecosystem';
+
+Selectați un preset de mai jos pentru a schimba instant aspectul interfeței spațiale și contrastul paginilor Starlight. Preferința este salvată local în browser.
+
+<div class="vsl-cards-grid">
+	{THEMES.map((theme) => (
+		<div class="vsl-doc-card">
+			<div style="display:flex;align-items:center;gap:12px;">
+				<span class="vsl-theme-swatch" style={`background:${theme.swatch}`}></span>
+				<div>
+					<div style="font-weight:700;font-size:0.98rem;">{theme.name}</div>
+					<div style="font-size:0.74rem;color:var(--vsl-text-soft);">{theme.badge} · {theme.mode.toUpperCase()}</div>
+				</div>
+			</div>
+			<p style="font-size:0.84rem;color:var(--vsl-text-muted);margin:4px 0 8px;">{theme.description}</p>
+			<button
+				type="button"
+				data-vtheme-set={theme.id}
+				class="vsl-theme-option"
+				style="justify-content:center;font-weight:700;font-size:0.82rem;margin-top:auto;"
+			>
+				Activează {theme.name}
+			</button>
+		</div>
+	))}
+</div>
+
+## Mod Flat vs Sticlă Spațială
+
+- **Vision Loft / Obsidian / Aurora**: Panouri translucide cu `backdrop-filter: blur(42px)` peste fundalul ambiental sau o imagine proprie.
+- **Flat Dark & Flat Light**: Dezactivează filtrele de blur (`backdrop-filter: none`) pentru consum redus de GPU și lizibilitate maximă.
