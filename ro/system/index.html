@@ -1,0 +1,867 @@
+<!DOCTYPE html><html lang="ro" dir="ltr" data-theme="dark" data-astro-cid-g5ptsecz><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Despre Sistemul Tău — IP, Rețea & Date PC | iDominiqe</title><link rel="canonical" href="https://idominiqe.com/ro/system/"/><link rel="alternate" hreflang="en" href="https://idominiqe.com/system/"/><link rel="alternate" hreflang="ro" href="https://idominiqe.com/ro/system/"/><link rel="alternate" hreflang="ru" href="https://idominiqe.com/ru/system/"/><link rel="alternate" hreflang="x-default" href="https://idominiqe.com/system/"/><link rel="sitemap" href="/sitemap-index.xml"/><link id="cat-favicon" rel="icon" type="image/svg+xml" href="/favicon.svg"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@600;700&amp;display=swap"/><script>(()=>{try{const t=localStorage.getItem('vslTheme')||'loft';const m=t==='flat-light'?'light':'dark';document.documentElement.dataset.vtheme=t;document.documentElement.dataset.theme=m;localStorage.setItem('starlight-theme',m);}catch(e){document.documentElement.dataset.vtheme='loft';document.documentElement.dataset.theme='dark';}})();</script><link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v7.4.13"/><meta name="generator" content="Starlight v0.43.1"/><meta property="og:title" content="Despre Sistemul Tău — IP, Rețea &amp; Date PC"/><meta property="og:type" content="article"/><meta property="og:url" content="https://idominiqe.com/ro/system/"/><meta property="og:locale" content="ro"/><meta property="og:description" content="Diagnosticare live pentru adresa IP publică, furnizor (ISP/ASN), țară, ping Cloudflare, GPU, rată de refresh ecran și capabilități PC."/><meta property="og:site_name" content="iDominiqe"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Diagnosticare live pentru adresa IP publică, furnizor (ISP/ASN), țară, ping Cloudflare, GPU, rată de refresh ecran și capabilități PC."/><script>
+	(() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+	})();
+</script><link rel="stylesheet" href="/_astro/print.C9eyqPGL.css" media="print"><link rel="stylesheet" href="/_astro/common.DEOcCDTo.css"><style>@layer starlight.components.icon{svg[data-astro-cid-hkc32dio]{color:var(--sl-icon-color);font-size:var(--sl-icon-size,1em);width:1em;height:1em;overflow:visible}}
+</style><script type="module" src="/_astro/page.cNngjUgL.js"></script><style>.vsl-sys-page[data-astro-cid-6hfer6sw]{flex-direction:column;gap:16px;padding-bottom:14px;display:flex}.vsl-sys-hero[data-astro-cid-6hfer6sw]{gap:12px;padding:22px 24px 18px}.vsl-sys-hero-top[data-astro-cid-6hfer6sw]{flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px;display:flex}.vsl-sys-eyebrow[data-astro-cid-6hfer6sw]{text-transform:uppercase;letter-spacing:.08em;color:#34d399;margin-bottom:4px;font-size:.72rem;font-weight:700}html[data-vtheme=flat-light] .vsl-sys-eyebrow[data-astro-cid-6hfer6sw]{color:#059669}.vsl-sys-h1[data-astro-cid-6hfer6sw]{color:var(--vsl-text);margin:0;font-size:clamp(1.45rem,2.5vw,2rem);font-weight:800}.vsl-sys-sub[data-astro-cid-6hfer6sw]{color:var(--vsl-text-muted);max-width:68ch;margin:6px 0 0;font-size:.88rem;line-height:1.55}.vsl-sys-actions[data-astro-cid-6hfer6sw]{flex-wrap:wrap;flex-shrink:0;gap:8px;display:flex}.vsl-sys-privacy[data-astro-cid-6hfer6sw]{color:var(--vsl-text-soft);border-top:1px solid var(--vsl-hairline);padding-top:10px;font-size:.76rem}.vsl-sys-kpis[data-astro-cid-6hfer6sw]{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;display:grid}.vsl-sys-kpi[data-astro-cid-6hfer6sw]{gap:5px;padding:15px 16px}.vsl-sys-kpi-label[data-astro-cid-6hfer6sw]{text-transform:uppercase;letter-spacing:.05em;color:var(--vsl-text-soft);font-size:.7rem;font-weight:700}.vsl-sys-kpi-row[data-astro-cid-6hfer6sw]{justify-content:space-between;align-items:center;gap:8px;display:flex}.vsl-sys-kpi-val[data-astro-cid-6hfer6sw]{color:var(--vsl-text);word-break:break-word;font-size:.98rem;font-weight:750}.vsl-sys-kpi-sub[data-astro-cid-6hfer6sw]{font-size:.74rem;font-family:var(--sl-font-mono);color:var(--vsl-text-muted);word-break:break-word}.vsl-sys-mini-btn[data-astro-cid-6hfer6sw]{border:1px solid var(--vsl-hairline);background:var(--vsl-surface-strong);width:26px;height:26px;color:var(--vsl-text);cursor:pointer;border-radius:8px;flex-shrink:0;justify-content:center;align-items:center;font-size:.78rem;display:inline-flex}.vsl-sys-grid[data-astro-cid-6hfer6sw]{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;display:grid}.vsl-sys-card[data-astro-cid-6hfer6sw]{gap:12px;padding:18px 20px}.vsl-sys-h2[data-astro-cid-6hfer6sw]{color:var(--vsl-text);border-bottom:1px solid var(--vsl-hairline);margin:0;padding-bottom:8px;font-size:.98rem;font-weight:750}.vsl-sys-dl[data-astro-cid-6hfer6sw]{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;margin:0;display:grid}.vsl-sys-dl[data-astro-cid-6hfer6sw]>div[data-astro-cid-6hfer6sw]{min-width:0}.vsl-sys-dl[data-astro-cid-6hfer6sw]>div[data-astro-cid-6hfer6sw].is-full{border-top:1px dashed var(--vsl-hairline);grid-column:1/-1;padding-top:6px}.vsl-sys-dl[data-astro-cid-6hfer6sw] dt[data-astro-cid-6hfer6sw]{color:var(--vsl-text-soft);margin-bottom:2px;font-size:.71rem}.vsl-sys-dl[data-astro-cid-6hfer6sw] dd[data-astro-cid-6hfer6sw]{font-size:.82rem;font-family:var(--sl-font-mono);color:var(--vsl-text);word-break:break-word;margin:0;line-height:1.4}.vsl-sys-hint[data-astro-cid-6hfer6sw]{color:var(--vsl-text-soft);margin:4px 0 0;font-size:.73rem;line-height:1.45}.vsl-sys-page[data-astro-cid-6hfer6sw].is-masked .vsl-sensitive[data-astro-cid-6hfer6sw]{filter:blur(6px);user-select:none;transition:filter .16s}@media (width<=1050px){.vsl-sys-kpis[data-astro-cid-6hfer6sw]{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (width<=860px){.vsl-sys-grid[data-astro-cid-6hfer6sw],.vsl-sys-dl[data-astro-cid-6hfer6sw]{grid-template-columns:1fr}.vsl-sys-hero[data-astro-cid-6hfer6sw]{padding:18px}}@media (width<=560px){.vsl-sys-kpis[data-astro-cid-6hfer6sw]{grid-template-columns:1fr}}
+</style></head><body data-astro-cid-g5ptsecz><a class="sl-skip-link" href="#_top" data-astro-cid-qb7clj6f>Sari la conținut</a><div class="vsl-backdrop" aria-hidden="true"><div class="vsl-backdrop-scene"><svg class="vsl-backdrop-loft" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="vslSkyWall" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e5dfd6"></stop><stop offset="48%" stop-color="#b4aca2"></stop><stop offset="100%" stop-color="#5c5650"></stop></linearGradient><linearGradient id="vslWindowLight" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#eef4f9" stop-opacity="0.92"></stop><stop offset="55%" stop-color="#d5dfe8" stop-opacity="0.72"></stop><stop offset="100%" stop-color="#8b8378" stop-opacity="0.48"></stop></linearGradient><linearGradient id="vslFloor" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#7c7369"></stop><stop offset="100%" stop-color="#383430"></stop></linearGradient></defs><rect width="1600" height="1000" fill="url(#vslSkyWall)"></rect><polygon points="180,0 1320,0 1120,210 380,210" fill="#f3efe9" opacity="0.78"></polygon><rect x="440" y="38" width="290" height="118" rx="8" fill="#ffffff" opacity="0.52"></rect><rect x="780" y="38" width="290" height="118" rx="8" fill="#ffffff" opacity="0.46"></rect><rect x="1160" y="135" width="380" height="585" rx="14" fill="url(#vslWindowLight)"></rect><line x1="1350" y1="135" x2="1350" y2="720" stroke="#4b4743" stroke-width="14" opacity="0.45"></line><line x1="1160" y1="420" x2="1540" y2="420" stroke="#4b4743" stroke-width="10" opacity="0.38"></line><ellipse cx="1460" cy="605" rx="145" ry="185" fill="#637356" opacity="0.52"></ellipse><rect x="110" y="210" width="240" height="460" rx="12" fill="#9c9389" opacity="0.42"></rect><rect x="0" y="710" width="1600" height="290" fill="url(#vslFloor)" opacity="0.88"></rect><rect x="420" y="660" width="660" height="130" rx="34" fill="#d7d0c7" opacity="0.62"></rect></svg></div><div id="vsl-backdrop-custom" class="vsl-backdrop-custom"></div><div class="vsl-backdrop-scrim"></div></div><div class="vsl-shell"><nav class="vsl-addr-bar" aria-label="Spatial Browser Address Bar"><div class="vsl-addr-group"><button type="button" id="vsl-sidebar-btn" class="vsl-icon-btn" title="Open Ecosystem Directory" aria-label="Open Ecosystem Directory"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"></rect><line x1="9" y1="4" x2="9" y2="20"></line></svg></button><button type="button" id="vsl-nav-back" class="vsl-icon-btn" title="Back" aria-label="Back"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button><button type="button" id="vsl-nav-fwd" class="vsl-icon-btn" title="Forward" aria-label="Forward"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button></div><form id="vsl-addr-form" class="vsl-url-pill" role="search"><span class="vsl-url-aa" aria-hidden="true">AA</span><div class="vsl-url-center"><svg class="vsl-lock-icon" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-7-2a2 2 0 0 1 4 0v2h-4V7Z"></path></svg><input id="vsl-addr-input" class="vsl-url-input" type="text" value="idominiqe.com/ro/system/" aria-label="Current route or URL" spellcheck="false" autocomplete="off"></div><button type="button" id="vsl-addr-reload" class="vsl-url-reload" title="Replay entrance motion" aria-label="Reload animations"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></button></form><div class="vsl-addr-group vsl-addr-group-extra"><a href="https://github.com/iDominiqe/idomi" target="_blank" rel="noopener noreferrer" class="vsl-icon-btn" title="Source on GitHub" aria-label="Source on GitHub"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="8.5 12.5 12 16 15.5 12.5"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg></a><button type="button" id="vsl-share-btn" class="vsl-icon-btn" title="Copy current page URL" aria-label="Share current URL"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg></button><button type="button" id="vsl-theme-open" class="vsl-icon-btn" title="Open Theme Studio" aria-label="Theme Studio"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button><a href="https://portfolio.idominiqe.com/" target="_blank" rel="noopener noreferrer" class="vsl-icon-btn" title="Open portfolio.idominiqe.com" aria-label="Open VisionOS Portfolio"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.5"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg></a></div></nav><div class="vsl-stage"><aside class="vsl-dock" aria-label="Navigare spațială"><a href="/ro/" class="vsl-dock-btn " data-tip="Acasă" aria-label="Acasă"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"></path></svg></a><a href="/ro/projects/ecosystem/" class="vsl-dock-btn " data-tip="Proiecte" aria-label="Proiecte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"></rect><rect x="13" y="3" width="8" height="8" rx="2"></rect><rect x="3" y="13" width="8" height="8" rx="2"></rect><rect x="13" y="13" width="8" height="8" rx="2"></rect></svg></a><a href="/ro/calculator/" class="vsl-dock-btn " data-tip="Calculator" aria-label="Calculator"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2.5"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="11" x2="8.01" y2="11"></line><line x1="12" y1="11" x2="12.01" y2="11"></line><line x1="16" y1="11" x2="16.01" y2="11"></line><line x1="8" y1="15" x2="8.01" y2="15"></line><line x1="12" y1="15" x2="12.01" y2="15"></line><line x1="16" y1="15" x2="16.01" y2="15"></line></svg></a><a href="/ro/about/" class="vsl-dock-btn " data-tip="Despre Mine" aria-label="Despre Mine"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></a><a href="/ro/system/" class="vsl-dock-btn is-active" data-tip="Despre Sistem" aria-label="Despre Sistem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2.5"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></a><a href="/ro/blog/" class="vsl-dock-btn " data-tip="Blog &amp; Securitate" aria-label="Blog"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></a><a href="/ro/reference/architecture/" class="vsl-dock-btn " data-tip="Arhitectură" aria-label="Arhitectură"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></a><button type="button" id="vsl-dock-themes" class="vsl-dock-btn " data-tip="Studio Teme" aria-label="Studio Teme"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"></path></svg></button></aside><div class="vsl-window vsl-reveal" id="vsl-window"><div class="page sl-flex"><header class="header"><div class="vsl-header-row"><div class="vsl-header-left"><site-search data-translations="{&quot;placeholder&quot;:&quot;Caută&quot;}" data-astro-cid-b5kgnn7o="true"><button data-open-modal disabled aria-label="Caută" aria-keyshortcuts="Control+K" data-astro-cid-b5kgnn7o><svg data-astro-cid-b5kgnn7o="true" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;" data-astro-cid-hkc32dio><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg><span class="sl-hidden md:sl-block" aria-hidden="true" data-astro-cid-b5kgnn7o>Caută</span><kbd class="sl-hidden md:sl-flex" style="display: none" data-astro-cid-b5kgnn7o><kbd data-astro-cid-b5kgnn7o>Ctrl</kbd><kbd data-astro-cid-b5kgnn7o>K</kbd></kbd></button><dialog style="padding: 0" aria-label="Caută" data-astro-cid-b5kgnn7o><div class="dialog-frame sl-flex" data-astro-cid-b5kgnn7o><button data-close-modal class="sl-flex md:sl-hidden" data-astro-cid-b5kgnn7o>Anulează</button><div class="search-container" data-astro-cid-b5kgnn7o><div id="starlight__search" data-astro-cid-b5kgnn7o></div></div></div></dialog></site-search><script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script><script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.CibB10mu.js"></script></div><nav class="vsl-header-tabs" aria-label="Secțiuni principale"><a href="/ro/" class="vsl-tab-link ">Acasă</a><a href="/ro/projects/ecosystem/" class="vsl-tab-link ">Proiecte</a><a href="/ro/calculator/" class="vsl-tab-link ">Calculator</a><a href="/ro/about/" class="vsl-tab-link ">Despre</a><a href="/ro/blog/" class="vsl-tab-link ">Blog</a></nav><div class="vsl-header-right"><div class="vsl-lang-switch" role="group" aria-label="Limbă"><a href="/system/" class="vsl-lang-btn " hreflang="en">EN</a><a href="/ro/system/" class="vsl-lang-btn is-active" hreflang="ro">RO</a><a href="/ru/system/" class="vsl-lang-btn " hreflang="ru">RU</a></div><button type="button" id="vsl-notif-btn" class="vsl-bell-btn" title="Stare ecosistem" aria-label="Stare ecosistem" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span class="vsl-online-dot" aria-hidden="true"></span></button><button type="button" id="vsl-profile-btn" class="vsl-profile-btn" aria-expanded="false" aria-label="Profil și linkuri iDominiqe"><span class="vsl-avatar" aria-hidden="true">iD</span><span class="vsl-profile-meta"><span class="vsl-profile-name">iDominiqe</span><span class="vsl-profile-sub">8 Noduri Live</span></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.65;"><polyline points="6 9 12 15 18 9"></polyline></svg></button><!-- Status / Updates Popover --><div id="vsl-notif-popover" class="vsl-popover" role="region" aria-label="Telemetrie live"><div class="vsl-popover-title">Telemetrie Edge</div><a href="/ro/projects/ecosystem/" class="vsl-popover-item"><span>8 Repozitorii Subdomeniu</span><span class="vsl-popover-muted" style="color:#22c55e;">● Online</span></a><a href="/ro/blog/dns-ns-domains/" class="vsl-popover-item"><span>DNS · Cloudflare Anycast</span><span class="vsl-popover-muted">TLS 1.3</span></a><a href="/ro/reference/architecture/" class="vsl-popover-item"><span>Starlight + Pagefind</span><span class="vsl-popover-muted">Pregătit</span></a><a href="/ro/system/" class="vsl-popover-item"><span>🖥️ Despre Sistemul Tău</span><span class="vsl-popover-muted">IP · ISP · GPU · PC</span></a><button type="button" id="vsl-popover-open-themes" class="vsl-popover-item"><span>Personalizează Teme</span><span class="vsl-popover-muted">5 Preseturi</span></button></div><!-- Profile & Social Links Popover --><div id="vsl-profile-popover" class="vsl-popover" role="region" aria-label="Canale dezvoltator"><div class="vsl-popover-title">Huburi Ecosistem</div><a href="/ro/system/" class="vsl-popover-item"><span>🖥️ Despre Sistemul Tău</span><span class="vsl-popover-muted">IP · ISP · GPU · PC</span></a><a href="/ro/about/" class="vsl-popover-item"><span>Despre Mine &amp; Bio</span><span class="vsl-popover-muted">Bio · Hardware</span></a><a href="/ro/calculator/" class="vsl-popover-item"><span>Calculator Proiect</span><span class="vsl-popover-muted">Web · App · MCU</span></a><a href="/ro/guides/getting-started/" class="vsl-popover-item"><span>Ghiduri &amp; Teme</span><span class="vsl-popover-muted">5 Preseturi</span></a><a href="https://portfolio.idominiqe.com/" target="_blank" rel="noopener noreferrer" class="vsl-popover-item"><span>VisionOS Portfolio</span><span class="vsl-popover-muted">portfolio.idominiqe.com ↗</span></a><a href="https://v-2.idominiqe.com/" target="_blank" rel="noopener noreferrer" class="vsl-popover-item"><span>Liquid Glass v-2 Archive</span><span class="vsl-popover-muted">v-2.idominiqe.com ↗</span></a><div class="vsl-popover-title" style="margin-top:6px;">Canale</div><a href="https://github.com/iDominiqe" target="_blank" rel="noopener noreferrer" class="vsl-popover-item"><span>GitHub</span><span class="vsl-popover-muted">@iDominiqe ↗</span></a><a href="https://discord.gg/f5wGW62Jsy" target="_blank" rel="noopener noreferrer" class="vsl-popover-item"><span>Discord</span><span class="vsl-popover-muted">Community ↗</span></a><a href="https://t.me/idominiqe" target="_blank" rel="noopener noreferrer" class="vsl-popover-item"><span>Telegram</span><span class="vsl-popover-muted">@idominiqe ↗</span></a><a href="https://www.youtube.com/@idominiqe" target="_blank" rel="noopener noreferrer" class="vsl-popover-item"><span>YouTube</span><span class="vsl-popover-muted">@idominiqe ↗</span></a><a href="https://www.instagram.com/idominiqe/" target="_blank" rel="noopener noreferrer" class="vsl-popover-item"><span>Instagram</span><span class="vsl-popover-muted">@idominiqe ↗</span></a><a href="https://www.facebook.com/idominiqe/" target="_blank" rel="noopener noreferrer" class="vsl-popover-item"><span>Facebook</span><span class="vsl-popover-muted">idominiqe ↗</span></a></div></div></div><script>
+	(function () {
+		const bellBtn = document.getElementById('vsl-notif-btn');
+		const profBtn = document.getElementById('vsl-profile-btn');
+		const bellPop = document.getElementById('vsl-notif-popover');
+		const profPop = document.getElementById('vsl-profile-popover');
+
+		const closeAll = () => {
+			bellPop?.classList.remove('is-open');
+			profPop?.classList.remove('is-open');
+			bellBtn?.setAttribute('aria-expanded', 'false');
+			profBtn?.setAttribute('aria-expanded', 'false');
+		};
+
+		bellBtn?.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const next = !bellPop?.classList.contains('is-open');
+			closeAll();
+			if (next && bellPop) {
+				bellPop.classList.add('is-open');
+				bellBtn.setAttribute('aria-expanded', 'true');
+			}
+		});
+
+		profBtn?.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const next = !profPop?.classList.contains('is-open');
+			closeAll();
+			if (next && profPop) {
+				profPop.classList.add('is-open');
+				profBtn.setAttribute('aria-expanded', 'true');
+			}
+		});
+
+		document.getElementById('vsl-popover-open-themes')?.addEventListener('click', () => {
+			closeAll();
+			document.getElementById('vsl-theme-open')?.click();
+		});
+
+		document.addEventListener('click', (e) => {
+			if (!(e.target instanceof Element)) return;
+			if (!e.target.closest('.vsl-header-right')) closeAll();
+		});
+	})();
+</script></header><div class="main-frame"><script type="module">var e=document.getElementById(`starlight__sidebar`),t=e?.querySelector(`sl-sidebar-state-persist`),n=`sl-sidebar-state`,r=()=>{let r=[],i=t?.dataset.hash||``;try{let e=sessionStorage.getItem(n),t=JSON.parse(e||`{}`);Array.isArray(t.open)&&t.hash===i&&(r=t.open)}catch{}return{hash:i,open:r,scroll:e?.scrollTop||0}},i=e=>{try{sessionStorage.setItem(n,JSON.stringify(e))}catch{}},a=()=>i(r()),o=(e,t)=>{let n=r();n.open[t]=e,i(n)};t?.addEventListener(`click`,e=>{if(!(e.target instanceof Element))return;let t=e.target.closest(`summary`)?.closest(`details`);if(!t)return;let n=t.querySelector(`sl-sidebar-restore`),r=parseInt(n?.dataset.index||``);isNaN(r)||o(!t.open,r)}),addEventListener(`visibilitychange`,()=>{document.visibilityState===`hidden`&&a()});</script><div class="lg:sl-flex" data-astro-cid-lrzkfocr><div class="main-pane" data-astro-cid-lrzkfocr><main data-pagefind-body lang="ro" dir="ltr" data-astro-cid-g5ptsecz><div class="content-panel" data-astro-cid-a7po4psb><div class="sl-container" data-astro-cid-a7po4psb></div></div><div class="content-panel" data-astro-cid-a7po4psb><div class="sl-container" data-astro-cid-a7po4psb><div class="sl-markdown-content"><div class="vsl-sys-page not-content" id="vsl-system-page" data-astro-cid-6hfer6sw><header class="vsl-doc-card vsl-sys-hero" data-tile="1" data-astro-cid-6hfer6sw><div class="vsl-sys-hero-top" data-astro-cid-6hfer6sw><div data-astro-cid-6hfer6sw><div class="vsl-sys-eyebrow" data-astro-cid-6hfer6sw>Diagnosticare Live Locală &amp; Cloudflare Edge (Fără Loguri)</div><h1 class="vsl-sys-h1" data-astro-cid-6hfer6sw>Despre Sistemul Tău</h1><p class="vsl-sys-sub" data-astro-cid-6hfer6sw>Informații în timp real despre rețeaua ta publică, furnizor (ISP/ASN), nodul Cloudflare Anycast, sistem de operare, GPU, rata de refresh a ecranului și browser — fără stocare pe server.</p></div><div class="vsl-sys-actions" data-astro-cid-6hfer6sw><button type="button" id="vsl-sys-mask-btn" class="vsl-btn-glass" aria-pressed="false" data-astro-cid-6hfer6sw>👁 Ascunde IP</button><button type="button" id="vsl-sys-refresh-btn" class="vsl-btn-glass" data-astro-cid-6hfer6sw>↻ Actualizează</button><button type="button" id="vsl-sys-copy-btn" class="vsl-btn-white" data-astro-cid-6hfer6sw>📋 Copiază JSON</button></div></div><div class="vsl-sys-privacy" data-astro-cid-6hfer6sw>Zero logare: IP-ul și datele Cloudflare sunt afișate doar în sesiunea ta curentă și nu sunt salvate în nicio bază de date.</div></header><section class="vsl-sys-kpis" data-tile="2" data-astro-cid-6hfer6sw><article class="vsl-doc-card vsl-sys-kpi" data-astro-cid-6hfer6sw><span class="vsl-sys-kpi-label" data-astro-cid-6hfer6sw>Adresă IP Publică</span><div class="vsl-sys-kpi-row" data-astro-cid-6hfer6sw><strong class="vsl-sys-kpi-val vsl-sensitive" id="sys-kpi-ip" data-astro-cid-6hfer6sw>Se detectează...</strong><button type="button" id="vsl-sys-copy-ip" class="vsl-sys-mini-btn" title="Copy IP" aria-label="Copy IP" data-astro-cid-6hfer6sw>⧉</button></div><span class="vsl-sys-kpi-sub" id="sys-kpi-ip-sub" data-astro-cid-6hfer6sw>—</span></article><article class="vsl-doc-card vsl-sys-kpi" data-astro-cid-6hfer6sw><span class="vsl-sys-kpi-label" data-astro-cid-6hfer6sw>Furnizor / ISP</span><strong class="vsl-sys-kpi-val" id="sys-kpi-isp" data-astro-cid-6hfer6sw>Se detectează...</strong><span class="vsl-sys-kpi-sub" id="sys-kpi-asn" data-astro-cid-6hfer6sw>—</span></article><article class="vsl-doc-card vsl-sys-kpi" data-astro-cid-6hfer6sw><span class="vsl-sys-kpi-label" data-astro-cid-6hfer6sw>Țară &amp; Oraș</span><strong class="vsl-sys-kpi-val" id="sys-kpi-geo" data-astro-cid-6hfer6sw>Se detectează...</strong><span class="vsl-sys-kpi-sub" id="sys-kpi-ping" data-astro-cid-6hfer6sw>—</span></article><article class="vsl-doc-card vsl-sys-kpi" data-astro-cid-6hfer6sw><span class="vsl-sys-kpi-label" data-astro-cid-6hfer6sw>OS &amp; GPU</span><strong class="vsl-sys-kpi-val" id="sys-kpi-os" data-astro-cid-6hfer6sw>Se detectează...</strong><span class="vsl-sys-kpi-sub" id="sys-kpi-gpu" data-astro-cid-6hfer6sw>—</span></article></section><section class="vsl-sys-grid" data-tile="3" data-astro-cid-6hfer6sw><!-- 1. Network, IP, MAC & Provider --><article class="vsl-doc-card vsl-sys-card" data-astro-cid-6hfer6sw><h2 class="vsl-sys-h2" data-astro-cid-6hfer6sw>🌐 Rețea, IP, MAC &amp; Furnizor</h2><dl class="vsl-sys-dl" data-astro-cid-6hfer6sw><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>IP Public</dt><dd id="sys-ip" class="vsl-sensitive" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Familie IP</dt><dd id="sys-ipver" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Operator / ISP</dt><dd id="sys-isp" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Sistem Autonom (ASN)</dt><dd id="sys-asn" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Țară</dt><dd id="sys-country" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Oraș / Regiune</dt><dd id="sys-city" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Fus orar ISP</dt><dd id="sys-tz" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Coordonate aprox.</dt><dd id="sys-coords" class="vsl-sensitive" data-astro-cid-6hfer6sw>—</dd></div><div class="is-full" data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Adresă MAC (OSI L2)</dt><dd id="sys-mac" data-astro-cid-6hfer6sw>Protejat la nivelul routerului L3 și browser</dd><p class="vsl-sys-hint" data-astro-cid-6hfer6sw>Browserele blochează citirea adresei MAC fizice din motive de securitate, iar adresa MAC nu trece de routerul tău local.</p></div></dl></article><!-- 2. Cloudflare Edge & Connection --><article class="vsl-doc-card vsl-sys-card" data-astro-cid-6hfer6sw><h2 class="vsl-sys-h2" data-astro-cid-6hfer6sw>⚡ Cloudflare Edge &amp; Conexiune</h2><dl class="vsl-sys-dl" data-astro-cid-6hfer6sw><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Nod Cloudflare POP</dt><dd id="sys-colo" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Ping Edge RTT</dt><dd id="sys-ping" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>HTTP / Cifru TLS</dt><dd id="sys-tls" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Profil Conexiune</dt><dd id="sys-conntype" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Viteză / RTT est.</dt><dd id="sys-downlink" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Stare Rețea</dt><dd id="sys-online" data-astro-cid-6hfer6sw>—</dd></div></dl></article><!-- 3. PC, OS, CPU & Memory --><article class="vsl-doc-card vsl-sys-card" data-astro-cid-6hfer6sw><h2 class="vsl-sys-h2" data-astro-cid-6hfer6sw>💻 PC, Sistem de Operare, CPU &amp; RAM</h2><dl class="vsl-sys-dl" data-astro-cid-6hfer6sw><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Sistem de Operare</dt><dd id="sys-os" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Arhitectură CPU</dt><dd id="sys-arch" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Nuclee Logice CPU</dt><dd id="sys-cores" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Memorie RAM (limită API)</dt><dd id="sys-ram" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Ora &amp; Fus Sistem</dt><dd id="sys-localtime" data-astro-cid-6hfer6sw>—</dd></div></dl></article><!-- 4. Graphics (GPU), WebGL & WebGPU --><article class="vsl-doc-card vsl-sys-card" data-astro-cid-6hfer6sw><h2 class="vsl-sys-h2" data-astro-cid-6hfer6sw>🎮 Grafică (GPU), WebGL &amp; WebGPU</h2><dl class="vsl-sys-dl" data-astro-cid-6hfer6sw><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Placa Video (GPU)</dt><dd id="sys-gpu" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Producător GPU</dt><dd id="sys-gpu-vendor" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Suport WebGL</dt><dd id="sys-webgl" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Textură / Viewport Max</dt><dd id="sys-maxtex" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>WebGPU API</dt><dd id="sys-webgpu" data-astro-cid-6hfer6sw>—</dd></div></dl></article><!-- 5. Display, Refresh Rate & Input --><article class="vsl-doc-card vsl-sys-card" data-astro-cid-6hfer6sw><h2 class="vsl-sys-h2" data-astro-cid-6hfer6sw>🖥️ Ecran, Rată Refresh &amp; Input</h2><dl class="vsl-sys-dl" data-astro-cid-6hfer6sw><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Rezoluție Logică</dt><dd id="sys-screen" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Rezoluție Fizică</dt><dd id="sys-physical" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Fereastră Browser</dt><dd id="sys-viewport" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Scalare DPI (DPR)</dt><dd id="sys-dpr" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Rată de Refresh (Hz)</dt><dd id="sys-hz" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Adâncime &amp; Gamut Culoare</dt><dd id="sys-color" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>HDR &amp; Temă OS</dt><dd id="sys-hdr" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Ecran Tactil</dt><dd id="sys-touch" data-astro-cid-6hfer6sw>—</dd></div></dl></article><!-- 6. Browser, Battery & Media I/O --><article class="vsl-doc-card vsl-sys-card" data-astro-cid-6hfer6sw><h2 class="vsl-sys-h2" data-astro-cid-6hfer6sw>🧭 Browser, Baterie &amp; Media I/O</h2><dl class="vsl-sys-dl" data-astro-cid-6hfer6sw><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Browser &amp; Versiune</dt><dd id="sys-browser" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Limbi Preferate</dt><dd id="sys-langs" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Stare Baterie</dt><dd id="sys-battery" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Cotă Stocare Browser</dt><dd id="sys-storage" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Dispozitive Media</dt><dd id="sys-media" data-astro-cid-6hfer6sw>—</dd></div><div data-astro-cid-6hfer6sw><dt data-astro-cid-6hfer6sw>Capabilități Runtime</dt><dd id="sys-flags" data-astro-cid-6hfer6sw>—</dd></div></dl></article></section></div><script>(function(){const langCode = "ro";
+const copyStrings = {"maskBtn":"👁 Ascunde IP","unmaskBtn":"👁 Arată IP","copiedOk":"Raport JSON copiat în clipboard","copiedIp":"Adresa IP copiată","refreshed":"Telemetria a fost actualizată","unavailable":"Ascuns / Indisponibil","yes":"Suportat","no":"Indisponibil","online":"Online","offline":"Offline","charging":"Se încarcă","discharging":"Pe baterie","localeTag":"ro-RO","macMasked":"Protejat la nivelul routerului L3 și browser"};
+
+	(function () {
+		const isLocalHost = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+		const SYSINFO_API = isLocalHost ? 'https://idominiqe.com/api/chat/sysinfo' : '/api/chat/sysinfo';
+		const pageEl = document.getElementById('vsl-system-page');
+		const maskBtn = document.getElementById('vsl-sys-mask-btn');
+		const refreshBtn = document.getElementById('vsl-sys-refresh-btn');
+		const copyJsonBtn = document.getElementById('vsl-sys-copy-btn');
+		const copyIpBtn = document.getElementById('vsl-sys-copy-ip');
+
+		const snapshot = {
+			generatedAt: new Date().toISOString(),
+			network: {},
+			edge: {},
+			system: {},
+			graphics: {},
+			display: {},
+			browser: {},
+		};
+
+		const setTxt = (id, val) => {
+			const el = document.getElementById(id);
+			if (el) el.textContent = val || copyStrings.unavailable;
+		};
+
+		function formatBytes(bytes) {
+			if (!Number.isFinite(bytes) || bytes <= 0) return copyStrings.unavailable;
+			const gb = bytes / (1024 * 1024 * 1024);
+			if (gb >= 1) return `${gb.toFixed(1)} GB`;
+			const mb = bytes / (1024 * 1024);
+			return `${Math.round(mb)} MB`;
+		}
+
+		function formatCountryName(code) {
+			if (!code) return '';
+			try {
+				const dn = new Intl.DisplayNames([copyStrings.localeTag, 'en'], { type: 'region' });
+				return `${dn.of(code)} (${code})`;
+			} catch (_) {
+				return code;
+			}
+		}
+
+		function parseUserAgentFallback() {
+			const ua = navigator.userAgent || '';
+			let os = navigator.platform || 'Unknown OS';
+			if (/Windows NT 10\.0/.test(ua)) os = 'Windows 10 / 11';
+			else if (/Mac OS X ([\d_]+)/.test(ua)) os = `macOS ${RegExp.$1.replace(/_/g, '.')}`;
+			else if (/Android ([\d.]+)/.test(ua)) os = `Android ${RegExp.$1}`;
+			else if (/iPhone OS ([\d_]+)|CPU OS ([\d_]+)/.test(ua)) os = `iOS ${(RegExp.$1 || RegExp.$2).replace(/_/g, '.')}`;
+			else if (/Linux/.test(ua)) os = 'Linux';
+
+			let browser = 'Browser';
+			if (/Edg\/([\d.]+)/.test(ua)) browser = `Microsoft Edge ${RegExp.$1}`;
+			else if (/OPR\/([\d.]+)/.test(ua)) browser = `Opera ${RegExp.$1}`;
+			else if (/Chrome\/([\d.]+)/.test(ua)) browser = `Chromium / Chrome ${RegExp.$1}`;
+			else if (/Firefox\/([\d.]+)/.test(ua)) browser = `Firefox ${RegExp.$1}`;
+			else if (/Version\/([\d.]+).*Safari/.test(ua)) browser = `Safari ${RegExp.$1}`;
+
+			let arch = /x86_64|Win64|WOW64|amd64/i.test(ua)
+				? 'x86_64 (64-bit)'
+				: /arm64|aarch64/i.test(ua)
+					? 'ARM64 (64-bit)'
+					: navigator.platform || 'Unknown';
+
+			return { os, browser, arch };
+		}
+
+		async function collectOsAndBrowser() {
+			const fb = parseUserAgentFallback();
+			let osLabel = fb.os;
+			let archLabel = fb.arch;
+			let browserLabel = fb.browser;
+
+			try {
+				const uad = navigator.userAgentData;
+				if (uad && typeof uad.getHighEntropyValues === 'function') {
+					const hi = await uad.getHighEntropyValues(['platform', 'platformVersion', 'architecture', 'bitness', 'fullVersionList']);
+					if (hi.platform === 'Windows' && hi.platformVersion) {
+						const major = parseInt(String(hi.platformVersion).split('.')[0] || '0', 10);
+						osLabel = major >= 13 ? `Windows 11 (NT ${hi.platformVersion})` : `Windows 10 (NT ${hi.platformVersion})`;
+					} else if (hi.platform) {
+						osLabel = hi.platformVersion ? `${hi.platform} ${hi.platformVersion}` : hi.platform;
+					}
+					if (hi.architecture) {
+						archLabel = hi.bitness ? `${hi.architecture} (${hi.bitness}-bit)` : hi.architecture;
+					}
+					const brandList = Array.isArray(hi.fullVersionList) ? hi.fullVersionList : uad.brands;
+					const meaningful = (brandList || []).find((b) => b.brand && !/Not.?A.?Brand/i.test(b.brand));
+					if (meaningful) {
+						browserLabel = `${meaningful.brand} ${meaningful.version}`;
+					}
+				}
+			} catch (_) {}
+
+			const cores = navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} threads` : copyStrings.unavailable;
+			const ram = navigator.deviceMemory ? `~${navigator.deviceMemory} GB+` : copyStrings.unavailable;
+			let localTz = copyStrings.unavailable;
+			try {
+				const tzName = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+				const timeStr = new Intl.DateTimeFormat(copyStrings.localeTag, { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(new Date());
+				localTz = `${timeStr} (${tzName})`;
+			} catch (_) {}
+
+			setTxt('sys-os', osLabel);
+			setTxt('sys-kpi-os', osLabel);
+			setTxt('sys-arch', archLabel);
+			setTxt('sys-cores', cores);
+			setTxt('sys-ram', ram);
+			setTxt('sys-localtime', localTz);
+			setTxt('sys-browser', browserLabel);
+			setTxt('sys-langs', (navigator.languages || [navigator.language]).filter(Boolean).join(', '));
+
+			snapshot.system = { os: osLabel, arch: archLabel, threads: navigator.hardwareConcurrency || null, memoryGb: navigator.deviceMemory || null, localTime: localTz };
+			snapshot.browser = { browser: browserLabel, languages: navigator.languages || [] };
+		}
+
+		function collectGpu() {
+			let renderer = copyStrings.unavailable;
+			let vendor = copyStrings.unavailable;
+			let webglVer = copyStrings.no;
+			let limits = copyStrings.unavailable;
+
+			try {
+				const canvas = document.createElement('canvas');
+				canvas.width = 1;
+				canvas.height = 1;
+				const gl2 = canvas.getContext('webgl2');
+				const gl = gl2 || canvas.getContext('webgl');
+				if (gl) {
+					webglVer = gl2 ? 'WebGL 2.0 + 1.0' : 'WebGL 1.0';
+					const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+					if (dbg) {
+						renderer = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || gl.getParameter(gl.RENDERER) || renderer;
+						vendor = gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL) || gl.getParameter(gl.VENDOR) || vendor;
+					} else {
+						renderer = gl.getParameter(gl.RENDERER) || renderer;
+						vendor = gl.getParameter(gl.VENDOR) || vendor;
+					}
+					const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+					const maxVp = gl.getParameter(gl.MAX_VIEWPORT_DIMS);
+					limits = `${maxTex}px / ${maxVp ? maxVp[0] + '×' + maxVp[1] : '?'}`;
+				}
+			} catch (_) {}
+
+			const webgpu = 'gpu' in navigator ? copyStrings.yes : copyStrings.no;
+			setTxt('sys-gpu', renderer);
+			setTxt('sys-kpi-gpu', renderer.length > 36 ? renderer.slice(0, 36) + '…' : renderer);
+			setTxt('sys-gpu-vendor', vendor);
+			setTxt('sys-webgl', webglVer);
+			setTxt('sys-maxtex', limits);
+			setTxt('sys-webgpu', webgpu);
+
+			snapshot.graphics = { renderer, vendor, webgl: webglVer, limits, webgpu: 'gpu' in navigator };
+		}
+
+		function updateViewportMetrics() {
+			const dpr = Number(window.devicePixelRatio || 1);
+			const sw = window.screen?.width || 0;
+			const sh = window.screen?.height || 0;
+			const pw = Math.round(sw * dpr);
+			const ph = Math.round(sh * dpr);
+			const vw = window.innerWidth;
+			const vh = window.innerHeight;
+			const orient = window.screen?.orientation?.type ? ` (${window.screen.orientation.type.replace('-primary', '')})` : '';
+
+			const p3 = window.matchMedia?.('(color-gamut: p3)').matches ? 'Display-P3' : 'sRGB';
+			const hdr = window.matchMedia?.('(dynamic-range: high)').matches ? 'HDR' : 'SDR';
+			const prefDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'Dark' : 'Light';
+			const touchPts = navigator.maxTouchPoints || 0;
+
+			setTxt('sys-screen', `${sw} × ${sh}${orient}`);
+			setTxt('sys-physical', `${pw} × ${ph}`);
+			setTxt('sys-viewport', `${vw} × ${vh}`);
+			setTxt('sys-dpr', `${dpr.toFixed(2)}x (${Math.round(dpr * 96)} DPI)`);
+			setTxt('sys-color', `${window.screen?.colorDepth || 24}-bit · ${p3}`);
+			setTxt('sys-hdr', `${hdr} · OS ${prefDark}`);
+			setTxt('sys-touch', touchPts > 0 ? `${touchPts} points` : 'Desktop / Non-touch');
+
+			snapshot.display = {
+				...snapshot.display,
+				logical: `${sw}x${sh}`,
+				physical: `${pw}x${ph}`,
+				viewport: `${vw}x${vh}`,
+				dpr,
+				gamut: p3,
+				hdr,
+				touchPoints: touchPts,
+			};
+		}
+
+		function measureRefreshRate() {
+			const samples = [];
+			let last = performance.now();
+			const step = (now) => {
+				const dt = now - last;
+				last = now;
+				if (dt > 1 && dt < 100) samples.push(1000 / dt);
+				if (samples.length < 24) {
+					requestAnimationFrame(step);
+					return;
+				}
+				samples.sort((a, b) => a - b);
+				const median = samples[Math.floor(samples.length / 2)] || 60;
+				const standard = [60, 75, 90, 120, 144, 165, 240];
+				const nearest = standard.find((r) => Math.abs(r - median) <= 4);
+				const hzText = `${nearest || Math.round(median)} Hz`;
+				setTxt('sys-hz', hzText);
+				snapshot.display.refreshRate = hzText;
+			};
+			requestAnimationFrame(step);
+		}
+
+		function collectConnectionAndEnv() {
+			const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+			setTxt('sys-conntype', conn?.effectiveType ? `${conn.effectiveType.toUpperCase()}${conn.type ? ' · ' + conn.type : ''}` : copyStrings.unavailable);
+			setTxt('sys-downlink', conn?.downlink ? `~${conn.downlink} Mbps${conn.rtt ? ' / ' + conn.rtt + ' ms' : ''}` : copyStrings.unavailable);
+			setTxt('sys-online', navigator.onLine ? copyStrings.online : copyStrings.offline);
+
+			const flags = [
+				typeof WebAssembly === 'object' ? 'WASM' : null,
+				'serviceWorker' in navigator ? 'SW' : null,
+				navigator.cookieEnabled ? 'Cookies' : null,
+				navigator.doNotTrack === '1' ? 'DNT=1' : 'DNT=off',
+			]
+				.filter(Boolean)
+				.join(' · ');
+			setTxt('sys-flags', flags);
+
+			if (typeof navigator.getBattery === 'function') {
+				navigator
+					.getBattery()
+					.then((bat) => {
+						const pct = `${Math.round((bat.level || 0) * 100)}%`;
+						const state = bat.charging ? copyStrings.charging : copyStrings.discharging;
+						setTxt('sys-battery', `${pct} (${state})`);
+						snapshot.browser.battery = `${pct} (${state})`;
+					})
+					.catch(() => setTxt('sys-battery', copyStrings.unavailable));
+			} else {
+				setTxt('sys-battery', copyStrings.unavailable);
+			}
+
+			if (navigator.storage?.estimate) {
+				navigator.storage
+					.estimate()
+					.then((est) => {
+						const txt = `${formatBytes(est.usage || 0)} / ${formatBytes(est.quota || 0)}`;
+						setTxt('sys-storage', txt);
+						snapshot.browser.storage = txt;
+					})
+					.catch(() => setTxt('sys-storage', copyStrings.unavailable));
+			} else {
+				setTxt('sys-storage', copyStrings.unavailable);
+			}
+
+			if (navigator.mediaDevices?.enumerateDevices) {
+				navigator.mediaDevices
+					.enumerateDevices()
+					.then((devs) => {
+						const mics = devs.filter((d) => d.kind === 'audioinput').length;
+						const cams = devs.filter((d) => d.kind === 'videoinput').length;
+						const spk = devs.filter((d) => d.kind === 'audiooutput').length;
+						const label = `Mic: ${mics} · Cam: ${cams} · Audio Out: ${spk}`;
+						setTxt('sys-media', label);
+						snapshot.browser.media = { mics, cams, spk };
+					})
+					.catch(() => setTxt('sys-media', copyStrings.unavailable));
+			} else {
+				setTxt('sys-media', copyStrings.unavailable);
+			}
+		}
+
+		async function fetchEdgeTelemetry() {
+			const t0 = performance.now();
+			try {
+				const res = await fetch(`${SYSINFO_API}?_t=${Date.now()}`, { cache: 'no-store' });
+				const rtt = Math.max(1, Math.round(performance.now() - t0));
+				if (!res.ok) throw new Error('HTTP ' + res.status);
+				const data = await res.json();
+				if (!data?.ok) throw new Error('Bad payload');
+
+				const countryFull = formatCountryName(data.country);
+				const cityLine = [data.city, data.region].filter(Boolean).join(', ') || copyStrings.unavailable;
+				const ispName = data.isp || copyStrings.unavailable;
+				const asnLabel = data.asn ? `AS${data.asn}` : '—';
+				const coords = data.latitude && data.longitude ? `${data.latitude}, ${data.longitude}` : copyStrings.unavailable;
+
+				setTxt('sys-kpi-ip', data.ip || copyStrings.unavailable);
+				setTxt('sys-kpi-ip-sub', `${data.ipVersion || 'IP'} · ${copyStrings.macMasked.split(' ')[0]}`);
+				setTxt('sys-kpi-isp', ispName);
+				setTxt('sys-kpi-asn', asnLabel);
+				setTxt('sys-kpi-geo', [data.city, data.country].filter(Boolean).join(', ') || countryFull || copyStrings.unavailable);
+				setTxt('sys-kpi-ping', `Cloudflare ${data.colo || 'Edge'} · ${rtt} ms`);
+
+				setTxt('sys-ip', data.ip || copyStrings.unavailable);
+				setTxt('sys-ipver', data.ipVersion || copyStrings.unavailable);
+				setTxt('sys-isp', ispName);
+				setTxt('sys-asn', asnLabel);
+				setTxt('sys-country', countryFull || copyStrings.unavailable);
+				setTxt('sys-city', cityLine);
+				setTxt('sys-tz', data.timezone || copyStrings.unavailable);
+				setTxt('sys-coords', coords);
+
+				setTxt('sys-colo', data.colo ? `${data.colo} (Anycast)` : copyStrings.unavailable);
+				setTxt('sys-ping', `${rtt} ms`);
+				setTxt('sys-tls', [data.httpProtocol, data.tlsVersion, data.tlsCipher].filter(Boolean).join(' · ') || copyStrings.unavailable);
+
+				snapshot.network = {
+					ip: data.ip,
+					ipVersion: data.ipVersion,
+					mac: 'Masked at L2/Browser',
+					isp: ispName,
+					asn: asnLabel,
+					country: countryFull,
+					city: cityLine,
+					timezone: data.timezone,
+					coords,
+				};
+				snapshot.edge = {
+					colo: data.colo,
+					rttMs: rtt,
+					httpProtocol: data.httpProtocol,
+					tlsVersion: data.tlsVersion,
+					tlsCipher: data.tlsCipher,
+				};
+			} catch (_) {
+				setTxt('sys-kpi-ip', copyStrings.unavailable);
+				setTxt('sys-kpi-ping', 'Edge telemetry unreachable');
+			}
+		}
+
+		maskBtn?.addEventListener('click', () => {
+			const next = !pageEl?.classList.contains('is-masked');
+			pageEl?.classList.toggle('is-masked', next);
+			maskBtn.setAttribute('aria-pressed', next ? 'true' : 'false');
+			maskBtn.textContent = next ? copyStrings.unmaskBtn : copyStrings.maskBtn;
+		});
+
+		copyIpBtn?.addEventListener('click', async () => {
+			const ip = snapshot.network?.ip;
+			if (!ip) return;
+			try {
+				await navigator.clipboard.writeText(ip);
+				window.__vslToast?.(copyStrings.copiedIp);
+			} catch (_) {}
+		});
+
+		copyJsonBtn?.addEventListener('click', async () => {
+			try {
+				await navigator.clipboard.writeText(JSON.stringify(snapshot, null, 2));
+				window.__vslToast?.(copyStrings.copiedOk);
+			} catch (_) {}
+		});
+
+		refreshBtn?.addEventListener('click', async () => {
+			await Promise.all([fetchEdgeTelemetry(), collectOsAndBrowser()]);
+			collectGpu();
+			updateViewportMetrics();
+			collectConnectionAndEnv();
+			measureRefreshRate();
+			window.__vslToast?.(copyStrings.refreshed);
+		});
+
+		window.addEventListener('resize', updateViewportMetrics);
+
+		fetchEdgeTelemetry();
+		collectOsAndBrowser();
+		collectGpu();
+		updateViewportMetrics();
+		collectConnectionAndEnv();
+		measureRefreshRate();
+	})();
+})();</script></div><footer class="sl-flex" data-astro-cid-ddtxxk7k><div class="meta sl-flex" data-astro-cid-ddtxxk7k></div><div class="pagination-links print:hidden" dir="ltr" data-astro-cid-b5raizh3><a href="/ro/calculator/" rel="prev" data-astro-cid-b5raizh3><svg data-astro-cid-b5raizh3="true" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;" data-astro-cid-hkc32dio><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg><span data-astro-cid-b5raizh3>Pagina precedentă<br data-astro-cid-b5raizh3><span class="link-title" data-astro-cid-b5raizh3>Calculator Proiect</span></span></a><a href="/ro/projects/ecosystem/" rel="next" data-astro-cid-b5raizh3><svg data-astro-cid-b5raizh3="true" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;" data-astro-cid-hkc32dio><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg><span data-astro-cid-b5raizh3>Pagina următoare<br data-astro-cid-b5raizh3><span class="link-title" data-astro-cid-b5raizh3>Proiecte Ecosistem Live</span></span></a></div></footer></div></div></main></div></div></div></div></div></div></div><!-- Theme Studio Slide Drawer --><aside id="vsl-theme-drawer" class="vsl-drawer" aria-label="Theme Studio" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;"><div><div style="font-size:1.02rem;font-weight:700;">Theme Studio</div><div style="font-size:0.75rem;color:var(--vsl-text-soft);">Pick glass ambiance or crisp matte flat mode</div></div><button type="button" id="vsl-drawer-close" class="vsl-icon-btn" aria-label="Close Theme Studio"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="vsl-theme-grid"><button type="button" class="vsl-theme-option" data-vtheme-set="loft" data-vtheme-mode="dark"><span class="vsl-theme-swatch" style="background:linear-gradient(135deg, #d7cec2 0%, #6f6a64 55%, #3d3b38 100%)"></span><span style="flex:1;min-width:0;"><span style="display:flex;align-items:center;gap:8px;font-size:0.86rem;font-weight:700;">Vision Loft<span style="font-size:0.65rem;padding:2px 7px;border-radius:999px;background:rgba(148,163,184,0.2);font-weight:600;">Default</span></span><span style="display:block;font-size:0.72rem;color:var(--vsl-text-soft);margin-top:2px;line-height:1.35;">Warm daylight studio backdrop with frosted smoked-glass depth inspired by VisionOS.</span></span></button><button type="button" class="vsl-theme-option" data-vtheme-set="obsidian" data-vtheme-mode="dark"><span class="vsl-theme-swatch" style="background:linear-gradient(135deg, #09090b 0%, #1e293b 55%, #334155 100%)"></span><span style="flex:1;min-width:0;"><span style="display:flex;align-items:center;gap:8px;font-size:0.86rem;font-weight:700;">Obsidian Glass<span style="font-size:0.65rem;padding:2px 7px;border-radius:999px;background:rgba(148,163,184,0.2);font-weight:600;">Dark Studio</span></span><span style="display:block;font-size:0.72rem;color:var(--vsl-text-soft);margin-top:2px;line-height:1.35;">Deep graphite dark room with subtle cool rim highlights and crisp white typography.</span></span></button><button type="button" class="vsl-theme-option" data-vtheme-set="aurora" data-vtheme-mode="dark"><span class="vsl-theme-swatch" style="background:linear-gradient(135deg, #0f172a 0%, #312e81 52%, #0d9488 100%)"></span><span style="flex:1;min-width:0;"><span style="display:flex;align-items:center;gap:8px;font-size:0.86rem;font-weight:700;">Aurora Prism<span style="font-size:0.65rem;padding:2px 7px;border-radius:999px;background:rgba(148,163,184,0.2);font-weight:600;">Ambient</span></span><span style="display:block;font-size:0.72rem;color:var(--vsl-text-soft);margin-top:2px;line-height:1.35;">Soft Northern Lights cobalt-violet ambient canvas behind translucent spatial panes.</span></span></button><button type="button" class="vsl-theme-option" data-vtheme-set="flat-dark" data-vtheme-mode="dark"><span class="vsl-theme-swatch" style="background:linear-gradient(135deg, #111317 0%, #1a1d24 100%)"></span><span style="flex:1;min-width:0;"><span style="display:flex;align-items:center;gap:8px;font-size:0.86rem;font-weight:700;">Flat Dark<span style="font-size:0.65rem;padding:2px 7px;border-radius:999px;background:rgba(148,163,184,0.2);font-weight:600;">Low GPU</span></span><span style="display:block;font-size:0.72rem;color:var(--vsl-text-soft);margin-top:2px;line-height:1.35;">Zero blur overhead matte charcoal interface tuned for maximum focus and battery life.</span></span></button><button type="button" class="vsl-theme-option" data-vtheme-set="flat-light" data-vtheme-mode="light"><span class="vsl-theme-swatch" style="background:linear-gradient(135deg, #ffffff 0%, #e5e7eb 100%)"></span><span style="flex:1;min-width:0;"><span style="display:flex;align-items:center;gap:8px;font-size:0.86rem;font-weight:700;">Flat Light<span style="font-size:0.65rem;padding:2px 7px;border-radius:999px;background:rgba(148,163,184,0.2);font-weight:600;">High Contrast</span></span><span style="display:block;font-size:0.72rem;color:var(--vsl-text-soft);margin-top:2px;line-height:1.35;">Crisp matte paper-white theme with clean ink borders and native Starlight light readability.</span></span></button></div><div style="border-top:1px solid var(--vsl-hairline);padding-top:14px;display:flex;flex-direction:column;gap:8px;"><div style="font-size:0.78rem;font-weight:700;">Custom Room Backdrop</div><div style="display:flex;gap:8px;"><input id="vsl-bg-url" type="url" placeholder="Paste wallpaper image URL..." style="flex:1;min-width:0;height:34px;border-radius:10px;border:1px solid var(--vsl-hairline);background:var(--vsl-surface);color:inherit;padding:0 10px;font-size:0.76rem;"><button type="button" id="vsl-bg-apply" style="height:34px;padding:0 12px;border-radius:10px;border:0;background:var(--vsl-accent);color:var(--vsl-accent-ink);font-size:0.75rem;font-weight:700;cursor:pointer;">Apply</button></div><div style="display:flex;align-items:center;gap:8px;"><label for="vsl-bg-file" style="flex:1;height:34px;border-radius:10px;border:1px solid var(--vsl-hairline);background:var(--vsl-surface);display:flex;align-items:center;justify-content:center;font-size:0.74rem;font-weight:600;cursor:pointer;">Upload Local Image</label><input id="vsl-bg-file" type="file" accept="image/*" hidden><button type="button" id="vsl-bg-reset" style="height:34px;padding:0 12px;border-radius:10px;border:1px solid var(--vsl-hairline);background:transparent;color:inherit;font-size:0.74rem;cursor:pointer;">Reset</button></div></div><a href="/ro/guides/themes/" style="margin-top:auto;display:flex;align-items:center;justify-content:center;height:38px;border-radius:12px;background:var(--vsl-surface-strong);color:inherit;text-decoration:none;font-size:0.8rem;font-weight:650;">Deschide Ghidul de Teme →</a></aside><div id="vsl-toast" class="vsl-toast" role="status" aria-live="polite"></div><script>
+	(function () {
+		const THEME_MODES = {
+			loft: 'dark',
+			obsidian: 'dark',
+			aurora: 'dark',
+			'flat-dark': 'dark',
+			'flat-light': 'light',
+		};
+
+		const toastEl = document.getElementById('vsl-toast');
+		let toastTimer;
+		window.__vslToast = function (msg) {
+			if (!toastEl) return;
+			toastEl.textContent = msg;
+			toastEl.classList.add('is-shown');
+			clearTimeout(toastTimer);
+			toastTimer = setTimeout(() => toastEl.classList.remove('is-shown'), 2200);
+		};
+
+		window.__setVTheme = function (themeId) {
+			if (!THEME_MODES[themeId]) themeId = 'loft';
+			document.documentElement.dataset.vtheme = themeId;
+			const mode = THEME_MODES[themeId];
+			document.documentElement.dataset.theme = mode;
+			try {
+				localStorage.setItem('vslTheme', themeId);
+				localStorage.setItem('starlight-theme', mode);
+			} catch (_) {}
+			document.querySelectorAll('[data-vtheme-set]').forEach((btn) => {
+				btn.classList.toggle('is-active', btn.getAttribute('data-vtheme-set') === themeId);
+			});
+		};
+
+		const applyCustomBg = (url) => {
+			const el = document.getElementById('vsl-backdrop-custom');
+			if (!el) return;
+			if (url) {
+				el.style.backgroundImage = `url("${url.replace(/"/g, '\\"')}")`;
+				el.classList.add('has-image');
+			} else {
+				el.style.backgroundImage = '';
+				el.classList.remove('has-image');
+			}
+		};
+
+		const savedTheme = (() => {
+			try {
+				return localStorage.getItem('vslTheme') || 'loft';
+			} catch (_) {
+				return 'loft';
+			}
+		})();
+		window.__setVTheme(savedTheme);
+
+		try {
+			const savedBg = localStorage.getItem('vslCustomBg');
+			if (savedBg) applyCustomBg(savedBg);
+		} catch (_) {}
+
+		const drawer = document.getElementById('vsl-theme-drawer');
+		const openDrawer = () => {
+			if (!drawer) return;
+			drawer.classList.add('is-open');
+			drawer.setAttribute('aria-hidden', 'false');
+		};
+		const closeDrawer = () => {
+			if (!drawer) return;
+			drawer.classList.remove('is-open');
+			drawer.setAttribute('aria-hidden', 'true');
+		};
+
+		document.getElementById('vsl-theme-open')?.addEventListener('click', openDrawer);
+		document.getElementById('vsl-dock-themes')?.addEventListener('click', openDrawer);
+		document.getElementById('vsl-drawer-close')?.addEventListener('click', closeDrawer);
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') closeDrawer();
+		});
+
+		document.addEventListener('click', (e) => {
+			const btn = e.target instanceof Element ? e.target.closest('[data-vtheme-set]') : null;
+			if (!btn) return;
+			const id = btn.getAttribute('data-vtheme-set');
+			if (id) {
+				window.__setVTheme(id);
+				window.__vslToast('Theme updated: ' + id);
+			}
+		});
+
+		document.getElementById('vsl-bg-apply')?.addEventListener('click', () => {
+			const input = document.getElementById('vsl-bg-url');
+			const val = input && 'value' in input ? String(input.value).trim() : '';
+			if (!val) return;
+			try {
+				localStorage.setItem('vslCustomBg', val);
+			} catch (_) {}
+			applyCustomBg(val);
+			window.__vslToast('Custom wallpaper applied');
+		});
+
+		document.getElementById('vsl-bg-file')?.addEventListener('change', (e) => {
+			const target = e.target;
+			const file = target && 'files' in target && target.files ? target.files[0] : null;
+			if (!file) return;
+			const reader = new FileReader();
+			reader.onload = () => {
+				if (typeof reader.result === 'string') {
+					try {
+						localStorage.setItem('vslCustomBg', reader.result);
+					} catch (_) {}
+					applyCustomBg(reader.result);
+					window.__vslToast('Local wallpaper applied');
+				}
+			};
+			reader.readAsDataURL(file);
+		});
+
+		document.getElementById('vsl-bg-reset')?.addEventListener('click', () => {
+			try {
+				localStorage.removeItem('vslCustomBg');
+			} catch (_) {}
+			applyCustomBg('');
+			const input = document.getElementById('vsl-bg-url');
+			if (input && 'value' in input) input.value = '';
+			window.__vslToast('Studio loft restored');
+		});
+
+		// Detached Address Bar Controls
+		document.getElementById('vsl-nav-back')?.addEventListener('click', () => window.history.back());
+		document.getElementById('vsl-nav-fwd')?.addEventListener('click', () => window.history.forward());
+		document.getElementById('vsl-sidebar-btn')?.addEventListener('click', () => {
+			const starlightBtn = document.querySelector('starlight-menu-button button');
+			if (starlightBtn instanceof HTMLElement && getComputedStyle(starlightBtn).display !== 'none') {
+				starlightBtn.click();
+				return;
+			}
+			window.location.href = '/projects/ecosystem/';
+		});
+
+		document.getElementById('vsl-addr-reload')?.addEventListener('click', () => {
+			const win = document.getElementById('vsl-window');
+			if (!win) return;
+			win.classList.remove('vsl-reveal');
+			void win.offsetWidth;
+			win.classList.add('vsl-reveal');
+			window.__vslToast('Motion tiles refreshed');
+		});
+
+		document.getElementById('vsl-share-btn')?.addEventListener('click', async () => {
+			try {
+				await navigator.clipboard.writeText(window.location.href);
+				window.__vslToast('Copied URL to clipboard');
+			} catch (_) {
+				window.__vslToast(window.location.href);
+			}
+		});
+
+		document.getElementById('vsl-addr-form')?.addEventListener('submit', (e) => {
+			e.preventDefault();
+			const inp = document.getElementById('vsl-addr-input');
+			let raw = inp && 'value' in inp ? String(inp.value).trim() : '/';
+			raw = raw.replace(/^https?:\/\/(www\.)?idominiqe\.com/i, '').replace(/^idominiqe\.com/i, '');
+			if (!raw.startsWith('/')) raw = '/' + raw;
+			if (!raw.endsWith('/')) raw += '/';
+			window.location.href = raw;
+		});
+	})();
+</script><!-- Animated Black Cat Favicon with Adaptive Sticker Contour --><script>
+	(function () {
+		const SPEED_MS = 170;
+		const STICKER_COLOR = '#ffffff';
+		const STICKER_THICKNESS_32 = 2;
+		const FRAMES = [
+			{ yOffset: 34, eyeOpen: 1, pupilY: -2, showPaws: false, sparkles: 0 },
+			{ yOffset: 18, eyeOpen: 1, pupilY: -1, showPaws: false, sparkles: 0 },
+			{ yOffset: 4, eyeOpen: 1, pupilX: 0, showPaws: true, pawClaws: false, sparkles: 0 },
+			{ yOffset: 0, eyeOpen: 1, pupilX: -2, showPaws: true, pawClaws: true, sparkles: 0 },
+			{ yOffset: 0, eyeOpen: 1, pupilX: 2, showPaws: true, pawClaws: true, sparkles: 0 },
+			{ yOffset: 0, eyeOpen: 0.1, earWiggle: 4, showPaws: true, pawClaws: false, sparkles: 0.4 },
+			{ yOffset: -2, eyeOpen: 1, tilt: -0.14, earWiggle: -3, showPaws: true, sparkles: 1 },
+			{ yOffset: -2, eyeOpen: 1, tilt: 0.14, earWiggle: 3, showPaws: true, sparkles: 0.8 },
+			{ yOffset: 0, eyeOpen: 1, tilt: 0, showPaws: true, sparkles: 0.3 },
+			{ yOffset: 0, eyeOpen: 0.1, showPaws: true, sparkles: 0 },
+			{ yOffset: 12, eyeOpen: 1, showPaws: false, sparkles: 0 },
+			{ yOffset: 28, eyeOpen: 1, showPaws: false, sparkles: 0 },
+		];
+
+		const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+		let isStickerEnabled = darkQuery.matches;
+		darkQuery.addEventListener('change', (e) => {
+			isStickerEnabled = e.matches;
+		});
+
+		document.querySelectorAll('link[rel*="icon"]:not(#cat-favicon)').forEach((el) => el.remove());
+		const link =
+			document.getElementById('cat-favicon') ||
+			(() => {
+				const l = document.createElement('link');
+				l.id = 'cat-favicon';
+				l.rel = 'icon';
+				document.head.appendChild(l);
+				return l;
+			})();
+		link.type = 'image/png';
+
+		const SIZE = 64;
+		const outCanvas = document.createElement('canvas');
+		outCanvas.width = SIZE;
+		outCanvas.height = SIZE;
+		const outCtx = outCanvas.getContext('2d');
+
+		const rawCanvas = document.createElement('canvas');
+		rawCanvas.width = SIZE;
+		rawCanvas.height = SIZE;
+		const rawCtx = rawCanvas.getContext('2d');
+
+		const tintCanvas = document.createElement('canvas');
+		tintCanvas.width = SIZE;
+		tintCanvas.height = SIZE;
+		const tintCtx = tintCanvas.getContext('2d');
+
+		if (!outCtx || !rawCtx || !tintCtx) return;
+
+		const ANGLES = Array.from({ length: 16 }, (_, i) => (i * Math.PI * 2) / 16);
+
+		function drawRawCat(ctx, state) {
+			const scale = SIZE / 128;
+			ctx.save();
+			ctx.clearRect(0, 0, SIZE, SIZE);
+			ctx.scale(scale, scale);
+
+			const {
+				yOffset = 0,
+				tilt = 0,
+				earWiggle = 0,
+				eyeOpen = 1,
+				pupilX = 0,
+				pupilY = 0,
+				showPaws = false,
+				pawClaws = false,
+				sparkles = 0,
+			} = state;
+
+			ctx.save();
+			ctx.translate(64, 74 + yOffset);
+			ctx.rotate(tilt);
+
+			ctx.beginPath();
+			ctx.moveTo(-38, -8);
+			ctx.quadraticCurveTo(-42, -44 + earWiggle, -34, -50 + earWiggle);
+			ctx.quadraticCurveTo(-20, -44, -13, -30);
+			ctx.quadraticCurveTo(0, -34, 13, -30);
+			ctx.quadraticCurveTo(20, -44, 34, -50 - earWiggle);
+			ctx.quadraticCurveTo(42, -44 - earWiggle, 38, -8);
+			ctx.quadraticCurveTo(46, 14, 36, 34);
+			ctx.lineTo(-36, 34);
+			ctx.quadraticCurveTo(-46, 14, -38, -8);
+			ctx.closePath();
+			ctx.fillStyle = '#111115';
+			ctx.fill();
+
+			ctx.strokeStyle = '#111115';
+			ctx.lineWidth = 3.2;
+			ctx.lineCap = 'round';
+			ctx.beginPath();
+			ctx.moveTo(-34, 6);
+			ctx.lineTo(-49, 1);
+			ctx.moveTo(-35, 13);
+			ctx.lineTo(-50, 14);
+			ctx.moveTo(34, 6);
+			ctx.lineTo(49, 1);
+			ctx.moveTo(35, 13);
+			ctx.lineTo(50, 14);
+			ctx.stroke();
+
+			[-18, 18].forEach((ex) => {
+				ctx.save();
+				ctx.translate(ex, -2);
+				if (eyeOpen > 0.3) {
+					ctx.beginPath();
+					ctx.arc(0, 0, 14, 0, Math.PI * 2);
+					ctx.fillStyle = '#ffffff';
+					ctx.fill();
+					ctx.beginPath();
+					ctx.arc(pupilX, pupilY, 10, 0, Math.PI * 2);
+					ctx.fillStyle = '#111115';
+					ctx.fill();
+					ctx.beginPath();
+					ctx.arc(pupilX - 3.2, pupilY - 3.2, 3.5, 0, Math.PI * 2);
+					ctx.fillStyle = '#ffffff';
+					ctx.fill();
+				} else {
+					ctx.beginPath();
+					ctx.arc(0, 2, 10.5, Math.PI * 1.1, Math.PI * 1.9);
+					ctx.lineWidth = 3.8;
+					ctx.strokeStyle = '#ffffff';
+					ctx.lineCap = 'round';
+					ctx.stroke();
+				}
+				ctx.restore();
+			});
+
+			ctx.beginPath();
+			ctx.moveTo(-3.5, 10.5);
+			ctx.lineTo(3.5, 10.5);
+			ctx.lineTo(0, 15);
+			ctx.closePath();
+			ctx.fillStyle = '#ffffff';
+			ctx.fill();
+			ctx.restore();
+
+			if (showPaws) {
+				const pawY = 110 + Math.min(0, yOffset * 0.4);
+				[27, 101].forEach((px) => {
+					ctx.save();
+					ctx.translate(px, pawY);
+					ctx.beginPath();
+					ctx.ellipse(0, 0, 12.5, 9, 0, 0, Math.PI * 2);
+					ctx.fillStyle = '#ffffff';
+					ctx.fill();
+					ctx.lineWidth = 2.6;
+					ctx.strokeStyle = '#111115';
+					ctx.stroke();
+					ctx.beginPath();
+					ctx.moveTo(-4.5, -3);
+					ctx.lineTo(-4.5, 4);
+					ctx.moveTo(0, -4);
+					ctx.lineTo(0, 4);
+					ctx.moveTo(4.5, -3);
+					ctx.lineTo(4.5, 4);
+					ctx.lineWidth = 2;
+					ctx.stroke();
+					if (pawClaws) {
+						[-4.5, 0, 4.5].forEach((c) => {
+							ctx.beginPath();
+							ctx.moveTo(c - 1.5, 6.5);
+							ctx.lineTo(c, 12.5);
+							ctx.lineTo(c + 1.5, 6.5);
+							ctx.closePath();
+							ctx.fillStyle = '#ffffff';
+							ctx.fill();
+							ctx.lineWidth = 1.6;
+							ctx.stroke();
+						});
+					}
+					ctx.restore();
+				});
+			}
+
+			if (sparkles > 0) {
+				[
+					[17, 28, 8.5],
+					[111, 22, 10.5],
+					[106, 50, 6.5],
+				].forEach(([sx, sy, baseR]) => {
+					const r = baseR * sparkles;
+					ctx.save();
+					ctx.translate(sx, sy);
+					ctx.beginPath();
+					ctx.moveTo(0, -r);
+					ctx.quadraticCurveTo(0, 0, r, 0);
+					ctx.quadraticCurveTo(0, 0, 0, r);
+					ctx.quadraticCurveTo(0, 0, -r, 0);
+					ctx.quadraticCurveTo(0, 0, 0, -r);
+					ctx.fillStyle = '#fbbf24';
+					ctx.fill();
+					ctx.lineWidth = 1.6;
+					ctx.strokeStyle = '#111115';
+					ctx.stroke();
+					ctx.restore();
+				});
+			}
+			ctx.restore();
+		}
+
+		function renderFrame(state) {
+			outCtx.clearRect(0, 0, SIZE, SIZE);
+			drawRawCat(rawCtx, state);
+
+			if (isStickerEnabled && STICKER_THICKNESS_32 > 0) {
+				tintCtx.save();
+				tintCtx.clearRect(0, 0, SIZE, SIZE);
+				tintCtx.drawImage(rawCanvas, 0, 0);
+				tintCtx.globalCompositeOperation = 'source-in';
+				tintCtx.fillStyle = STICKER_COLOR;
+				tintCtx.fillRect(0, 0, SIZE, SIZE);
+				tintCtx.restore();
+
+				const radius = (STICKER_THICKNESS_32 / 32) * SIZE;
+				const rings = radius > 4 ? [radius * 0.5, radius] : [radius];
+				rings.forEach((r) => {
+					for (let i = 0; i < ANGLES.length; i += 1) {
+						outCtx.drawImage(tintCanvas, Math.cos(ANGLES[i]) * r, Math.sin(ANGLES[i]) * r);
+					}
+				});
+			}
+			outCtx.drawImage(rawCanvas, 0, 0);
+		}
+
+		let idx = 0;
+		let timer = null;
+		const step = () => {
+			renderFrame(FRAMES[idx]);
+			try {
+				link.href = outCanvas.toDataURL('image/png');
+			} catch (_) {}
+			idx = (idx + 1) % FRAMES.length;
+		};
+		const start = () => {
+			if (!timer) {
+				step();
+				timer = setInterval(step, SPEED_MS);
+			}
+		};
+		const stop = () => {
+			if (timer) {
+				clearInterval(timer);
+				timer = null;
+			}
+		};
+
+		document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+		start();
+	})();
+</script></body></html>
