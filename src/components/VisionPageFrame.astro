@@ -18,6 +18,7 @@ const dockCopy = {
 		projects: 'Projects',
 		calculator: 'Calculator',
 		about: 'About & Bio',
+		system: 'About Your System',
 		blog: 'Blog & Security',
 		arch: 'Architecture',
 		themes: 'Theme Studio',
@@ -29,6 +30,7 @@ const dockCopy = {
 		projects: 'Proiecte',
 		calculator: 'Calculator',
 		about: 'Despre Mine',
+		system: 'Despre Sistem',
 		blog: 'Blog & Securitate',
 		arch: 'Arhitectură',
 		themes: 'Studio Teme',
@@ -40,6 +42,7 @@ const dockCopy = {
 		projects: 'Проекты',
 		calculator: 'Калькулятор',
 		about: 'Обо мне',
+		system: 'О вашей системе',
 		blog: 'Блог и Безопасность',
 		arch: 'Архитектура',
 		themes: 'Студия Тем',
@@ -51,6 +54,7 @@ const isHome = stripped === '/';
 const isProjects = stripped.startsWith('/projects');
 const isCalculator = stripped.startsWith('/calculator');
 const isAbout = stripped.startsWith('/about');
+const isSystem = stripped.startsWith('/system');
 const isBlog = stripped.startsWith('/blog');
 const isArchitecture = stripped.startsWith('/reference') || stripped.startsWith('/guides/getting-started');
 const isThemes = stripped.startsWith('/guides/themes');
@@ -219,6 +223,13 @@ const isThemes = stripped.startsWith('/guides/themes');
 				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<circle cx="12" cy="8" r="4" />
 					<path d="M5 20a7 7 0 0 1 14 0" />
+				</svg>
+			</a>
+			<a href={`${prefix}/system/`} class={`vsl-dock-btn ${isSystem ? 'is-active' : ''}`} data-tip={dockCopy.system} aria-label={dockCopy.system}>
+				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<rect x="2" y="3" width="20" height="14" rx="2.5" />
+					<line x1="8" y1="21" x2="16" y2="21" />
+					<line x1="12" y1="17" x2="12" y2="21" />
 				</svg>
 			</a>
 			<a href={`${prefix}/blog/`} class={`vsl-dock-btn ${isBlog ? 'is-active' : ''}`} data-tip={dockCopy.blog} aria-label="Blog">

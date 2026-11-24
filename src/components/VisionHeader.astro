@@ -34,6 +34,8 @@ const copy = {
 		aboutMe: 'About Me & Bio',
 		calculator: 'Project Calculator',
 		guidesLink: 'Guides & Presets',
+		aboutSystem: '🖥️ About Your System',
+		sysMeta: 'IP · ISP · GPU · PC',
 		tabs: [
 			{ label: 'Home', href: '/', active: stripped === '/' },
 			{ label: 'Projects', href: '/projects/ecosystem/', active: stripped.startsWith('/projects') },
@@ -64,6 +66,8 @@ const copy = {
 		aboutMe: 'Despre Mine & Bio',
 		calculator: 'Calculator Proiect',
 		guidesLink: 'Ghiduri & Teme',
+		aboutSystem: '🖥️ Despre Sistemul Tău',
+		sysMeta: 'IP · ISP · GPU · PC',
 		tabs: [
 			{ label: 'Acasă', href: '/ro/', active: stripped === '/' },
 			{ label: 'Proiecte', href: '/ro/projects/ecosystem/', active: stripped.startsWith('/projects') },
@@ -94,6 +98,8 @@ const copy = {
 		aboutMe: 'Обо мне и Био',
 		calculator: 'Калькулятор проекта',
 		guidesLink: 'Гайды и Темы',
+		aboutSystem: '🖥️ О вашей системе',
+		sysMeta: 'IP · Провайдер · ПК',
 		tabs: [
 			{ label: 'Главная', href: '/ru/', active: stripped === '/' },
 			{ label: 'Проекты', href: '/ru/projects/ecosystem/', active: stripped.startsWith('/projects') },
@@ -178,6 +184,10 @@ const navTabs = copy.tabs;
 				<span>Starlight + Pagefind</span>
 				<span class="vsl-popover-muted">{copy.ready}</span>
 			</a>
+			<a href={`${prefix}/system/`} class="vsl-popover-item">
+				<span>{copy.aboutSystem}</span>
+				<span class="vsl-popover-muted">{copy.sysMeta}</span>
+			</a>
 			<button type="button" id="vsl-popover-open-themes" class="vsl-popover-item">
 				<span>{copy.customThemes}</span>
 				<span class="vsl-popover-muted">{copy.presets}</span>
@@ -187,6 +197,10 @@ const navTabs = copy.tabs;
 		<!-- Profile & Social Links Popover -->
 		<div id="vsl-profile-popover" class="vsl-popover" role="region" aria-label={copy.devChannels}>
 			<div class="vsl-popover-title">{copy.ecoHubs}</div>
+			<a href={`${prefix}/system/`} class="vsl-popover-item">
+				<span>{copy.aboutSystem}</span>
+				<span class="vsl-popover-muted">{copy.sysMeta}</span>
+			</a>
 			<a href={`${prefix}/about/`} class="vsl-popover-item">
 				<span>{copy.aboutMe}</span>
 				<span class="vsl-popover-muted">Bio · Hardware</span>

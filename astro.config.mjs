@@ -83,6 +83,7 @@ export default defineConfig({
 					items: [
 						{ label: 'About Me & Bio', translations: { ro: 'Despre Mine', ru: 'Обо мне' }, slug: 'about' },
 						{ label: 'Project Calculator', translations: { ro: 'Calculator Proiect', ru: 'Калькулятор проекта' }, slug: 'calculator' },
+						{ label: 'About Your System', translations: { ro: 'Despre Sistemul Tău', ru: 'О вашей системе' }, slug: 'system' },
 					],
 				},
 				{
