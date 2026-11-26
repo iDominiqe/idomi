@@ -51,6 +51,45 @@ export interface SocialItem {
 
 export const PROJECTS: ProjectItem[] = [
 	{
+		id: 'aegis-cs2',
+		category: 'spatial',
+		badge: 'CS2 5v5 Hub & Market',
+		badgeRo: 'Hub CS2 5v5 & Market',
+		badgeRu: 'CS2 5v5 Матчинг и Маркет',
+		tags: ['React 18 + TS', 'Cloudflare D1', 'Steam / A2S'],
+		title: 'AEGIS // CS2 Hub',
+		shortTitle: 'AEGIS // CS2',
+		description:
+			'Fair-play Counter-Strike 2 5v5 matchmaking & map veto hub featuring live Valve/UDP A2S server monitoring, a 15,000+ item CS2 Wiki, P2P skin marketplace, and provably fair cases.',
+		descriptionRo:
+			'Platformă CS2 5v5 fair-play cu map veto, monitorizare live a serverelor prin Steam/UDP A2S, bază Wiki cu peste 15.000 de iteme, marketplace P2P pe Cloudflare D1 și deschidere cutii.',
+		descriptionRu:
+			'Платформа честного 5v5-матчинга CS2 с баном карт (Map Veto), мониторингом серверов Steam / UDP A2S, базой Wiki на 15 000+ скинов, P2P-маркетом на Cloudflare D1 и открытием кейсов.',
+		stack: 'React 18 · TypeScript · Cloudflare Workers + D1 · Steam API',
+		liveUrl: 'https://cs2.idominiqe.com/',
+		domainLabel: 'cs2.idominiqe.com',
+		repoName: 'iDominiqe/cs2',
+		repoUrl: 'https://github.com/iDominiqe/cs2',
+		accent: '#ff5500',
+		gradient:
+			'radial-gradient(circle at 76% 24%, rgba(255, 85, 0, 0.52), transparent 54%), radial-gradient(circle at 20% 78%, rgba(0, 240, 255, 0.28), transparent 56%), linear-gradient(135deg, #05070c 0%, #111827 54%, #27120b 100%)',
+		highlights: [
+			'5v5 Squad Builder, anti-smurf Trust filter & Captain Map Veto',
+			'Live CS2 server monitor via Steam API + local UDP A2S_INFO checker',
+			'15,000+ CS2 Wiki items, D1 P2P skin market & 1x–5x case roulette',
+		],
+		highlightsRo: [
+			'Squad Builder 5v5, filtru anti-smurf și cameră Captain Map Veto',
+			'Monitorizare servere CS2 prin Steam API + checker local UDP A2S_INFO',
+			'Wiki cu 15.000+ iteme, marketplace P2P pe D1 și ruletă 1x–5x',
+		],
+		highlightsRu: [
+			'Сборка лобби 5v5, фильтр Trust Score и капитанский пик/бан карт',
+			'Мониторинг серверов CS2 через Steam API и локальный UDP A2S-чекер',
+			'Wiki на 15 000+ предметов, P2P-маркет на D1 и рулетка кейсов 1x–5x',
+		],
+	},
+	{
 		id: 'atelier-studio',
 		category: 'webgl',
 		badge: '3D Print & Apparel Studio',
