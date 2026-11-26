@@ -923,6 +923,11 @@ html:not([data-has-sidebar]) .vsl-window .main-frame {
 	padding-top: 0 !important;
 }
 
+html:not([data-has-sidebar]) .vsl-window main {
+	--sl-main-pad: 0;
+	padding: 0 !important;
+}
+
 html:not([data-has-sidebar]) .vsl-window .content-panel {
 	border-top: 0 !important;
 	padding: 12px 16px 14px !important;
