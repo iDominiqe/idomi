@@ -14,16 +14,20 @@ const localizedProjects = PROJECTS.map((p) => ({
 	highlights: lang === 'ro' ? p.highlightsRo : lang === 'ru' ? p.highlightsRu : p.highlights,
 }));
 
+const totalCount = localizedProjects.length;
+const webglCount = localizedProjects.filter((p) => p.category === 'webgl').length;
+const spatialCount = localizedProjects.filter((p) => p.category === 'spatial').length;
+
 const copy = {
 	en: {
-		eyebrow: '8 Live Subdomains · Cloudflare Anycast Edge',
+		eyebrow: `${totalCount} Live Subdomains · Cloudflare Anycast Edge`,
 		title: 'Live Ecosystem Projects',
 		subtitle:
 			'Independent GitHub repositories deployed across isolated subdomains. Switch layouts, filter by focus area, or launch a live interactive preview.',
 		calcBtn: '🧮 Calculator',
-		filterAll: 'All (8)',
-		filterWebgl: '3D & WebGL (5)',
-		filterSpatial: 'Spatial & Glass OS (3)',
+		filterAll: `All (${totalCount})`,
+		filterWebgl: `3D & WebGL (${webglCount})`,
+		filterSpatial: `Spatial & Glass OS (${spatialCount})`,
 		viewBento: '⊞ Bento',
 		viewDeck: '▤ Deck',
 		viewMatrix: '≡ Matrix',
@@ -40,14 +44,14 @@ const copy = {
 		modalRepo: 'GitHub Repo',
 	},
 	ro: {
-		eyebrow: '8 Subdomenii Live · Cloudflare Anycast Edge',
+		eyebrow: `${totalCount} Subdomenii Live · Cloudflare Anycast Edge`,
 		title: 'Proiecte Ecosistem Live',
 		subtitle:
 			'Repozitorii GitHub independente găzduite pe subdomenii izolate. Schimbă modul de afișare, filtrează după direcție sau deschide o previzualizare live.',
 		calcBtn: '🧮 Calculator',
-		filterAll: 'Toate (8)',
-		filterWebgl: '3D & WebGL (5)',
-		filterSpatial: 'Spatial & Glass OS (3)',
+		filterAll: `Toate (${totalCount})`,
+		filterWebgl: `3D & WebGL (${webglCount})`,
+		filterSpatial: `Spatial & Glass OS (${spatialCount})`,
 		viewBento: '⊞ Galerie',
 		viewDeck: '▤ Detaliat',
 		viewMatrix: '≡ Matrice DNS',
@@ -64,14 +68,14 @@ const copy = {
 		modalRepo: 'Repo GitHub',
 	},
 	ru: {
-		eyebrow: '8 живых поддоменов · Cloudflare Anycast Edge',
+		eyebrow: `${totalCount} живых поддоменов · Cloudflare Anycast Edge`,
 		title: 'Проекты экосистемы вживую',
 		subtitle:
 			'Независимые репозитории GitHub на изолированных поддоменах. Переключайте вид витрины, фильтруйте по направлениям или запускайте живое превью.',
 		calcBtn: '🧮 Калькулятор',
-		filterAll: 'Все (8)',
-		filterWebgl: '3D и WebGL (5)',
-		filterSpatial: 'Spatial и Glass OS (3)',
+		filterAll: `Все (${totalCount})`,
+		filterWebgl: `3D и WebGL (${webglCount})`,
+		filterSpatial: `Spatial и Glass OS (${spatialCount})`,
 		viewBento: '⊞ Витрина',
 		viewDeck: '▤ Детально',
 		viewMatrix: '≡ Таблица DNS',

@@ -51,6 +51,84 @@ export interface SocialItem {
 
 export const PROJECTS: ProjectItem[] = [
 	{
+		id: 'atelier-studio',
+		category: 'webgl',
+		badge: '3D Print & Apparel Studio',
+		badgeRo: 'Studio 3D Portrete & Textile',
+		badgeRu: '3D Ателье Портретов и Одежды',
+		tags: ['React Three Fiber', 'PBR Studio', 'Bloom FX'],
+		title: 'ATELIER LUMIÈRE 3D',
+		shortTitle: 'Atelier 3D',
+		description:
+			'Interactive 3D bespoke canvas portrait & apparel studio built with React Three Fiber, featuring 5 PBR gallery frames, Halo LED backlighting, and 280/480 GSM clothing.',
+		descriptionRo:
+			'Studio 3D interactiv pentru portrete pe pânză și textile personalizate, cu 5 rame PBR, iluminare Halo LED și tricouri/hanorace 280/480 GSM în React Three Fiber.',
+		descriptionRu:
+			'Интерактивное 3D-ателье картин на холсте и кастомной одежды (футболки 280 GSM и худи 480 GSM) на React Three Fiber с 5 PBR-рамами и LED-подсветкой.',
+		stack: 'React 18 · TypeScript · R3F / Three.js · Tailwind',
+		liveUrl: 'https://atelierstudio.idominiqe.com/',
+		domainLabel: 'atelierstudio.idominiqe.com',
+		repoName: 'iDominiqe/atelierstudio',
+		repoUrl: 'https://github.com/iDominiqe/atelierstudio',
+		accent: '#f59e0b',
+		gradient:
+			'radial-gradient(circle at 76% 24%, rgba(245, 158, 11, 0.52), transparent 54%), radial-gradient(circle at 20% 78%, rgba(217, 119, 6, 0.34), transparent 56%), linear-gradient(135deg, #0b0d12 0%, #1c1917 54%, #292524 100%)',
+		highlights: [
+			'Dual 3D studio: Wall Art Portraits + Crewneck & Hoodie config',
+			'5 PBR gallery frames, Halo LED glow & Museum Spotlight modes',
+			'Live photo upload, artistic filters & Bloom post-processing',
+		],
+		highlightsRo: [
+			'Mod dublu 3D: Portrete pe perete + Tricouri 280 GSM & Hanorace',
+			'5 rame PBR, iluminare Halo LED și moduri Day/Night Museum',
+			'Încărcare foto live, filtre artistice și post-procesare Bloom',
+		],
+		highlightsRu: [
+			'Два 3D-режима: портреты на стену + футболки и худи / батники',
+			'5 PBR-рам, подсветка Halo LED и режимы освещения Day/Night',
+			'Загрузка своих фото, арт-фильтры и постобработка Bloom',
+		],
+	},
+	{
+		id: 'rmo-skyhub',
+		category: 'webgl',
+		badge: '3D Airport & Flight Sim',
+		badgeRo: 'Simulare 3D Aeroport RMO',
+		badgeRu: '3D Аэропорт Кишинёва RMO',
+		tags: ['React Three Fiber', 'RMO / LUKK', '3D Globe'],
+		title: 'RMO SkyHub 3D Airport',
+		shortTitle: 'RMO SkyHub',
+		description:
+			'Interactive 3D Chișinău International Airport (RMO / LUKK) simulation with dual-runway traffic, global route calculator, cabin seat map, QR boarding pass, and cinematic takeoff.',
+		descriptionRo:
+			'Simulare 3D a Aeroportului Internațional Chișinău (RMO / LUKK) cu trafic pe două piste, glob 3D de rute, selectare locuri, boarding pass QR și decolare cinematică.',
+		descriptionRu:
+			'3D-симулятор Международного аэропорта Кишинёва (RMO / LUKK) с двумя ВПП, трафиком лайнеров, 3D-глобусом маршрутов, выбором мест в салоне и кинематографичным взлётом.',
+		stack: 'React 18 · TypeScript · R3F / Three.js · Postprocessing',
+		liveUrl: 'https://airportprototype.idominiqe.com/',
+		domainLabel: 'airportprototype.idominiqe.com',
+		repoName: 'iDominiqe/airportprototype',
+		repoUrl: 'https://github.com/iDominiqe/airportprototype',
+		accent: '#38bdf8',
+		gradient:
+			'radial-gradient(circle at 75% 22%, rgba(56, 189, 248, 0.54), transparent 54%), radial-gradient(circle at 22% 80%, rgba(2, 132, 199, 0.38), transparent 55%), linear-gradient(135deg, #0b1322 0%, #0f172a 52%, #082f49 100%)',
+		highlights: [
+			'RMO / LUKK 3D terminal, jet bridges & dual active runways (08L/08R)',
+			'3D global route calculator & interactive A–F cabin seat selection',
+			'Post-checkout gate pushback, taxi, V2 rotation & climbout tracking',
+		],
+		highlightsRo: [
+			'Terminal 3D RMO / LUKK, pasarele și trafic simultan pe pistele 08L/08R',
+			'Calculator rute pe glob 3D și hartă interactivă a locurilor A–F',
+			'Secvență cinematică de pushback, rulare, rotație V2 și decolare',
+		],
+		highlightsRu: [
+			'3D-терминал RMO / LUKK, телетрапы и две активные полосы (08L/08R)',
+			'3D-глобус маршрутов, расчёт тарифа и выбор мест A–F с QR-билетом',
+			'Полный цикл вылета: pushback, руление, отрыв V2 и набор высоты',
+		],
+	},
+	{
 		id: 'smartcity-v3',
 		category: 'webgl',
 		badge: '3D WebGL Flagship',
@@ -365,6 +443,16 @@ export const PROJECTS: ProjectItem[] = [
 ];
 
 export const BLOG_POSTS: BlogPostItem[] = [
+	{
+		slug: 'majorana-2-quantum-ai',
+		href: '/blog/majorana-2-quantum-ai/',
+		category: 'Quantum · Agentic AI',
+		title: 'Majorana 2 & Microsoft Discovery Agentic AI',
+		excerpt: '1,000x more reliable InAs-Pb topological qubits (20s mean lifetime), Discovery R&D agents, and interactive 3D simulation.',
+		readTime: '10 min read',
+		updated: 'Quantum · 3D Lab',
+		accent: '#38bdf8',
+	},
 	{
 		slug: 'dns-ns-domains',
 		href: '/blog/dns-ns-domains/',

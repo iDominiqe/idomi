@@ -1,7 +1,9 @@
 ---
 import Search from 'virtual:starlight/components/Search';
 import config from 'virtual:starlight/user-config';
-import { SOCIALS } from '../data/ecosystem';
+import { PROJECTS, SOCIALS } from '../data/ecosystem';
+
+const totalProjects = PROJECTS.length;
 
 const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 const pathname = Astro.url.pathname;
@@ -21,10 +23,10 @@ const copy = {
 		language: 'Language',
 		ecoStatus: 'Ecosystem Status',
 		profileAria: 'iDominiqe profile & links',
-		liveNodes: '8 Live Nodes',
+		liveNodes: `${totalProjects} Live Nodes`,
 		liveTel: 'Live telemetry',
 		edgeTel: 'Edge Telemetry',
-		subRepos: '8 Subdomain Repos',
+		subRepos: `${totalProjects} Subdomain Repos`,
 		ready: 'Ready',
 		customThemes: 'Customize Theme Studio',
 		presets: '5 Presets',
@@ -53,10 +55,10 @@ const copy = {
 		language: 'Limbă',
 		ecoStatus: 'Stare ecosistem',
 		profileAria: 'Profil și linkuri iDominiqe',
-		liveNodes: '8 Noduri Live',
+		liveNodes: `${totalProjects} Noduri Live`,
 		liveTel: 'Telemetrie live',
 		edgeTel: 'Telemetrie Edge',
-		subRepos: '8 Repozitorii Subdomeniu',
+		subRepos: `${totalProjects} Repozitorii Subdomeniu`,
 		ready: 'Pregătit',
 		customThemes: 'Personalizează Teme',
 		presets: '5 Preseturi',
@@ -85,10 +87,10 @@ const copy = {
 		language: 'Язык',
 		ecoStatus: 'Статус экосистемы',
 		profileAria: 'Профиль и ссылки iDominiqe',
-		liveNodes: '8 Живых Нод',
+		liveNodes: `${totalProjects} Живых Нод`,
 		liveTel: 'Живая телеметрия',
 		edgeTel: 'Edge-телеметрия',
-		subRepos: '8 Репозиториев поддоменов',
+		subRepos: `${totalProjects} Репозиториев поддоменов`,
 		ready: 'Готово',
 		customThemes: 'Настроить Студию Тем',
 		presets: '5 Пресетов',
